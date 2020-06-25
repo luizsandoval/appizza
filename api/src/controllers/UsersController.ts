@@ -5,6 +5,9 @@ import knex from '../database/connection';
 
 import User from '../models/user.model';
 
+import JWT_SECRET from '../constants/secret';
+import { Console } from 'console';
+
 class UsersController {
 
     async authenticate(req: Request, res: Response) {
@@ -27,7 +30,10 @@ class UsersController {
                     cpf: user.cpf,
                     email: user.email
                 },
-                process.env.JWT_SECRET || ''
+                JWT_SECRET,
+                {
+                    expiresIn: "12h"
+                }
             );
     
             return res.status(200).json(userToken);
@@ -40,13 +46,12 @@ class UsersController {
     async create(req: Request, res: Response) {
         try {
             const user: User = req.body;
-    
+
             const trx = await knex.transaction();
     
             const insertedUser = await trx<User>('users')
-                .insert(user, '*')
-                .first();
-    
+                .insert(user)
+
             await trx.commit();
     
             return res.status(200).json(insertedUser);

@@ -3,7 +3,7 @@ import Knex from 'knex';
 export async function up(knex: Knex) {
     return knex.schema.createTable('orders', (table) => {
         table.increments('id').primary();
-        table.float('total').notNullable();
+        table.decimal('total').notNullable();
         table.integer('user_id')
             .notNullable()
             .references('id')
