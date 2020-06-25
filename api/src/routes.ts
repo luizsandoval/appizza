@@ -29,14 +29,31 @@ routes
         '/users', 
         celebrate(
             {
-                body: Joi.object().keys({
-                    name: Joi.string().required(),
-                    surname: Joi.string().required(),
-                    email: Joi.string().required().email(),
-                    password: Joi.string().required(),
-                    cpf: Joi.string().required().custom(CPFValidator),
-                    address: Joi.string().required(),
-                })
+                body: Joi.object()
+                    .keys(
+                        {
+                            name: Joi
+                                .string()
+                                .required(),
+                            surname: Joi
+                                .string()
+                                .required(),
+                            email: Joi
+                                .string()
+                                .required()
+                                .email(),
+                            password: Joi
+                                .string()
+                                .required(),
+                            cpf: Joi
+                                .string()
+                                .required()
+                                .custom(CPFValidator),
+                            address: Joi
+                                .string()
+                                .required(),
+                        }
+                    )
             },
             {
                 abortEarly: false
@@ -45,19 +62,26 @@ routes
         usersController.create
     );
 
-    routes
-        .post(
-            'signIn',
-            celebrate(
-                {
-                    body: Joi.object().keys({
-                        email: Joi.string().required(),
-                        password: Joi.string().required()
-                    })
-                }
-            ),
-            usersController.authenticate
-        );
+routes
+    .post(
+        'signIn',
+        celebrate(
+            {
+                body: Joi.object()
+                    .keys(
+                        {
+                            email: Joi
+                                .string()
+                                .required(),
+                            password: Joi
+                                .string()
+                                .required()
+                        }
+                    )
+            }
+        ),
+        usersController.authenticate
+    );
 // endregion
 
 // region pizzas
@@ -70,12 +94,24 @@ routes
         '/pizzas',
         celebrate(
             {
-                body: Joi.object<Pizza>().keys({
-                    name: Joi.string().required(),
-                    ingredients: Joi.string().required(),
-                    price: Joi.number().positive().required(),
-                    image: Joi.string().required()
-                })
+                body: Joi.object<Pizza>()
+                    .keys(
+                        {
+                            name: Joi
+                                .string()
+                                .required(),
+                            ingredients: Joi
+                                .string()
+                                .required(),
+                            price: Joi
+                                .number()
+                                .positive()
+                                .required(),
+                            image: Joi
+                                .string()
+                                .required()
+                        }
+                    )
             }
         ),
         upload.single('image'),
@@ -90,7 +126,9 @@ routes
         celebrate(
             {
                 params: {
-                    id: Joi.number().required()
+                    id: Joi
+                        .number()
+                        .required()
                 }
             }
         ),
@@ -110,8 +148,14 @@ routes
             {
                 body: Joi.object<Order>(
                     {
-                        total: Joi.number().positive().required(),
-                        user_id: Joi.number().positive().required()
+                        total: Joi
+                            .number()
+                            .positive()
+                            .required(),
+                        user_id: Joi
+                            .number()
+                            .positive()
+                            .required()
                     }
                 )
             }
@@ -127,7 +171,10 @@ routes
         celebrate(
             {
                 params: {
-                    id: Joi.number().positive().required()
+                    id: Joi
+                        .number()
+                        .positive()
+                        .required()
                 }
             }
         ),
