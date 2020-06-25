@@ -6,6 +6,8 @@ import { celebrate, Joi } from 'celebrate';
 
 import multerConfig from './config/multer';
 
+import CPFValidator from './helpers/CPFValidator';
+
 import Pizza from './models/pizza.model';
 import Order from './models/order.model';
 
@@ -32,7 +34,7 @@ routes
                     surname: Joi.string().required(),
                     email: Joi.string().required().email(),
                     password: Joi.string().required(),
-                    cpf: Joi.string().required(),
+                    cpf: Joi.string().required().custom(CPFValidator),
                     address: Joi.string().required(),
                 })
             },
