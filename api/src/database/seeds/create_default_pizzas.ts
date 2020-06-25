@@ -6,37 +6,37 @@ export async function seed(knex: Knex) {
             name: 'Pepperoni',
             price: 32.00,
             ingredients: 'Muçarela, Pepperoni',
-            image: 'pepperoni.jpeg'
+            image: 'default/pepperoni.jpeg'
         },
         {
             name: 'Portuguesa',
             price: 34.99,
             ingredients: 'Muçarela, Cebola, Presunto, Ovo, Palmito',
-            image: 'portuguesa.jpeg'
+            image: 'default/portuguesa.jpeg'
         },
         {
             name: 'Muçarela',
             price: 29.99,
             ingredients: 'Muçarela, Orégano',
-            image: 'mucarela.jpeg'
+            image: 'default/mucarela.jpeg'
         },
         {
             name: 'Bauru',
             price: 29.99,
             ingredients: 'Muçarela, Presunto, Rodelas de Tomate',
-            image: 'bauru.jpeg'
+            image: 'default/bauru.jpeg'
         },
         {
             name: 'Três Queijos',
             price: 32.50,
             ingredients: 'Muçarela, Catupiry, Queijo Prato',
-            image: 'tres-queijos.jpeg'
+            image: 'default/tres-queijos.jpeg'
         },
         {
             name: 'Calabresa',
             price: 29.99,
             ingredients: 'Calabresa, Cebola',
-            image: 'calabresa.jpeg'
+            image: 'default/calabresa.jpeg'
         },
     ]);
 }
