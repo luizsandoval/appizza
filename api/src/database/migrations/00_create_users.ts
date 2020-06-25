@@ -6,13 +6,13 @@ export async function up(knex: Knex) {
         table.string('name').notNullable();
         table.string('surname').notNullable();
         table.string('address').notNullable();
-        table.string('cpf').notNullable();
+        table.string('cpf').unique().notNullable();
         table.string('email').notNullable();
         table.string('password').notNullable();
         table
             .dateTime('created_at')
             .notNullable()
-            .defaultTo(knex.raw('now()'));
+            .defaultTo(new Date());
     });
 }
 

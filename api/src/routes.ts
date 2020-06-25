@@ -1,13 +1,26 @@
 import express from 'express';
+import multer from 'multer';
+import expressJwt from 'express-jwt';
+
 import { celebrate, Joi } from 'celebrate';
 
-const routes = express.Router();
+import multerConfig from './config/multer';
+
+import Pizza from './models/pizza.model';
+import Order from './models/order.model';
 
 import UsersController from './controllers/UsersController';
 import PizzasController from './controllers/PizzasController';
+import OrdersController from './controllers/OrdersController';
+
+const routes = express.Router();
+const upload = multer(multerConfig);
+
+const authenticate = expressJwt({ secret: process.env.JWT_SECRET || '' })
+
+// region users
 
 const usersController = new UsersController();
-const pizzasController = new PizzasController();
 
 routes
     .post(
@@ -28,16 +41,96 @@ routes
             }
         ),
         usersController.create
-    )
+    );
+
+    routes
+        .post(
+            'signIn',
+            celebrate(
+                {
+                    body: Joi.object().keys({
+                        email: Joi.string().required(),
+                        password: Joi.string().required()
+                    })
+                }
+            ),
+            usersController.authenticate
+        );
+// endregion
+
+// region pizzas
+
+const pizzasController = new PizzasController();
 
 routes
+    .use(authenticate)
+    .post(
+        '/pizzas',
+        celebrate(
+            {
+                body: Joi.object<Pizza>().keys({
+                    name: Joi.string().required(),
+                    ingredients: Joi.string().required(),
+                    price: Joi.number().positive().required(),
+                    image: Joi.string().required()
+                })
+            }
+        ),
+        upload.single('image'),
+        pizzasController.create
+    )
     .get(
-        '/pizzas', 
+        '/pizzas',
         pizzasController.index
     )
     .get(
         'pizzas/:id',
+        celebrate(
+            {
+                params: {
+                    id: Joi.number().required()
+                }
+            }
+        ),
         pizzasController.show
+    );
+// endregion
+
+// region orders
+
+const ordersController = new OrdersController();
+
+routes
+    .use(authenticate)
+    .post(
+        '/orders',
+        celebrate(
+            {
+                body: Joi.object<Order>(
+                    {
+                        total: Joi.number().positive().required(),
+                        user_id: Joi.number().positive().required()
+                    }
+                )
+            }
+        ),
+        ordersController.create
     )
+    .get(
+        '/orders',
+        ordersController.index
+    )
+    .get(
+        'orders/:id',
+        celebrate(
+            {
+                params: {
+                    id: Joi.number().positive().required()
+                }
+            }
+        ),
+        ordersController.show
+    );
+// endregion
 
 export default routes;

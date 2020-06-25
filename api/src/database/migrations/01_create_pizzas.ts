@@ -10,7 +10,7 @@ export async function up(knex: Knex) {
         table
             .dateTime('created_at')
             .notNullable()
-            .defaultTo(knex.raw('now()'));
+            .defaultTo(new Date());
     });
 }
 
