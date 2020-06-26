@@ -1,6 +1,6 @@
 import api from './api';
 
-import { set } from './token.service';
+import { set, get } from './token.service';
 
 export const signUp = (user) => api
     .post('/users', user)
@@ -9,3 +9,5 @@ export const signUp = (user) => api
 export const signIn = (email, password) => api
     .post('/signIn', { email, password })
     .then((res) => set(res.data));
+
+export const isLoggedIn = () => !!get();
