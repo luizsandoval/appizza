@@ -1,32 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useHistory } from 'react-router-dom';
 
-import { faEye } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useForm } from 'react-hook-form';
+
+import * as yup from 'yup';
 
 import PrimaryButton from '../../components/PrimaryButton';
 import DividerWithText from '../../components/DividerWithText';
 import SecondaryButton from '../../components/SecondaryButton';
+import PasswordInput from '../../components/PasswordInput';
+import ErrorMessage from '../../components/ErrorMessage';
 
 import { signIn } from '../../services/users.service';
 
-import { Container, FormContainer, IconButton } from './styles';
+import { Container, FormContainer } from './styles';
+
+const SignInSchema = yup.object().shape({
+    email: yup.string().email('E-mail inválido').required('O e-mail é obrigatório'),
+    password: yup.string().required('A senha é obrigatória'),
+});
 
 const SignIn = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const { register, errors, formState, getValues } = useForm({ mode: 'onBlur', validationSchema: SignInSchema });
 
     const history = useHistory();
 
     const handleLogin = (e) => {
         e.preventDefault();
 
+        const { email, password } = getValues();
+
         signIn(email, password)
             .then(() => history.push('/home'));
     };
 
-    const isFormValid = () => email && password;
+    const isFormValid = () => formState.isValid;
+
+    const goToSignUp = () => history.push('/signUp');
 
     return (
         <Container>
@@ -35,29 +46,23 @@ const SignIn = () => {
                     <fieldset>
                         <label htmlFor="email">E-mail</label>
                         <input 
-                            name="email" 
-                            type="email" 
+                            autoFocus 
                             required 
-                            onChange={(e) => setEmail(e.target.value)}
+                            name="email" 
+                            type="email"
+                            ref={register}
                         />
+                        {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
                     </fieldset>
                     <fieldset>
-                        <label htmlFor="email">Senha</label>
-                        <input 
-                            name="password" 
-                            type="password" 
-                            required 
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <IconButton type="button">
-                            <FontAwesomeIcon icon={faEye} />
-                        </IconButton>
+                        <PasswordInput forwardRef={register} />
+                        {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
                     </fieldset>
                     <PrimaryButton type="submit" disabled={!isFormValid()}>
                         Comer muita pizza
                     </PrimaryButton>
                     <DividerWithText text="ou" />
-                    <SecondaryButton type="button">
+                    <SecondaryButton type="button" onClick={() => goToSignUp()}>
                         Cadastrar-se
                     </SecondaryButton>
                 </form>

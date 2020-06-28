@@ -39,6 +39,15 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
     }
 
+    input {
+        background: ${({ theme }) => theme.colors.gray.main};
+        color: ${({ theme }) => theme.colors.black.main};
+        padding: 16px;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+    }
+
 `;
 
 export default GlobalStyles;

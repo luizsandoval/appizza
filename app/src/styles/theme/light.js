@@ -1,11 +1,11 @@
-import { lighten } from 'polished';
+import { rgba } from 'polished';
 
 const getColorPallette = (color) => (
     {
         main: color,
-        light: lighten('0.8', color),
-        lighten: lighten('0.5', color),
-        lightest: lighten('0.2', color),
+        light: rgba(color, 0.8),
+        lighten: rgba(color, 0.5),
+        lightest: rgba(color, 0.25),
     }
 );
 
@@ -13,11 +13,14 @@ const LightTheme = {
     type: 'Light',
     colors: {
         primary: getColorPallette('#FF1300'),
-        secondary: getColorPallette('#FF9100'),
+        secondary: getColorPallette('#FF7C00'),
         accent: getColorPallette('#FF006F'),
-        background: '#ffffff',
+        gray: getColorPallette('#F2F2F2'),
+        danger: getColorPallette('#EF3E2D'),
+        success: getColorPallette('#28B67A'),
+        black: getColorPallette('#000000'),
         white: '#ffffff',
-        black: getColorPallette('#000000')
+        background: '#ffffff',
     },
     text: getColorPallette('#000000'),
 };

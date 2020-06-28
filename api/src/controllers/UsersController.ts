@@ -6,7 +6,6 @@ import knex from '../database/connection';
 import User from '../models/user.model';
 
 import JWT_SECRET from '../constants/secret';
-import { Console } from 'console';
 
 class UsersController {
 
@@ -19,20 +18,21 @@ class UsersController {
                 .where('password', password)
                 .first();
     
-            if (!user) return res.status(403).json('Usuário ou senha inválidos');
+            if (!user) return res.status(403).json({ message: 'Usuário ou senha inválidos' });
     
             const userToken = sign(
                 {
                     id: user.id,
                     name: user.name,
                     surname: user.surname,
+                    address: user.address,
                     fullName: `${user.name} ${user.surname}`,
                     cpf: user.cpf,
                     email: user.email
                 },
                 JWT_SECRET,
                 {
-                    expiresIn: "12h"
+                    expiresIn: '12h'
                 }
             );
     

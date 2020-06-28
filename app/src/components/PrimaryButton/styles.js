@@ -15,8 +15,8 @@ const PrimaryButton = styled.button`
     padding: 16px;
 
     &[disabled] {
-        background: lightgray;
-        color: #000;
+        background: ${({ theme }) => theme.colors.primary.lighten};
+        font-style: italic;
     }
 `;
 
