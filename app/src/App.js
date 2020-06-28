@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ThemeProvider } from 'styled-components';
+
+import { getUser } from './services/users.service';
 
 import GlobalStyles from './styles/global';
 import LightTheme from './styles/theme/light';
 
 import Routes from './routes';
 
+import AppContext from './AppContext';
+
 function App() {
+    const [user, setUser] = useState(getUser());
+
     return (
-        <ThemeProvider theme={LightTheme}>
-            <GlobalStyles />
-            <Routes />
-        </ThemeProvider>
+        <AppContext.Provider value={{ user, setUser }}>
+            <ThemeProvider theme={LightTheme}>
+                <GlobalStyles />
+                <Routes />
+            </ThemeProvider>
+        </AppContext.Provider>
     );
 }
 

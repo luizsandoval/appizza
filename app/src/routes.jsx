@@ -17,7 +17,11 @@ const Routes = () => (
             <Switch>
                 <Route path="/signIn" render={() => <SignIn /> }/>
                 <Route path="/signUp" render={() => <SignUp /> }/>
-                <ProtectedRoute path="/" exact component={Home} />
+                <ProtectedRoute 
+                    path="/" 
+                    exact
+                    component={Home}
+                />
             </Switch>
         </Suspense>
         <ToastContainer />

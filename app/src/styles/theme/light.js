@@ -18,6 +18,7 @@ const LightTheme = {
         gray: getColorPallette('#F2F2F2'),
         danger: getColorPallette('#EF3E2D'),
         success: getColorPallette('#28B67A'),
+        info: getColorPallette('#4995DF'),
         black: getColorPallette('#000000'),
         white: '#ffffff',
         background: '#ffffff',

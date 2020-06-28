@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
@@ -12,7 +12,9 @@ import SecondaryButton from '../../components/SecondaryButton';
 import PasswordInput from '../../components/PasswordInput';
 import ErrorMessage from '../../components/ErrorMessage';
 
-import { signIn } from '../../services/users.service';
+import { signIn, getUser } from '../../services/users.service';
+
+import AppContext from '../../AppContext';
 
 import { Container, FormContainer } from './styles';
 
@@ -26,13 +28,21 @@ const SignIn = () => {
 
     const history = useHistory();
 
+    const { setUser } = useContext(AppContext);
+
     const handleLogin = (e) => {
         e.preventDefault();
 
         const { email, password } = getValues();
 
         signIn(email, password)
-            .then(() => history.push('/home'));
+            .then(() => {
+                const user = getUser();
+
+                setUser(user);
+
+                history.push('/home');
+            });
     };
 
     const isFormValid = () => formState.isValid;

@@ -1,7 +1,16 @@
 import React from 'react';
 
-import { Footer } from './styles';
+import { StyledFooter, Copyright } from './styles';
 
-const Footer = () => (<Footer>Copyright &copy; { new Date().getFullYear() }</Footer>)
+const Footer = () => (
+    <StyledFooter>
+        <Copyright>
+            Appizza - Aplicativo para pizzarias. 
+            <br />
+            <br />
+            Copyright &copy; { new Date().getFullYear() }
+        </Copyright>
+    </StyledFooter>
+);
 
 export default Footer;

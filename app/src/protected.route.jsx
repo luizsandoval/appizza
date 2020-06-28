@@ -3,13 +3,19 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { isLoggedIn } from './services/users.service';
 
+import Layout from './pages/Layout';
+
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
     return (
         <Route
             {...rest}
             render={(props) => {
                 if (isLoggedIn()) {
-                    return <Component {...props} />;
+                    return (
+                        <Layout>
+                            <Component {...props} />
+                        </Layout>
+                    );
                 } else {
                     return (
                         <Redirect

@@ -9,8 +9,16 @@ class PizzasController {
     async index(req: Request, res: Response) {
         try {
             const pizzas = await knex<Pizza>('pizzas');
+
+            const serializedPizzas = pizzas
+                .map(pizza => (
+                    {
+                        ...pizza,
+                        image: `${process.env.IMAGES_URL}/${pizza?.image}`
+                    }
+                ));
     
-            return res.status(200).json(pizzas);
+            return res.status(200).json(serializedPizzas);
 
         } catch (err) {
             return res.status(500).json(err);
@@ -27,7 +35,7 @@ class PizzasController {
     
             const serializedPizza = {
                 ...pizza,
-                image: `${process.env.UPLOADS_URL}/${pizza?.image}`
+                image: `${process.env.IMAGES_URL}/${pizza?.image}`
             };
     
             return res.status(200).json(serializedPizza);

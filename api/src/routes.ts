@@ -20,7 +20,7 @@ import OrdersController from './controllers/OrdersController';
 const routes = express.Router();
 const upload = multer(multerConfig);
 
-const authenticate = expressJwt({ secret: JWT_SECRET })
+// const authenticate = expressJwt({ secret: JWT_SECRET })
 
 // region users
 
@@ -91,7 +91,7 @@ routes
 const pizzasController = new PizzasController();
 
 routes
-    .use(authenticate)
+    // .use(authenticate)
     .post(
         '/pizzas',
         celebrate(
@@ -143,7 +143,7 @@ routes
 const ordersController = new OrdersController();
 
 routes
-    .use(authenticate)
+    // .use(authenticate)
     .post(
         '/orders',
         celebrate(

@@ -1,13 +1,15 @@
 import api from './api';
 
-import { set, get } from './token.service';
+import { set as setToken, get as getToken, decodeToken } from './token.service';
 
 export const signUp = (user) => api
     .post('/users', user)
-    .then((res) => res.data);
+    .then(({ data }) => data);
 
 export const signIn = (email, password) => api
     .post('/signIn', { email, password })
-    .then((res) => set(res.data));
+    .then(({ data }) => setToken(data));
 
-export const isLoggedIn = () => !!get();
+export const isLoggedIn = () => !!getToken();
+
+export const getUser = () => decodeToken();
