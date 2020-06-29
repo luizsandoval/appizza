@@ -25,7 +25,7 @@ const GlobalStyles = createGlobalStyle`
         display: flex;
         flex-direction: column;
         flex: 1;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
         background: ${({ theme }) => theme.colors.background};
 

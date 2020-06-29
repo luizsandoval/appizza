@@ -6,7 +6,7 @@ export const SectionHeader = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 64px 32px 32px;
+    padding: 32px;
 `;
 
 export const StyledIcon = styled(FontAwesomeIcon)`
@@ -21,6 +21,6 @@ export const PizzasContainer = styled.div`
     align-items: center;
     width: 100%;
     height: auto;
-    background: ${({ theme }) => theme.colors.secondary.lighten};
+    background: ${({ theme }) => theme.colors.secondary.lightest};
     padding: 32px;
 `;

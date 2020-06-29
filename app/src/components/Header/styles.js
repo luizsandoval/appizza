@@ -48,7 +48,7 @@ export const Avatar = styled.div`
     height: 40px;
     width: 40px;
     margin-right: 8px;
-    background: ${({ theme }) => theme.colors.secondary.light};
+    background: ${({ theme }) => theme.colors.primary.lighten};
     color: ${({ theme }) => theme.colors.white};
 `;
 

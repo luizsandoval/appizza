@@ -8,5 +8,5 @@ export const create = (order) => api.post(API, order)
 export const getAll = () => api.get(API)
     .then(res => res.data);
 
-export const getOne = (id) = api.get(`${API}/${id}`)
+export const getOne = (id) => api.get(`${API}/${id}`)
     .then(res => res.data);

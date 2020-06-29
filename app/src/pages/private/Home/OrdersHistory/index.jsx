@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { faReceipt } from '@fortawesome/free-solid-svg-icons';
 
+import { getAll } from '../../../../services/orders.service';
+
 import NoOrdersSVG from '../../../../assets/no-orders.svg';
 
 import {
@@ -16,6 +18,11 @@ import {
 const OrdersHistory = () => {
     const [orders, setOrders] = useState([]);
 
+    useEffect(() => {
+        getAll()
+            .then(orders => setOrders(orders));
+    }, []);
+
     return (
         <>
             <SectionHeader>
@@ -24,12 +31,16 @@ const OrdersHistory = () => {
             </SectionHeader>
             {!orders.length ? (
                 <NoOrdersContainer>
+                    <h2>Ops, nada por aqui...</h2>
                     <NoOrdersImageWrapper>
                         <NoOrdersImage
                             src={NoOrdersSVG}
                             alt='Não há histórico de pedidos'
                         />
                     </NoOrdersImageWrapper>
+                    <p>
+                        Não há pedidos cadastrados
+                    </p>
                 </NoOrdersContainer>
             ) : (
                 <OrdersContainer>Pedidos vão aqui...</OrdersContainer>

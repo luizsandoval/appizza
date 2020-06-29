@@ -26,13 +26,21 @@ export const OrdersContainer = styled.div`
 
 export const NoOrdersContainer = styled.div`
     display: flex;
+    flex: 1;
+    padding: 32px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    h2, p {
+        text-align: center;
+        color: ${({ theme }) => theme.colors.black.lighten};
+    }
 `;
 
 export const NoOrdersImageWrapper = styled.div`
-    max-width: 500px;
+    width: 400px;
+    height: auto;
     padding: 32px;
 `;
 

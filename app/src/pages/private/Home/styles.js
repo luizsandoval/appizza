@@ -21,6 +21,7 @@ export const FloatingActionButton = styled.button`
     padding: 16px;
     bottom: 0;
     margin: 16px;
+    box-shadow: 5px 15px 25px ${({ theme }) => theme.colors.black.lightest};
 `;
 
 export const StyledIcon = styled(FontAwesomeIcon)`
