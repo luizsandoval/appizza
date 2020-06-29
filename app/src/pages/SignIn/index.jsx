@@ -41,7 +41,7 @@ const SignIn = () => {
 
                 setUser(user);
 
-                history.push('/home');
+                history.push('/');
             });
     };
 
