@@ -109,6 +109,9 @@ routes
                                 .number()
                                 .positive()
                                 .required(),
+                            description: Joi
+                                .string()
+                                .max(30),
                             image: Joi
                                 .string()
                                 .required()
@@ -118,6 +121,50 @@ routes
         ),
         upload.single('image'),
         pizzasController.create
+    )
+    .put(
+        '/pizzas',
+        celebrate(
+            {
+                body: Joi.object<Pizza>()
+                    .keys(
+                        {
+                            id: Joi
+                                .number()
+                                .required(),
+                            name: Joi
+                                .string()
+                                .required(),
+                            ingredients: Joi
+                                .string()
+                                .required(),
+                            description: Joi
+                                .string()
+                                .max(30),
+                            price: Joi
+                                .number()
+                                .positive()
+                                .required(),
+                            image: Joi
+                                .string()
+                                .required()
+                        }
+                    )
+            }
+        ),
+        pizzasController.destroy
+    )
+    .delete(
+        '/pizzas/:id',
+        celebrate(
+            {
+                params: {
+                    id: Joi
+                        .number()
+                        .required()
+                }
+            }
+        )
     )
     .get(
         '/pizzas',

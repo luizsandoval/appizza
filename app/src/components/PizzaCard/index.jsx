@@ -2,30 +2,60 @@ import React from 'react';
 
 import formatCurrency from '../../utils/formatCurrency';
 
-import { CardContainer, CardContent, CardImage, CardActions, CardButton } from './styles';
+import Checkbox from '../../components/Checkbox';
 
-const PizzaCard = ({ imageSource, name, ingredients, price }) => {
+import {
+    CardContainer,
+    CardContent,
+    CardImage,
+    CardActions,
+    CardButton,
+} from './styles';
 
+const PizzaCard = ({
+    imageSource,
+    name,
+    id,
+    pizzaName,
+    ingredients,
+    price,
+    showActions = true,
+    selectable = false,
+    zoomOnHover = false,
+    onSelect,
+    checked,
+}) => {
     return (
-        <CardContainer>
-            <CardImage imageSource={imageSource} />
+        <CardContainer 
+            onClick={() => onSelect()}
+            zoomOnHover={zoomOnHover}
+        >
+            <CardImage imageSource={imageSource}>
+                {selectable ? (
+                    <Checkbox
+                        name={name}
+                        value={id}
+                        checked={checked}
+                        align="flex-end"
+                        onChange={onSelect}
+                    />
+                ) : null}
+            </CardImage>
             <CardContent>
-                <h2>{name}</h2>
+                <h2>{pizzaName}</h2>
                 <small>{ingredients}</small>
                 <label>
                     R$: <b>{formatCurrency(price)}</b>
                 </label>
             </CardContent>
-            <CardActions>
-                <CardButton>
-                    Pedir
-                </CardButton>
-                <CardButton>
-                    Detalhes
-                </CardButton>
-            </CardActions>
+            {showActions ? (
+                <CardActions>
+                    <CardButton>Pedir</CardButton>
+                    <CardButton>Detalhes</CardButton>
+                </CardActions>
+            ) : null}
         </CardContainer>
-    )
+    );
 };
 
 export default PizzaCard;

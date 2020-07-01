@@ -10,7 +10,7 @@ export const CardContainer = styled.div`
     box-shadow: 5px 15px 25px ${({ theme }) => theme.colors.black.lightest};
 
     &:hover {
-        transform: scale(1.2);
+        transform: ${({ zoomOnHover }) => zoomOnHover && 'scale(1.2)'};
     }
 `;
 

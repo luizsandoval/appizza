@@ -10,6 +10,7 @@ import Spinner from './components/Spinner';
 const SignIn = lazy(() => import('./pages/SignIn'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const Home = lazy(() => import('./pages/private/Home'));
+const Order = lazy(() => import('./pages/private/Order'));
 
 const Routes = () => (
     <BrowserRouter>
@@ -21,6 +22,10 @@ const Routes = () => (
                     path="/" 
                     exact
                     component={Home}
+                />
+                <ProtectedRoute 
+                    path="/order"
+                    component={Order}
                 />
             </Switch>
         </Suspense>

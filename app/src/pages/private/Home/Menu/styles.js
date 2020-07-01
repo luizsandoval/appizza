@@ -6,6 +6,7 @@ export const SectionHeader = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     padding: 32px;
 `;
 
@@ -23,4 +24,9 @@ export const PizzasContainer = styled.div`
     height: auto;
     background: ${({ theme }) => theme.colors.secondary.lightest};
     padding: 32px;
+`;
+
+export const TitleWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
 `;

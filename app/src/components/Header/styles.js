@@ -13,7 +13,7 @@ export const StyledHeader = styled.header`
 `;
 
 export const Logo = styled.img`
-    height: 80px;
+    height: 60px;
     width: auto;
     max-width: 100%;
     padding: 8px 0;

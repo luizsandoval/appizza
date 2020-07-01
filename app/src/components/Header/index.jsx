@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import AppContext from '../../AppContext';
 
 import LogoSVG from '../../assets/logo.svg';
@@ -20,7 +22,9 @@ const Header = () => {
 
     return (
         <StyledHeader>
-            <Logo src={LogoSVG} alt="Appizza - Aplicativo para pizzarias" />
+            <Link to="/">
+                <Logo src={LogoSVG} alt="Appizza - Aplicativo para pizzarias" />
+            </Link>
             <UserInformation>
                 <Avatar>
                     <span>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { Container, FloatingActionButton, StyledIcon } from './styles';
@@ -12,7 +14,9 @@ const Home = () => (
         <Menu />
         <OrdersHistory />
         <FloatingActionButton>
-            <StyledIcon icon={faPlus} />
+            <Link to="/order">
+                <StyledIcon icon={faPlus} />
+            </Link>
         </FloatingActionButton>
     </Container>
 );

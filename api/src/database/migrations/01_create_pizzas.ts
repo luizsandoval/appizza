@@ -7,6 +7,8 @@ export async function up(knex: Knex) {
         table.float('price').notNullable();
         table.string('image').notNullable();
         table.string('ingredients').notNullable();
+        table.boolean('active').notNullable().defaultTo(true);
+        table.string('description', 30);
         table
             .dateTime('created_at')
             .notNullable()

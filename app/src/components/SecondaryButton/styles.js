@@ -8,7 +8,10 @@ const SecondaryButton = styled.button`
     color: ${({ theme }) => theme.colors.secondary.main};
     background: ${({ theme }) => theme.colors.background};
     padding: 16px;
-    width: 100%;
+    width: ${({ fullWidth }) => (fullWidth 
+        ? '100%'
+        : 'auto'
+    )};
     border-radius: 5px;
     font-size: 1em;
     font-weight: bold;
