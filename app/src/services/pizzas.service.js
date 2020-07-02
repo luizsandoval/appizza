@@ -9,10 +9,12 @@ export const create = async (pizza) => {
     formData.append('ingredients', pizza.ingredients);
     formData.append('image', pizza.image);
 
-    const res = await api
+    if (pizza.description) formData.append('description', pizza.description);
+
+    const { data } = await api
         .post(API, pizza);
 
-    return res.data;
+    return data;
 }
 
 export const update = async (pizza) => {
@@ -23,21 +25,23 @@ export const update = async (pizza) => {
     formData.append('ingredients', pizza.ingredients);
     formData.append('image', pizza.image);
 
-    const res = await api
+    if (pizza.description) formData.append('description', pizza.description);
+
+    const { data } = await api
         .put(API, pizza);
 
-    return res.data;
+    return data;
 }
 
 export const remove = async (id) => {
-    const res = await api
+    const { data } = await api
         .delete(`${API}/${id}`, id);
 
-    return res.data;
+    return data;
 }
 
 export const getAll = () => api.get(API)
-    .then(res => res.data);
+    .then(({ data }) => data);
 
 export const getOne = (id) => api.get(`${API}/${id}`)
-    .then(res => res.data);
+    .then(({ data }) => data);

@@ -27,7 +27,10 @@ const PizzaCard = ({
 }) => {
     return (
         <CardContainer 
-            onClick={() => onSelect()}
+            onClick={() => (selectable 
+                ? onSelect()
+                : null
+            )}
             zoomOnHover={zoomOnHover}
         >
             <CardImage imageSource={imageSource}>

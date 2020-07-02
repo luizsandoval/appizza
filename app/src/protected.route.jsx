@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { isLoggedIn } from './services/users.service';
+import { isLoginValid, signOut } from './services/users.service';
 
 import Layout from './pages/Layout';
 
@@ -10,13 +10,15 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
         <Route
             {...rest}
             render={(props) => {
-                if (isLoggedIn()) {
+                if (isLoginValid()) {
                     return (
                         <Layout>
                             <Component {...props} />
                         </Layout>
                     );
                 } else {
+                    signOut();
+
                     return (
                         <Redirect
                             to={{

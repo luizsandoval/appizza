@@ -7,18 +7,20 @@ interface CreateOrderRequest {
     user_id: number;
     pizza_ids: number[]; 
     total: number;
+    address: string;
 }
 
 class OrdersController {
     async create(req: Request, res: Response) {
         try {
-            const { user_id, pizza_ids, total }: CreateOrderRequest = req.body;                
+            const { user_id, pizza_ids, total, address }: CreateOrderRequest = req.body;                
         
             const trx = await knex.transaction();
     
             const order = {
                 user_id,
-                total
+                total,
+                address
             };  
 
             const insertedOrder = await trx<Order>('orders')

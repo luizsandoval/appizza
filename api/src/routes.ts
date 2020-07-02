@@ -201,6 +201,9 @@ routes
                             .number()
                             .positive()
                             .required(),
+                        address: Joi
+                            .string()
+                            .required(),
                         user_id: Joi
                             .number()
                             .positive()

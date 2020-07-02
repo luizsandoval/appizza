@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import AppContext from '../../AppContext';
+
+import { signOut } from '../../services/users.service';
 
 import LogoSVG from '../../assets/logo.svg';
 
@@ -11,13 +13,21 @@ import { StyledHeader, Logo, UserInformation, Avatar, StyledIcon } from './style
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
-    const { user } = useContext(AppContext); 
+    const { user, setUser } = useContext(AppContext); 
+
+    const history = useHistory();
 
     const getUserInitials = () => {
         const firstInitial = user.name[0].toUpperCase();
         const lastInitial = user.surname[0].toUpperCase();
 
         return `${firstInitial}${lastInitial}`;
+    };
+
+    const handleSignOut = () => {
+        signOut();
+        setUser({});
+        history.push('/signIn');
     };
 
     return (
@@ -37,7 +47,7 @@ const Header = () => {
                 <span>
                     |
                 </span>
-                <span>
+                <span onClick={() => handleSignOut()}>
                     Sair
                     <StyledIcon icon={faSignOutAlt}/>
                 </span>

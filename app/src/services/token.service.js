@@ -9,3 +9,5 @@ export const set = (token) => localStorage.setItem(TOKEN_KEY, token);
 export const remove = () => localStorage.removeItem(TOKEN_KEY);
 
 export const decodeToken = () => decode(get());
+
+export const isTokenExpired = () => (decodeToken().exp < Date.now() / 1000);
