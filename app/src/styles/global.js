@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import { rgba } from 'polished';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 const GlobalStyles = createGlobalStyle`
@@ -52,6 +54,17 @@ const GlobalStyles = createGlobalStyle`
         border: none;
         border-radius: 5px;
         width: 100%;
+
+        -webkit-transition: all 0.30s ease-in-out;
+        -moz-transition: all 0.30s ease-in-out;
+        -ms-transition: all 0.30s ease-in-out;
+        -o-transition: all 0.30s ease-in-out;
+        outline: none;
+    }
+
+    input:focus, textarea:focus {
+        box-shadow: 0 0 5px ${({ theme }) => rgba(theme.colors.secondary.light, 1)};
+        border: 1px solid ${({ theme }) => rgba(theme.colors.secondary.light, 1)};
     }
 
     h1 {

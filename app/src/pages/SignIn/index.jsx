@@ -16,7 +16,9 @@ import { signIn, getUser } from '../../services/users.service';
 
 import AppContext from '../../AppContext';
 
-import { Container, FormContainer } from './styles';
+import LogoSVG from '../../assets/logo.svg';
+
+import { Container, FormContainer, Logo } from './styles';
 
 const SignInSchema = yup.object().shape({
     email: yup.string().email('E-mail inválido').required('O e-mail é obrigatório'),
@@ -52,6 +54,7 @@ const SignIn = () => {
     return (
         <Container>
             <FormContainer>
+                <Logo src={LogoSVG} />
                 <form onSubmit={(e) => handleLogin(e)} noValidate>
                     <fieldset>
                         <label htmlFor="email">E-mail</label>

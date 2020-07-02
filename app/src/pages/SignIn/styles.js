@@ -40,3 +40,10 @@ export const FormContainer = styled.div`
         }
     }
 `;
+
+export const Logo = styled.img`
+    height: 80px;
+    width: auto;
+    max-width: 100%;
+    margin-bottom: 32px;
+`;
