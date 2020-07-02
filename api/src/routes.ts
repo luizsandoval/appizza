@@ -1,14 +1,11 @@
 import express from 'express';
 import multer from 'multer';
-import expressJwt from 'express-jwt';
 
 import { celebrate, Joi } from 'celebrate';
 
 import multerConfig from './config/multer';
 
 import CPFValidator from './helpers/CPFValidator';
-
-import JWT_SECRET from './constants/secret';
 
 import Pizza from './models/pizza.model';
 import Order from './models/order.model';
@@ -19,8 +16,6 @@ import OrdersController from './controllers/OrdersController';
 
 const routes = express.Router();
 const upload = multer(multerConfig);
-
-// const authenticate = expressJwt({ secret: JWT_SECRET })
 
 // region users
 
@@ -91,7 +86,6 @@ routes
 const pizzasController = new PizzasController();
 
 routes
-    // .use(authenticate)
     .post(
         '/pizzas',
         celebrate(
@@ -190,7 +184,6 @@ routes
 const ordersController = new OrdersController();
 
 routes
-    // .use(authenticate)
     .post(
         '/orders',
         celebrate(

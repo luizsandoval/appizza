@@ -5,8 +5,6 @@ import knex from '../database/connection';
 
 import User from '../models/user.model';
 
-import JWT_SECRET from '../constants/secret';
-
 class UsersController {
 
     async authenticate(req: Request, res: Response) {
@@ -30,7 +28,7 @@ class UsersController {
                     cpf: user.cpf,
                     email: user.email
                 },
-                JWT_SECRET,
+                process.env.SECRET_JWT || '',
                 {
                     expiresIn: '12h'
                 }
