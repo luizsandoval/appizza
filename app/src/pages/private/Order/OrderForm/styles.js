@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PizzasContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, 1fr);    
-    grid-gap: 16px;
+    grid-gap: 32px;
     padding: 16px 0;
 
     @media screen and (min-width: 768px) {

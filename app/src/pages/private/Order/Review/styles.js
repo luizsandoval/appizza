@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ellipsis } from 'polished';
 
 export const Container = styled.div`
     padding: 32px 0;
@@ -34,6 +35,7 @@ export const PizzaDetails = styled.div`
 
     small {
         color: ${({ theme }) => theme.colors.black.lighten};
+        ${ellipsis(150)};
     }
 `;
 

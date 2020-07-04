@@ -59,7 +59,8 @@ const OrdersHistory = () => {
                 .calendar(null, {
                     sameDay: '[Hoje]', 
                     lastDay: '[Ontem]', 
-                    sameElse: 'dddd'
+                    sameElse: 'dddd, DD [de] MMMM [de] YYYY',
+                    lastWeek: 'dddd, DD [de] MMMM [de] YYYY'
                 });
 
             return date;

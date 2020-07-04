@@ -3,32 +3,41 @@ import React from 'react';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import {
-    HiddenCheckbox,
-    StyledCheckbox,
-    CheckboxContainer,
+    Label,
+    Input,
     Icon,
+    StyledCheckbox,
 } from './styles';
 
 const Checkbox = ({
     checked,
+    id = 'checkbox',
     name = 'checkbox',
+    margin = 0,
     children,
-    align = 'flex-start',
     ...props
 }) => (
-    <CheckboxContainer align={align}>
-        <HiddenCheckbox
-            checked={checked}
+    <Label htmlFor={id}>
+        <Input
+            type="checkbox"
+            id={id}
             name={name}
+            margin={margin}
+            checked={checked}
             {...props}
         />
         <StyledCheckbox 
             checked={checked}
+            margin={margin}
         >
             <Icon icon={faCheck} />
         </StyledCheckbox>
-        {children}
-    </CheckboxContainer>
+        <span>
+            {
+                children
+            }
+        </span>
+    </Label>
 );
 
 export default Checkbox;

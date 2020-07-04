@@ -33,7 +33,7 @@ const Header = () => {
     return (
         <StyledHeader>
             <Link to="/">
-                <Logo src={LogoSVG} alt="Appizza - Aplicativo para pizzarias" />
+                <Logo src={LogoSVG} alt="Appizza - Aplicativo para pizzarias" title="Appizza - A melhor pizza da região" />
             </Link>
             <UserInformation>
                 <Avatar>

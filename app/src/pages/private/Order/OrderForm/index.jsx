@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { FormHeader, PizzasContainer, Fieldset } from './styles';
 
@@ -22,9 +22,9 @@ const OrderSchema = yup
 
 const OrderForm = ({ pizzas, user, order, setOrder, setActiveStep }) => {
     const [selectedPizzas, setSelectedPizzas] = useState(order.selectedPizzas || []);
-    const [sameRegisterAddress, setSameRegisterAddress] = useState(order.sameRegisterAddress || true);
+    const [sameRegisterAddress, setSameRegisterAddress] = useState(order.sameRegisterAddress || false);
 
-    const { register, errors, getValues, formState } = useForm({ validationSchema: OrderSchema, mode: 'onBlur' });
+    const { register, errors, getValues, formState } = useForm({ validationSchema: OrderSchema, mode: 'onChange' });
 
     const handlePizzaSelect = (pizza) => (!isPizzaSelected(pizza.id)
         ? setSelectedPizzas([...selectedPizzas, pizza])
@@ -55,6 +55,10 @@ const OrderForm = ({ pizzas, user, order, setOrder, setActiveStep }) => {
 
         setActiveStep('review');
     };
+
+    useEffect(() => {
+       if (order.selectedPizzas) setSelectedPizzas(order.selectedPizzas);
+    }, [order])
 
     return (
         <form 
@@ -90,9 +94,7 @@ const OrderForm = ({ pizzas, user, order, setOrder, setActiveStep }) => {
                 <h3>Entrega</h3>
                 <Checkbox
                     checked={sameRegisterAddress}
-                    value={sameRegisterAddress}
                     onChange={handleSameRegisterAddressChange}
-                    onClick={handleSameRegisterAddressChange}
                 >
                     O endereço de entrega é o mesmo de cadastro
                 </Checkbox>
@@ -101,7 +103,13 @@ const OrderForm = ({ pizzas, user, order, setOrder, setActiveStep }) => {
                     name="address"
                     ref={register}
                     disabled={sameRegisterAddress}
-                    defaultValue={order.address || user.address}
+                    defaultValue={(
+                        order.address
+                            ? order.address
+                            : sameRegisterAddress
+                                ? user.address
+                                : ''
+                    )}
                 />
                 {errors.address && (
                     <ErrorMessage>

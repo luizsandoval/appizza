@@ -43,8 +43,9 @@ const PizzaCard = ({
                 {selectable ? (
                     <Checkbox
                         name={name}
+                        id={pizza.id}
                         checked={checked}
-                        align="flex-end"
+                        margin="16px"
                         onChange={onSelect}
                     />
                 ) : null}
