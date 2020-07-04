@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import PrimaryButton from '../../components/PrimaryButton';
-import DividerWithText from '../../components/DividerWithText';
+import Divider from '../../components/Divider';
 import SecondaryButton from '../../components/SecondaryButton';
 import PasswordInput from '../../components/PasswordInput';
 import ErrorMessage from '../../components/ErrorMessage';
@@ -74,7 +74,7 @@ const SignIn = () => {
                     <PrimaryButton type="submit" disabled={!isFormValid()}>
                         Comer muita pizza
                     </PrimaryButton>
-                    <DividerWithText text="ou" />
+                    <Divider text="ou" />
                     <SecondaryButton type="button" onClick={() => goToSignUp()}>
                         Cadastrar-se
                     </SecondaryButton>

@@ -34,6 +34,8 @@ const OrderForm = ({ pizzas, user, order, setOrder, setActiveStep }) => {
         )
     );
 
+    const handleSameRegisterAddressChange = () => setSameRegisterAddress(isSame => !isSame);
+
     const isPizzaSelected = (id) => selectedPizzas.some(pizza => pizza.id === id);
 
     const isFormValid = () => formState.isValid && selectedPizzas.length;
@@ -52,7 +54,7 @@ const OrderForm = ({ pizzas, user, order, setOrder, setActiveStep }) => {
         setOrder(order);
 
         setActiveStep('review');
-    }
+    };
 
     return (
         <form 
@@ -66,18 +68,13 @@ const OrderForm = ({ pizzas, user, order, setOrder, setActiveStep }) => {
             <Fieldset>
                 <h3>Pizzas</h3>
                 <PizzasContainer>
-                    {pizzas.map((pizza) => (
+                    {pizzas
+                        .map((pizza) => (
                         <PizzaCard
-                            id={pizza.id}
                             key={pizza.id}
-                            pizzaName={pizza.name}
-                            price={pizza.price}
-                            ingredients={pizza.ingredients}
-                            imageSource={pizza.image}
+                            pizza={pizza}
                             selectable
-                            onSelect={() =>
-                                handlePizzaSelect(pizza)
-                            }
+                            onSelect={() => handlePizzaSelect(pizza)}
                             checked={isPizzaSelected(pizza.id)}
                             showActions={false}
                         />
@@ -93,8 +90,9 @@ const OrderForm = ({ pizzas, user, order, setOrder, setActiveStep }) => {
                 <h3>Entrega</h3>
                 <Checkbox
                     checked={sameRegisterAddress}
-                    onClick={() => setSameRegisterAddress(!sameRegisterAddress)}
                     value={sameRegisterAddress}
+                    onChange={handleSameRegisterAddressChange}
+                    onClick={handleSameRegisterAddressChange}
                 >
                     O endereço de entrega é o mesmo de cadastro
                 </Checkbox>

@@ -22,7 +22,7 @@ const Menu = () => {
             <SectionHeader>
                 <TitleWrapper>
                     <StyledIcon icon={faUtensils} size="2x" />
-                    <h1>Cardápio</h1>
+                    <h1 id="menu">Cardápio</h1>
                 </TitleWrapper>
                 <SecondaryButton
                     fullWidth={false}
@@ -36,11 +36,7 @@ const Menu = () => {
                         pizza => (
                             <PizzaCard
                                 key={pizza.id}
-                                pizzaName={pizza.name}
-                                imageSource={pizza.image}
-                                zoomOnHover
-                                price={pizza.price}
-                                ingredients={pizza.ingredients}
+                                pizza={pizza}
                             />
 
                         )

@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { useHistory } from 'react-router-dom';
+
+import AppContext from '../../AppContext';
 
 import formatCurrency from '../../utils/formatCurrency';
 
@@ -13,31 +17,32 @@ import {
 } from './styles';
 
 const PizzaCard = ({
-    imageSource,
+    pizza,
     name,
-    id,
-    pizzaName,
-    ingredients,
-    price,
-    showActions = true,
-    selectable = false,
-    zoomOnHover = false,
     onSelect,
     checked,
+    showActions = true,
+    selectable = false,
 }) => {
+    const { setSelectedPizzas } = useContext(AppContext);
+    const history = useHistory();
+
+    const handleOrderPizza = (pizza) => {
+        setSelectedPizzas([pizza]);
+        history.push('/order');
+    };
+
     return (
         <CardContainer 
             onClick={() => (selectable 
                 ? onSelect()
                 : null
             )}
-            zoomOnHover={zoomOnHover}
         >
-            <CardImage imageSource={imageSource}>
+            <CardImage imageSource={pizza.image}>
                 {selectable ? (
                     <Checkbox
                         name={name}
-                        value={id}
                         checked={checked}
                         align="flex-end"
                         onChange={onSelect}
@@ -45,15 +50,19 @@ const PizzaCard = ({
                 ) : null}
             </CardImage>
             <CardContent>
-                <h2>{pizzaName}</h2>
-                <small>{ingredients}</small>
+                <h2>{pizza.name}</h2>
+                <small>{pizza.ingredients}</small>
                 <label>
-                    R$: <b>{formatCurrency(price)}</b>
+                    R$: <b>{formatCurrency(pizza.price)}</b>
                 </label>
             </CardContent>
             {showActions ? (
                 <CardActions>
-                    <CardButton>Pedir</CardButton>
+                    <CardButton
+                        onClick={() => handleOrderPizza(pizza)}
+                    >
+                        Pedir
+                    </CardButton>
                     <CardButton>Detalhes</CardButton>
                 </CardActions>
             ) : null}

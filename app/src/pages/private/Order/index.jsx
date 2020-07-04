@@ -15,7 +15,7 @@ import {
 } from './styles';
 
 const Order = () => {
-    const { user } = useContext(AppContext);
+    const { user, selectedPizzas, setSelectedPizzas } = useContext(AppContext);
 
     const [pizzas, setPizzas] = useState([]);
     const [order, setOrder] = useState({});
@@ -41,11 +41,6 @@ const Order = () => {
         createOrder(orderToBeSaved)
             .then(() => setActiveStep('feedback'));
     }
-
-    useEffect(() => {
-        if (!pizzas.length) getPizzas()
-            .then((pizzas) => setPizzas(pizzas));
-    }, [pizzas.length]);
 
     const getCurrentStep = () => {
         switch (activeStep) {
@@ -78,6 +73,22 @@ const Order = () => {
             );
         }
     };
+
+    useEffect(() => {
+        if (selectedPizzas.length) {
+            const order = {
+                selectedPizzas,
+            };
+
+            setOrder(order);
+            setSelectedPizzas([]);
+        }
+    }, [selectedPizzas, setSelectedPizzas]);
+
+    useEffect(() => {
+        if (!pizzas.length) getPizzas()
+            .then((pizzas) => setPizzas(pizzas));
+    }, [pizzas.length]);
 
     return (
         <Container>

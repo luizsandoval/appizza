@@ -6,7 +6,11 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 64px;
+    padding: 64px 0;
+
+    @media screen and (min-width: 768px) {
+        padding: 64px;
+    }
 
     background: ${({ theme }) => theme.colors.secondary.lighten};
 `;
@@ -15,7 +19,7 @@ export const Card = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 600px;
+    width: auto;
     border-radius: 5px;
     height: auto;
     padding: 32px 64px;

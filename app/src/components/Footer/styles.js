@@ -15,4 +15,11 @@ export const StyledFooter = styled.footer`
 export const Copyright = styled.p`
     text-align: center;
     font-size: 0.7em;
+
+    a {
+        color: ${({ theme }) => theme.colors.white};
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 `;

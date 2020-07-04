@@ -8,10 +8,6 @@ export const CardContainer = styled.div`
     border-radius: 5px;
     background: ${({ theme }) => theme.colors.background};
     box-shadow: 5px 15px 25px ${({ theme }) => theme.colors.black.lightest};
-
-    &:hover {
-        transform: ${({ zoomOnHover }) => zoomOnHover && 'scale(1.2)'};
-    }
 `;
 
 export const CardImage = styled.div`

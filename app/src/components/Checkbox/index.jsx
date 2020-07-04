@@ -11,20 +11,20 @@ import {
 
 const Checkbox = ({
     checked,
-    value,
-    onChange,
-    name,
+    name = 'checkbox',
     children,
     align = 'flex-start',
+    ...props
 }) => (
     <CheckboxContainer align={align}>
         <HiddenCheckbox
-            value={value}
-            onChange={({ target }) => onChange(target.value)}
             checked={checked}
             name={name}
+            {...props}
         />
-        <StyledCheckbox checked={checked}>
+        <StyledCheckbox 
+            checked={checked}
+        >
             <Icon icon={faCheck} />
         </StyledCheckbox>
         {children}

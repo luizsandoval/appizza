@@ -13,9 +13,10 @@ import AppContext from './AppContext';
 
 function App() {
     const [user, setUser] = useState(getUser());
+    const [selectedPizzas, setSelectedPizzas] = useState([]);
 
     return (
-        <AppContext.Provider value={{ user, setUser }}>
+        <AppContext.Provider value={{ user, selectedPizzas, setUser, setSelectedPizzas }}>
             <ThemeProvider theme={LightTheme}>
                 <GlobalStyles />
                 <Routes />

@@ -9,8 +9,7 @@
         "url": "https://github.com/luizsandoval"
     },
     "scripts": {
-        "build": "tsc -w",
-        "build:prod": "tsc && npm run copy-assets",
+        "build": "tsc && npm run copy-assets",
         "start:prod": "node ./dist/src/server.js",
         "start:dev": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
         "database": "npm run knex:migrate && npm run knex:seed",
@@ -19,19 +18,19 @@
         "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
         "knex:seed:prod": "knex --knexfile dist/knexfile.js seed:run",
         "knex:migrate:prod": "knex --knexfile dist/knexfile.js migrate:latest",
-        "copy-assets": "mkdir -p \"dist\\uploads\\default\" && xcopy \"uploads\\default\" \"dist\\uploads\\default\""
+        "copy-assets": "mkdir -p dist/uploads/default && cp -r uploads/default dist/uploads/default"
     },
     "dependencies": {
         "celebrate": "^12.1.1",
         "cors": "^2.8.5",
         "cpf-cnpj-validator": "^1.0.2",
-        "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "express-jwt": "^5.3.3",
         "jsonwebtoken": "^8.5.1",
         "knex": "^0.21.1",
         "multer": "^1.4.2",
-        "sqlite3": "^4.2.0"
+        "sqlite3": "^4.2.0",
+        "dotenv": "^8.2.0"
     },
     "devDependencies": {
         "@types/cors": "^2.8.6",

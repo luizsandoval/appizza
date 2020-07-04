@@ -6,13 +6,15 @@ export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
     border: 0;
     clip: rect(0 0 0 0);
     clippath: inset(50%);
-    height: 1px;
-    margin: -1px;
     overflow: hidden;
-    padding: 0;
+    height: 24px;
+    width: 24px;
     position: absolute;
+    padding: 0;
+    top: 0;
+    left: 0;
+    opacity:0;
     white-space: nowrap;
-    width: 1px;
 `;
 
 export const StyledCheckbox = styled.div`
@@ -22,12 +24,14 @@ export const StyledCheckbox = styled.div`
     align-items: center;
     height: 24px;
     width: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
     border-radius: 5px;
     background: ${({ theme, checked }) => checked 
         ? theme.colors.success.main
         : theme.colors.white
     };
-    margin-right: 16px;
     cursor: pointer;
 `;
 
@@ -35,6 +39,7 @@ export const CheckboxContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative;
     justify-content: ${({ align }) => align };
     padding: 16px 0;
 `;

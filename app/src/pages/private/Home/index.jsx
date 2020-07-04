@@ -13,11 +13,11 @@ const Home = () => (
     <Container>
         <Menu />
         <OrdersHistory />
-        <FloatingActionButton>
-            <Link to="/order">
-                <StyledIcon icon={faPlus} />
-            </Link>
-        </FloatingActionButton>
+        <Link to="/order">
+            <FloatingActionButton>
+                    <StyledIcon icon={faPlus} />
+            </FloatingActionButton>
+        </Link>
     </Container>
 );
 

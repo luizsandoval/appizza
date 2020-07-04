@@ -10,11 +10,11 @@ import { signUp } from '../../services/users.service';
 
 import isValid from '../../validators/CPFValidator';
 
+import Divider from '../../components/Divider';
 import ErrorMessage from '../../components/ErrorMessage';
 import PrimaryButton from '../../components/PrimaryButton';
 import PasswordInput from '../../components/PasswordInput';
 import SecondaryButton from '../../components/SecondaryButton';
-import DividerWithText from '../../components/DividerWithText';
 
 import { Container, FormContainer } from './styles';
 
@@ -121,7 +121,7 @@ const SignUp = () => {
                     <PrimaryButton type="submit" disabled={!isFormValid()}>
                         Cadastrar-se agora
                     </PrimaryButton>
-                    <DividerWithText text="ou" />
+                    <Divider text="ou" />
                     <SecondaryButton type="button" onClick={() => goToSignIn()}>
                         Voltar para login
                     </SecondaryButton>

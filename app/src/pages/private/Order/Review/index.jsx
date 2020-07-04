@@ -2,11 +2,11 @@ import React from 'react';
 
 import formatCurrency from '../../../../utils/formatCurrency';
 
+import Divider from '../../../../components/Divider';
 import PrimaryButton from '../../../../components/PrimaryButton';
 import SecondaryButton from '../../../../components/SecondaryButton';
-import DividerWithText from '../../../../components/DividerWithText';
 
-import { Container, PizzaDetails, PizzaItem, Divider, TotalContainer } from './styles';
+import { Container, PizzaDetails, PizzaItem, TotalContainer } from './styles';
 
 const Review = ({ order, total, setActiveStep, confirmOrder }) => {
 
@@ -57,7 +57,7 @@ const Review = ({ order, total, setActiveStep, confirmOrder }) => {
                 Confirmar pedido
             </PrimaryButton>
 
-            <DividerWithText text="ou" />
+            <Divider text="ou" />
 
             <SecondaryButton 
                 type="button"

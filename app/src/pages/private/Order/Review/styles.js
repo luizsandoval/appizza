@@ -45,11 +45,3 @@ export const TotalContainer = styled.div`
     width: 100%;
     margin-bottom: 32px;
 `;
-
-export const Divider = styled.div`
-    width: 100%;
-    height: 1px;
-    color: ${({ theme }) => theme.colors.black.lightest};
-    background: ${({ theme }) => theme.colors.black.lightest};
-    margin: 24px 0;
-`;

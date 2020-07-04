@@ -2,7 +2,9 @@ import { createContext } from 'react';
 
 const DEFAULT_CONTEXT = {
     user: {},
-    setUser: (user) => {}
+    selectedPizzas: [],
+    setUser: (user) => {},
+    setSelectedPizzas: (pizzas) => {},
 };
 
 const AppContext = createContext(DEFAULT_CONTEXT);
