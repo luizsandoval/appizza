@@ -15,7 +15,12 @@ export const FeedbackContainer = styled.div`
 `;
 
 export const StyledImage = styled.img`
-    width: 400px;
+    width: 100%;
+    max-width: 100%;
     height: auto;
     padding: 32px;
+
+    @media screen and (min-width: 768px) {
+        width: 400px;
+    }
 `;

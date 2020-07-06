@@ -13,6 +13,7 @@ import {
     CardContent,
     CardImage,
     CardActions,
+    Overlay,
     CardButton,
 } from './styles';
 
@@ -24,13 +25,15 @@ const PizzaCard = ({
     showActions = true,
     selectable = false,
 }) => {
-    const { setSelectedPizzas } = useContext(AppContext);
+    const { setSelectedPizzas, setExpandedPizza } = useContext(AppContext);
     const history = useHistory();
 
     const handleOrderPizza = (pizza) => {
         setSelectedPizzas([pizza]);
         history.push('/order');
     };
+
+    const handlePizzaDetails = (pizza) => setExpandedPizza(pizza);
 
     return (
         <CardContainer 
@@ -41,13 +44,16 @@ const PizzaCard = ({
         >
             <CardImage imageSource={pizza.image}>
                 {selectable ? (
-                    <Checkbox
-                        name={name}
-                        id={pizza.id}
-                        checked={checked}
-                        margin="16px"
-                        onChange={onSelect}
-                    />
+                    <>
+                        <Overlay />
+                        <Checkbox
+                            name={name}
+                            id={pizza.id}
+                            checked={checked}
+                            margin="16px"
+                            onChange={onSelect}
+                        />
+                    </>
                 ) : null}
             </CardImage>
             <CardContent>
@@ -64,7 +70,11 @@ const PizzaCard = ({
                     >
                         Pedir
                     </CardButton>
-                    <CardButton>Detalhes</CardButton>
+                    <CardButton
+                        onClick={() => handlePizzaDetails(pizza)}
+                    >
+                        Detalhes
+                    </CardButton>
                 </CardActions>
             ) : null}
         </CardContainer>

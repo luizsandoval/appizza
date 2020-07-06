@@ -6,7 +6,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { StyledBackButton, Icon } from './styles';
 
-const BackButton = () => {
+const BackButton = ({ customAction }) => {
     const history = useHistory();
 
     const handleBackHistory = () => history.goBack();
@@ -14,7 +14,10 @@ const BackButton = () => {
     return (
         <StyledBackButton 
             type="button" 
-            onClick={() => handleBackHistory()}
+            onClick={() => (customAction 
+                ? customAction() 
+                : handleBackHistory()
+            )}
         >
             <Icon icon={faArrowLeft} />
         </StyledBackButton>

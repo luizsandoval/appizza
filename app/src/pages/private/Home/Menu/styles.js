@@ -17,13 +17,17 @@ export const StyledIcon = styled(FontAwesomeIcon)`
 
 export const PizzasContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, 1fr);
     grid-gap: 32px;
     align-items: center;
     width: 100%;
     height: auto;
     background: ${({ theme }) => theme.colors.secondary.lightest};
     padding: 32px;
+
+    @media screen and (min-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
 `;
 
 export const TitleWrapper = styled.div`

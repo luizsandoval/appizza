@@ -47,7 +47,7 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
     }
 
-    input {
+    input, textarea {
         background: ${({ theme }) => theme.colors.gray.main};
         color: ${({ theme }) => theme.colors.black.main};
         padding: 16px;

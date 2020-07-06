@@ -14,9 +14,23 @@ import AppContext from './AppContext';
 function App() {
     const [user, setUser] = useState(getUser());
     const [selectedPizzas, setSelectedPizzas] = useState([]);
+    const [expandedPizza, setExpandedPizza] = useState('');
+    const [openedComponent, setOpenedComponent] = useState('');
 
     return (
-        <AppContext.Provider value={{ user, selectedPizzas, setUser, setSelectedPizzas }}>
+        <AppContext.Provider 
+            value={
+                { 
+                    user, 
+                    selectedPizzas, 
+                    expandedPizza, 
+                    openedComponent, 
+                    setUser, 
+                    setSelectedPizzas, 
+                    setExpandedPizza, 
+                    setOpenedComponent, 
+                }
+            }>
             <ThemeProvider theme={LightTheme}>
                 <GlobalStyles />
                 <Routes />

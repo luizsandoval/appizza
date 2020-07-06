@@ -52,8 +52,10 @@ const OrdersHistory = () => {
 
     const handleOrders = (orders) => {
         const ordersGroupedByDate = groupBy(orders, (order) => {
+            console.log(order.created_at);
             order.created_at = dayJs(order.created_at)
                 .format('YYYY-MM-DD');
+
 
             const date = dayJs(order.created_at)
                 .calendar(null, {

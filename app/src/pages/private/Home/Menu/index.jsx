@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { faUtensils } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,10 +7,16 @@ import SecondaryButton from '../../../../components/SecondaryButton';
 
 import { getAll } from '../../../../services/pizzas.service'; 
 
+import AppContext from '../../../../AppContext';
+
 import { SectionHeader, StyledIcon, PizzasContainer, TitleWrapper } from './styles';
 
 const Menu = () => {
+    const { setOpenedComponent } = useContext(AppContext);
+
     const [pizzas, setPizzas] = useState([]);
+
+    const handleAddPizza = () => setOpenedComponent('keep');
 
     useEffect(() => {
         getAll()
@@ -26,6 +32,7 @@ const Menu = () => {
                 </TitleWrapper>
                 <SecondaryButton
                     fullWidth={false}
+                    onClick={() => handleAddPizza()}
                 >
                     Adicionar Pizza
                 </SecondaryButton>

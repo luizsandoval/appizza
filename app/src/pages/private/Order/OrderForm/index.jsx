@@ -22,9 +22,9 @@ const OrderSchema = yup
 
 const OrderForm = ({ pizzas, user, order, setOrder, setActiveStep }) => {
     const [selectedPizzas, setSelectedPizzas] = useState(order.selectedPizzas || []);
-    const [sameRegisterAddress, setSameRegisterAddress] = useState(order.sameRegisterAddress || false);
+    const [sameRegisterAddress, setSameRegisterAddress] = useState(order.sameRegisterAddress || true);
 
-    const { register, errors, getValues, formState } = useForm({ validationSchema: OrderSchema, mode: 'onChange' });
+    const { register, errors, getValues, setValue, formState } = useForm({ validationSchema: OrderSchema, mode: 'onChange' });
 
     const handlePizzaSelect = (pizza) => (!isPizzaSelected(pizza.id)
         ? setSelectedPizzas([...selectedPizzas, pizza])
@@ -59,6 +59,14 @@ const OrderForm = ({ pizzas, user, order, setOrder, setActiveStep }) => {
     useEffect(() => {
        if (order.selectedPizzas) setSelectedPizzas(order.selectedPizzas);
     }, [order])
+
+    useEffect(() => {
+        const address = sameRegisterAddress
+            ? user.address
+            : '';
+
+        setValue('address', address, true);
+    }, [sameRegisterAddress, user.address, setValue])
 
     return (
         <form 

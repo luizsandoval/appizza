@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ellipsis } from 'polished';
+import { ellipsis, rgba } from 'polished';
 
 export const CardContainer = styled.div`
     display: flex;
@@ -13,6 +13,7 @@ export const CardContainer = styled.div`
 export const CardImage = styled.div`
     max-width: 100%;
     height: 100px;
+    position: relative;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     background-image: url(${({ imageSource }) => imageSource});
@@ -53,4 +54,11 @@ export const CardButton = styled.button`
     letter-spacing: 1.5px;
     background: ${({ theme }) => theme.colors.background};
     padding: 8px 16px;
+`;
+
+export const Overlay = styled.div`
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    background: ${({ theme }) => rgba(theme.colors.black.main, 0.3)};
 `;

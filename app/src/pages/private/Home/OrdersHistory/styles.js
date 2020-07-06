@@ -53,7 +53,6 @@ export const Order = styled.div`
     display: flex;
     flex-direction: column;
     padding: 32px;
-    /* border: 1px solid ${({ theme }) => theme.colors.black.lightest}; */
     background-image: radial-gradient(circle at center, white 3px, transparent 4px), radial-gradient(circle at center, white 3px, transparent 4px);
     background-size: 14px 12px;
     background-position: center -6px, center calc(100% + 6px);

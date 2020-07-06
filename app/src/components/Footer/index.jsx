@@ -5,7 +5,8 @@ import { StyledFooter, Copyright } from './styles';
 const Footer = () => (
     <StyledFooter>
         <Copyright>
-            Appizza - Aplicativo para pizzarias 
+            Appizza - Aplicativo para pizzarias
+            &nbsp;
             <span
                 role="img"
                 aria-label="Uma fatia de pizza"
@@ -14,13 +15,15 @@ const Footer = () => (
             </span> 
             <br />
             <br />
-            Feito com 
+            Feito com
+            &nbsp;
             <span 
                 role="img"
                 aria-label="Um coração vermelho, representando amor"
             >
                 ❤️    
-            </span> 
+            </span>
+            &nbsp;
             por
             &nbsp;
             <a 
