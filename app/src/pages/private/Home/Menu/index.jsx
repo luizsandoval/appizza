@@ -12,7 +12,7 @@ import AppContext from '../../../../AppContext';
 import { SectionHeader, StyledIcon, PizzasContainer, TitleWrapper } from './styles';
 
 const Menu = () => {
-    const { setOpenedComponent } = useContext(AppContext);
+    const { expandedPizza, setOpenedComponent } = useContext(AppContext);
 
     const [pizzas, setPizzas] = useState([]);
 
@@ -22,6 +22,11 @@ const Menu = () => {
         getAll()
             .then((pizzas) => setPizzas(pizzas));
     }, []);
+
+    useEffect(() => {
+        getAll()
+            .then((pizzas) => setPizzas(pizzas));
+    }, [expandedPizza]);
 
     return (
         <>

@@ -28,16 +28,17 @@ const Pizza = () => {
         setOpenedComponent('');
     };
 
-    const handleDelete = () => removePizza(pizza)
+    const handleDelete = () => removePizza(pizza.id)
         .then(handleClose);
 
-    const handleKeep = (pizza) => Promise
-        .all(
-            pizza.id 
-                ? updatePizza(pizza)
-                : createPizza(pizza)
+    const handleKeep = (pizza) => (pizza.id 
+            ? updatePizza(pizza)
+            : createPizza(pizza)
         )
-        .then(() => handleChangeActiveComponent('details'));
+        .then((insertedPizza) => {
+            setExpandedPizza(insertedPizza);
+            handleChangeActiveComponent('details');
+        });
 
     const handleOrderPizza = (e, pizza) => {
         handleDefaultEvents(e);
