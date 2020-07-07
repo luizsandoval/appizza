@@ -5,7 +5,8 @@ export const Overlay = styled.div`
     position: fixed;
     width: 100%;
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     background: ${({ theme }) => rgba(theme.colors.black.main, 0.8)};
     z-index: 3;
 `;

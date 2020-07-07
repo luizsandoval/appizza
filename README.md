@@ -207,3 +207,5 @@ And your default browser will open the app at http://localhost:3000.
 The [MIT License](https://opensource.org/licenses/MIT) (MIT)
 
 Copyright :copyright: 2020 - Appizza - App for pizza places.
+
+<b>Made with :heart: by [Luiz Sandoval](https://github.com/luizsandoval)</b>

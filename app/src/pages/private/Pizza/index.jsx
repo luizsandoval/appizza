@@ -42,8 +42,8 @@ const Pizza = () => {
 
     const handleOrderPizza = (e, pizza) => {
         handleDefaultEvents(e);
+        handleClose();
 
-        setExpandedPizza({});
         setSelectedPizzas([pizza]);
         history.push('/order');
     };
