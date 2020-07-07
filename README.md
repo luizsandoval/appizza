@@ -4,6 +4,7 @@
         height="160" 
     />
 </div>
+<br />
 
 <p align="center">
   <img src="https://img.shields.io/static/v1?label=react&message=framework&color=blue&style=for-the-badge&logo=REACT"/>
@@ -15,15 +16,15 @@
 
 ### Summary 
 
-:man_teacher: [Overview](#overview)
+:man_teacher: [Overview](#overview-man_teacher)
 
-:bulb: [Functionalities](#functionalities)
+:bulb: [Functionalities](#functionalities-bulb)
 
-:rocket: [Preview](#preview)
+:rocket: [Preview](#preview-rocket)
 
-:wrench: [Running locally](#running-locally)
+:wrench: [Running locally](#running-locally-wrench)
 
-:eyes: [Technologies Used](#technologies-used)
+:package: [Technologies Used](#technologies-used-package)
 
 ## Overview :man_teacher:
 
@@ -183,7 +184,7 @@ or
 
 And your default browser will open the app at http://localhost:3000.
 
-## Technologies used
+## Technologies used :package:
 
 ### Backend
 - [Express](https://expressjs.com)
