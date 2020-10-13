@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { ThemeProvider } from 'styled-components';
 
-import { getUser } from './services/users.service';
+import { getEstablishment } from './services/establishments.service';
 
 import GlobalStyles from './styles/global';
 import LightTheme from './styles/theme/light';
@@ -12,7 +12,7 @@ import Routes from './routes';
 import AppContext from './AppContext';
 
 function App() {
-    const [user, setUser] = useState(getUser());
+    const [user, setUser] = useState(getEstablishment());
     const [selectedPizzas, setSelectedPizzas] = useState([]);
     const [expandedPizza, setExpandedPizza] = useState('');
     const [openedComponent, setOpenedComponent] = useState('');

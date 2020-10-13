@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import AppContext from '../../AppContext';
 
-import { signOut } from '../../services/users.service';
+import { signOut } from '../../services/establishments.service';
 
 import LogoSVG from '../../assets/logo.svg';
 

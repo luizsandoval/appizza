@@ -10,7 +10,6 @@ import isNonAuthenticatedRoute from './middlewares/isNonAuthenticatedRoute';
 
 import Routes from './routes'; 
 
-
 if (process.env.NODE_ENV === 'development') {
     const dotenv = config();
 

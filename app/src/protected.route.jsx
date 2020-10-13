@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { isLoginValid, signOut } from './services/users.service';
+import { isLoginValid, signOut } from './services/establishments.service';
 
 import Layout from './pages/Layout';
 

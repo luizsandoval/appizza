@@ -8,16 +8,16 @@ import {
     isTokenExpired, 
 } from './token.service';
 
-export const signUp = (user) => api
-    .post('/users', user)
+export const signUp = (establishment) => api
+    .post('/establishments', establishment)
     .then(({ data }) => data);
 
 export const signIn = (email, password) => api
-    .post('/signIn', { email, password })
+    .post('/auth/establishments', { email, password })
     .then(({ data }) => setToken(data));
 
 export const isLoginValid = () => !!getToken() && !isTokenExpired();
 
 export const signOut = () => removeToken();
 
-export const getUser = () => decodeToken();
+export const getEstablishment = () => decodeToken();

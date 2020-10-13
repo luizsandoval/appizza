@@ -12,7 +12,7 @@ import SecondaryButton from '../../components/SecondaryButton';
 import PasswordInput from '../../components/PasswordInput';
 import ErrorMessage from '../../components/ErrorMessage';
 
-import { signIn, getUser } from '../../services/users.service';
+import { signIn, getEstablishment } from '../../services/establishments.service';
 
 import AppContext from '../../AppContext';
 
@@ -39,7 +39,7 @@ const SignIn = () => {
 
         signIn(email, password)
             .then(() => {
-                const user = getUser();
+                const user = getEstablishment();
 
                 setUser(user);
 
@@ -72,7 +72,7 @@ const SignIn = () => {
                         {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
                     </fieldset>
                     <PrimaryButton type="submit" disabled={!isFormValid()}>
-                        Comer muita pizza
+                        Vender muita pizza
                     </PrimaryButton>
                     <Divider text="ou" />
                     <SecondaryButton type="button" onClick={() => goToSignUp()}>
