@@ -12,7 +12,7 @@
   <img src="http://img.shields.io/static/v1?label=License&message=MIT&color=green&style=for-the-badge"/>
 </p>
 
-> Status: Under improvement (version 2 is coming) :work_in_progress:
+> Status: Under improvement :construction: (version 2 is coming):rocket:
 
 ### Summary 
 
