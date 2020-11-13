@@ -37,7 +37,7 @@ const GlobalStyles = createGlobalStyle`
         }
     }
 
-    button {
+    button, a {
         :hover {
             cursor: pointer;
         }

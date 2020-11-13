@@ -36,7 +36,7 @@ export const StyledForm = styled.form`
 
         label {
             margin-bottom: 8px;
-            font-weight: bold;
+            font-weight: normal;
         
             & small {
                 color: ${({ theme }) => theme.colors.black.lighten};

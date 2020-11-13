@@ -5,7 +5,8 @@ export async function up(knex: Knex) {
         table.increments('id').primary();
         table.string('first_name').notNullable();
         table.string('last_name').notNullable();
-        table.string('address').notNullable();
+        table.decimal('latitude').notNullable();
+        table.decimal('longitude').notNullable();
         table.string('cpf').unique().notNullable();
         table.string('email').notNullable();
         table.string('password').notNullable();

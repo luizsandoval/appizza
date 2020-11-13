@@ -1,18 +1,17 @@
 import { Response, Request } from 'express';
-import { sign } from 'jsonwebtoken';
-
-import { hash } from 'bcrypt';
 
 import knex from '../database/connection';
 
 import User from '../models/user.model';
+
+import { encryptPassword } from '../helpers/passwordEncryptor';
 
 class UsersController {
     async create(req: Request, res: Response) {
         try {
             const user: User = req.body;
 
-            user.password = await hash(user.password, process.env.ROUNDS || ''); 
+            user.password = await encryptPassword(user.password); 
 
             const trx = await knex.transaction();
     

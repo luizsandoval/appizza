@@ -1,9 +1,5 @@
 import React, { useContext } from 'react';
 
-import { Link } from 'react-router-dom';
-
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
 import AppContext from '../../../AppContext';
 
 import { Container, FloatingActionButton, StyledIcon } from './styles';
@@ -21,11 +17,6 @@ const Home = () => {
             <Container>
                 <Menu />
                 <OrdersHistory />
-                <Link to="/order">
-                    <FloatingActionButton>
-                            <StyledIcon icon={faPlus} />
-                    </FloatingActionButton>
-                </Link>
             </Container>
         </>
     )

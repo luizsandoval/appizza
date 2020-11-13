@@ -98,7 +98,7 @@ const Keep = ({ handleKeep, handleClose, setActiveComponent, pizza }) => {
                     />
                     {errors.ingredients && (
                         <ErrorMessage>
-                            {errors.ingredients.message}
+                            {errors?.ingredients?.message}
                         </ErrorMessage>
                     )}
                 </fieldset>
@@ -112,7 +112,7 @@ const Keep = ({ handleKeep, handleClose, setActiveComponent, pizza }) => {
                         required
                     />
                     {errors.price && (
-                        <ErrorMessage>{errors.price.message}</ErrorMessage>
+                        <ErrorMessage>{errors?.price?.message}</ErrorMessage>
                     )}
                 </fieldset>
                 <fieldset>

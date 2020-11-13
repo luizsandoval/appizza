@@ -1,13 +1,11 @@
 import { Response, Request } from 'express';
 import { sign } from 'jsonwebtoken';
 
-import { compare, getRounds } from 'bcrypt';
-
 import knex from '../database/connection';
 
 import { User, Establishment } from '../models';
 
-import isPasswordValid from '../helpers/validatePassword';
+import { validatePassword as isPasswordValid } from '../helpers/passwordEncryptor';
 
 class AuthController {
     async authenticateUsers(req: Request, res: Response) {
@@ -18,7 +16,9 @@ class AuthController {
                 .where('email', email)
                 .first();
     
-            if (!user || await isPasswordValid(password, user.password)) return res.status(403).json({ message: 'E-mail ou senha inválido(s)' });
+            if (!user || !(await isPasswordValid(password, user.password))) {
+                return res.status(403).json({ message: 'E-mail ou senha inválido(s)' });
+            }
     
             const token = sign(
                 {
@@ -51,7 +51,9 @@ class AuthController {
                 .where('email', email)
                 .first();
     
-            if (!establishment || await isPasswordValid(password, establishment.password)) return res.status(403).json({ message: 'E-mail ou senha inválido(s)' });
+            if (!establishment || !(await isPasswordValid(password, establishment.password))) {
+                return res.status(403).json({ message: 'E-mail ou senha inválido(s)' });
+            }
     
             const token = sign(
                 {
