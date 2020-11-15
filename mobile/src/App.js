@@ -1,11 +1,19 @@
 import React from 'react';
 
-import { Text } from 'react-native';
+import { SafeAreaView } from 'react-native';
+
+import { ThemeProvider } from 'styled-components/native';
+
+import LightTheme from './styles/themes/light';
+
+import Routes from './routes';
 
 const App = () => (
-    <Text>
-        Salve galera
-    </Text>
+    <ThemeProvider theme={LightTheme}>
+        <SafeAreaView style={{ flex: 1 }}>
+            <Routes />
+        </SafeAreaView>
+    </ThemeProvider>
 );
 
 export default App;
