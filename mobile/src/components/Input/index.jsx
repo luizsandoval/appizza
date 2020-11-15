@@ -1,18 +1,25 @@
 import React from 'react';
 
-import { Label, TextInput } from './styles';
+import { Container, Label, TextInput } from './styles';
 
-const Input = ({ label, placeholder, required, ...rest }) => (
-    <>
-        <Label>
+const Input = ({ 
+    label, 
+    placeholder, 
+    required = false, 
+    invalid = false, 
+    ...rest
+}) => (
+    <Container>
+        <Label invalid={invalid}>
             {label}
-            {required && '*'}
+            {required && ' *'}
         </Label>
         <TextInput
+            invalid={invalid}
             placeholder={placeholder}
             {...rest}
         />
-    </>
+    </Container>
 );
 
 export default Input;

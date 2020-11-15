@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
-import Title from '../../components/Title';
-import PrimaryButton from '../../components/PrimaryButton';
+import Title from '../../../components/Title';
+import PrimaryButton from '../../../components/PrimaryButton';
 
 export const StyledTitle = styled(Title)`
     margin-top: 16px;

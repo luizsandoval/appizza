@@ -1,14 +1,12 @@
 import React from 'react';
 
-import { View } from 'react-native';
-
 import LottieView from 'lottie-react-native';
 
 import {
     SubTitle,
     Container,
     SecondaryButton,
-} from '../../components';
+} from '../../../components';
 
 import { 
     StyledTitle,
@@ -16,27 +14,29 @@ import {
     StyledPrimaryButton,
 } from './styles';
 
-const Welcome = () => (
+const Welcome = ({ navigation }) => (
     <Container>
         <StyledTitle>
             As melhores{'\n'}
             pizzas da região
         </StyledTitle>
         <SubTitle>
-            A alguns cliques de você
+            A poucos cliques de você
         </SubTitle>
         <AnimationWrapper>
             <LottieView 
                 loop
                 autoPlay
-                source={require('../../assets/chef.json')}
+                source={require('../../../assets/chef.json')}
             />
         </AnimationWrapper>
         <StyledPrimaryButton
             title="Entrar"
+            onPress={() => navigation.navigate('SignIn')}
         />
         <SecondaryButton
             title="Ainda não sou cadastrado"
+            onPress={() => navigation.navigate('SignUp')}
         />
     </Container>
 );

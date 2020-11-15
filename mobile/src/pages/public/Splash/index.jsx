@@ -2,9 +2,9 @@ import React from 'react';
 
 import styled from 'styled-components/native';
 
-import Container from '../../components/Container';
+import Container from '../../../components/Container';
 
-import Logo from '../../assets/logo.svg';
+import Logo from '../../../assets/logo.svg';
 
 const StyledContainer = styled(Container)`
     align-items: center;

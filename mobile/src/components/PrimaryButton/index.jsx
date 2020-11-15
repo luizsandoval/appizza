@@ -2,12 +2,15 @@ import React from 'react';
 
 import { ButtonContainer, ButtonText } from './styles';
 
-const PrimaryButton = ({ title, onPress, ...rest }) => (
+const PrimaryButton = ({ title, onPress, disabled = false, ...rest }) => (
     <ButtonContainer 
-        onPress={onPress} 
+        onPress={onPress}
+        disabled={disabled}
         {...rest}
     >
-        <ButtonText>
+        <ButtonText
+            disabled={disabled}
+        >
             {title}
         </ButtonText>
     </ButtonContainer>
