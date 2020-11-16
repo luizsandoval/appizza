@@ -4,6 +4,16 @@ export const Container = styled.View`
     margin: 16px 0;
 `;
 
+export const Hint = styled.Text`
+    font-size: 12px;
+    margin-top: 8px;
+    color: ${({ theme, invalid }) => (        
+        !invalid
+            ? (theme.text.custom(0.4))
+            : (theme.colors.primary.main)
+    )};
+`;
+
 export const Label = styled.Text`
     font-size: 16px;
     margin-bottom: 8px;

@@ -1,8 +1,9 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import * as yup from 'yup';
 
@@ -28,42 +29,40 @@ const SIGN_IN_SCHEMA = yup
         {
             email: yup
                 .string()
-                .email('E-mail inválido')
-                .required('O e-mail é obrigatório'),
+                .required('O e-mail é obrigatório')
+                .email('E-mail inválido'),
             password: yup
                 .string()
-                .required('A senha é obrigatória'),
+                .required('A senha é obrigatória')
         }
     );
 
 const SignIn = () => {
+    const [isLoading, setIsLoading] = useState(false);
+
     const { 
         errors,
         formState,
-        register,
-        setValue,
+        control,
         getValues
     } = useForm(
         { 
-            mode: 'onChange', 
-            validationSchema: SIGN_IN_SCHEMA 
+            mode: 'onChange',
+            resolver: yupResolver(SIGN_IN_SCHEMA),
         }
     );
 
-    const setLoginForm = useCallback(() => {
-        register({ name: 'email '});
-        register({ name: 'password '});
-    }, [register]);
+    const isFormValid = () => formState.isValid;
 
     const handleLogin = useCallback(() => {
         const { email, password } = getValues();
+
+        setIsLoading(true);
+
+        console.warn(email, password);
         
         // handle login here...
     }, [getValues]);
-
-    useEffect(() => {
-        setLoginForm();
-    }, [setLoginForm]);
 
     return (
         <StyledContainer defaultPadding={false}>
@@ -76,27 +75,50 @@ const SignIn = () => {
                     Entre agora
                 </Title>
                 <View>
-                    <Input 
-                        required
-                        autoFocus
-                        label="E-mail"
-                        keyboardType="email-address"
-                        textContentType="emailAddress"
-                        placeholder="batman@batcaverna.com"
-                        onBlur={(text) => setValue('email', text)}
+                    <Controller 
+                        name="email"
+                        defaultValue=""
+                        control={control}
+                        render={({ onChange, onBlur, value }) => (
+                            <Input 
+                                required
+                                autoFocus
+                                label="E-mail"
+                                value={value}
+                                onBlur={onBlur}
+                                invalid={errors.email}
+                                keyboardType="email-address"
+                                hint={errors?.email?.message}
+                                textContentType="emailAddress"
+                                placeholder="batman@batcaverna.com"
+                                onChangeText={text => onChange(text)}
+                            />
+                        )}
                     />
-            
-                    <PasswordInput
-                        required
-                        onBlur={(text) => setValue('password', text)}
+
+                    <Controller 
+                        name="password"
+                        defaultValue=""
+                        control={control}
+                        render={({ onChange, onBlur, value }) => (
+                            <PasswordInput
+                                required
+                                value={value}
+                                onBlur={onBlur}
+                                invalid={errors.password}
+                                hint={errors?.password?.message}
+                                onChangeText={text => onChange(text)}
+                            />
+                        )}
                     />
 
                 </View>
 
                 <PrimaryButton
-                    title="Comer muita pizza"
-                    disabled={!formState.isValid}
+                    isLoading={isLoading}
                     onPress={handleLogin}
+                    disabled={!isFormValid()}
+                    title="Comer muita pizza"
                 />
             </Form>   
         </StyledContainer>

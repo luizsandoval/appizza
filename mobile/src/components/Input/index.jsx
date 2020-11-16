@@ -1,12 +1,18 @@
 import React from 'react';
 
-import { Container, Label, TextInput } from './styles';
+import { 
+    Hint,
+    Label,
+    Container, 
+    TextInput,
+} from './styles';
 
 const Input = ({ 
     label, 
     placeholder, 
+    hint = '',
     required = false, 
-    invalid = false, 
+    invalid = false,
     ...rest
 }) => (
     <Container>
@@ -19,6 +25,16 @@ const Input = ({
             placeholder={placeholder}
             {...rest}
         />
+        {
+            hint
+                ? (
+                    <Hint invalid={invalid}>
+                        {hint}
+                    </Hint>
+                )
+                : null
+        }
+
     </Container>
 );
 
