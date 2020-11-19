@@ -6,12 +6,12 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { ButtonContainer, Icon } from './styles';
 
-const BackButton = () => {
+const BackButton = ({ customAction }) => {
     const navigation = useNavigation();
 
     return (
         <ButtonContainer
-            onPress={() => navigation.goBack()}
+            onPress={() => customAction ? customAction() : navigation.goBack()}
         >
             <Icon
                 icon={faChevronLeft} 

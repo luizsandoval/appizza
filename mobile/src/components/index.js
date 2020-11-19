@@ -6,6 +6,7 @@ import BackButton from './BackButton';
 import PasswordInput from './PasswordInput';
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
+import FloatingActionButton from './FloatingActionButton';
 
 export {
     Title,
@@ -16,4 +17,5 @@ export {
     PasswordInput,
     PrimaryButton,
     SecondaryButton,
+    FloatingActionButton,
 };

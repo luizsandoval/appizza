@@ -6,6 +6,7 @@ const Text = styled.Text`
     font-size: 36px;
     font-weight: bold;
     line-height: 42px;
+    margin-bottom: 16px;
     color: ${({ theme }) => theme.text.custom(0.6)};
 `;
 
