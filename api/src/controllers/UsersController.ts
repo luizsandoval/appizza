@@ -26,6 +26,25 @@ class UsersController {
             return res.status(500).json(err);
         }
     }
+
+    async update(req: Request, res: Response) {
+        try {
+            const user: User = req.body;
+
+            const trx = await knex.transaction();
+    
+            const updatedUser = await trx<User>('users')
+                .update(user, '*')
+                .where('id', user.id);
+
+            await trx.commit();
+    
+            return res.status(200).json(updatedUser);
+
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    }
 }
 
 export default UsersController;

@@ -7,23 +7,26 @@ export default celebrate(
         body: Joi.object()
             .keys(
                 {
+                    id: Joi
+                        .number()
+                        .positive()
+                        .required(),
                     first_name: Joi
-                        .string()
-                        .required(),
+                        .string(),
                     last_name: Joi
-                        .string()
-                        .required(),
+                        .string(),
                     email: Joi
                         .string()
-                        .required()
                         .email(),
                     password: Joi
-                        .string()
-                        .required(),
+                        .string(),
                     cpf: Joi
                         .string()
-                        .required()
                         .custom(CPFValidator),
+                    latitude: Joi
+                        .number(),
+                    longitude: Joi
+                        .number(),
                 }
             )
     },

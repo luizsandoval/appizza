@@ -2,17 +2,22 @@ import { Router } from 'express';
 
 import { UsersController } from '../../controllers';
 
-import { createUserValidator } from './validators';
+import { createUserValidator, updateUserValidator } from './validators';
 
 const routes = Router();
 
-const { create } = new UsersController();
+const { create, update } = new UsersController();
 
 routes
     .post(
         '/users', 
         createUserValidator,
         create
+    )
+    .put(
+        '/users',
+        updateUserValidator,
+        update
     );
 
 export default routes;

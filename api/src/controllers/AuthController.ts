@@ -23,10 +23,11 @@ class AuthController {
             const token = sign(
                 {
                     id: user.id,
-                    name: user.name,
-                    surname: user.surname,
-                    address: user.address,
-                    fullName: `${user.name} ${user.surname}`,
+                    name: user.first_name,
+                    surname: user.last_name,
+                    latitude: user.latitude,
+                    longitude: user.longitude,
+                    fullName: `${user.first_name} ${user.last_name}`,
                     cpf: user.cpf,
                     email: user.email
                 },
@@ -35,7 +36,7 @@ class AuthController {
                     expiresIn: '12h'
                 }
             );
-    
+
             return res.status(200).json(token);
 
         } catch(err) {
