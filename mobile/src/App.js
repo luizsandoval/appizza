@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Provider } from 'react-redux';
-
 import { SafeAreaView } from 'react-native';
+
+import { connect } from 'react-redux';
 
 import { ThemeProvider } from 'styled-components/native';
 
@@ -10,16 +10,18 @@ import LightTheme from './styles/themes/light';
 
 import Routes from './routes';
 
-import store from './store';
-
-const App = () => (
-    <Provider store={store}>
-        <ThemeProvider theme={LightTheme}>
-            <SafeAreaView style={{ flex: 1 }}>
-                <Routes />
-            </SafeAreaView>
-        </ThemeProvider>
-    </Provider>
+const App = ({ isAuthenticated }) => (
+    <ThemeProvider theme={LightTheme}>
+        <SafeAreaView style={{ flex: 1 }}>
+            <Routes isAuthenticated={isAuthenticated} />
+        </SafeAreaView>
+    </ThemeProvider>
 );
 
-export default App;
+const mapStateToProps = ({ auth: { isAuthenticated } }) => (
+    {
+        isAuthenticated,
+    }
+);
+
+export default connect(mapStateToProps)(App);

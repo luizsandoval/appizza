@@ -2,6 +2,10 @@ import React, { useState, useCallback } from 'react';
 
 import { View } from 'react-native';
 
+import { connect } from 'react-redux';
+
+import { signIn } from '../../../store/actions/auth';
+
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -37,7 +41,7 @@ const SIGN_IN_SCHEMA = yup
         }
     );
 
-const SignIn = () => {
+const SignIn = ({ onSignIn, navigation }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const { 
@@ -59,9 +63,8 @@ const SignIn = () => {
 
         setIsLoading(true);
 
-        console.warn(email, password);
-        
-        // handle login here...
+        onSignIn({ email, password });
+
     }, [getValues]);
 
     return (
@@ -125,4 +128,10 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+const mapDispatchToProps = dispatch => (
+    {
+        onSignIn: user => dispatch(signIn(user)),
+    }
+);
+
+export default connect(null,mapDispatchToProps)(SignIn);

@@ -2,7 +2,6 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Splash from '../pages/public/Splash';
 import SignIn from '../pages/public/SignIn';
 import SignUp from '../pages/public/SignUp';
 import Welcome from '../pages/public/Welcome';
@@ -18,10 +17,6 @@ export default PrivateRoutes = () => (
             }
         }
     >
-        <Stack.Screen
-            name="Splash"
-            component={Splash}
-        />
         <Stack.Screen
             name="Welcome"
             component={Welcome}

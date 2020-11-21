@@ -14,7 +14,7 @@ export const signIn = ({ email, password })=> {
     return async dispatch => {
         try {
             const { data } = await api.post('/auth/users', { email, password });
-            
+
             await setToken(data);
 
             dispatch(userSignedIn);
@@ -33,7 +33,6 @@ export const signUp = user => {
 
             return data;
         } catch (error) {
-            console.log('error', JSON.stringify(error));
             throw error;
         }
     }
