@@ -6,13 +6,13 @@ const INITIAL_STATE = {
     isAuthenticated: false,
 };
 
-const reducer = (state = INITIAL_STATE, { type }) => {
+const reducer = (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {
         case AUTH_ACTIONS_TYPES.USER_SIGNED_IN: {
             return {
                 ...state,
                 isAuthenticated: true,
-                user: decode(),
+                user: decode(payload),
             }
         };
         case AUTH_ACTIONS_TYPES.USER_SIGNED_OUT: {

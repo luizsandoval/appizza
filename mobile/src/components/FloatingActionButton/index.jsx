@@ -1,41 +1,52 @@
 import React from 'react';
 
-import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
 
-const ButtonContainer = styled.TouchableOpacity`
-    right: 0;
-    bottom: 0;
-    position: absolute;
+import {
+    ButtonText,
+    ButtonWrapper,
+    ButtonContainer,
+} from './styles';
 
-    width: 50px;
-    height: 50px;
-
-    background: ${({ theme, color, variation }) => theme.colors[color][variation]};
-
-    margin: 16px;
-    border-radius: 50px;
-
-    align-items: center;
-    justify-content: center;
-`;
+import {
+    BUTTON_SIZES,
+    BUTTON_POSITIONS,
+} from './constants';
 
 const FloatingActionButton = (
     { 
-        children, 
-        size = 'default', 
-        color = 'primary', 
+        children,
+        title = '',
+        position = 'end',
+        size = 'default',
+        color = 'primary',
         variation = 'main',
+        disabled = false,
         ...rest 
     }
 ) => (
-    <ButtonContainer
-        size={size}
-        color={color}
-        variation={variation}
-        {...rest}
+    <ButtonWrapper
+        windowWidth={Dimensions.get('window').width}
     >
-        {children}
-    </ButtonContainer>
+        <ButtonContainer
+            color={color}
+            disabled={disabled}
+            variation={variation}
+            size={BUTTON_SIZES[size]}
+            position={BUTTON_POSITIONS[position]}
+            {...rest}
+        >
+            {(
+                title
+                    ? (
+                        <ButtonText disabled={disabled}>
+                            {title}
+                        </ButtonText>
+                    )
+                    : children
+            )}
+        </ButtonContainer>
+    </ButtonWrapper>
 );
 
 export default FloatingActionButton;

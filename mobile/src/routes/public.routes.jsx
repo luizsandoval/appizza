@@ -2,18 +2,32 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from '../pages/private/Home';
+import SignIn from '../pages/public/SignIn';
+import SignUp from '../pages/public/SignUp';
+import Welcome from '../pages/public/Welcome';
 
-const Stack = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator();
 
 export default PublicRoutes = () => (
-    <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-            options={{
-                headerShown: false
-            }}
-            name="Home"
-            component={Home}
+    <Navigator 
+        initialRouteName="Welcome" 
+        screenOptions={
+            { 
+                headerShown: false 
+            }
+        }
+    >
+        <Screen
+            name="Welcome"
+            component={Welcome}
         />
-    </Stack.Navigator>
+        <Screen
+            name="SignIn"
+            component={SignIn}
+        />
+        <Screen
+            name="SignUp"
+            component={SignUp}
+        />
+    </Navigator>
 );

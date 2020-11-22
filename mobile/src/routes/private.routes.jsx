@@ -2,32 +2,32 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import SignIn from '../pages/public/SignIn';
-import SignUp from '../pages/public/SignUp';
-import Welcome from '../pages/public/Welcome';
+import Home from '../pages/private/Home';
+import ConfirmLocation from '../pages/private/ConfirmLocation';
 
-const Stack = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator();
 
-export default PrivateRoutes = () => (
-    <Stack.Navigator 
-        initialRouteName="Welcome" 
-        screenOptions={
-            { 
-                headerShown: false 
-            }
-        }
+export default PrivateRoutes = ({ firstAccess = false }) => (
+    <Navigator 
+        initialRouteName={(
+            firstAccess
+                ? 'ConfirmLocation'
+                : 'Home'
+        )}
     >
-        <Stack.Screen
-            name="Welcome"
-            component={Welcome}
+        <Screen
+            options={{
+                headerShown: false
+            }}
+            name="ConfirmLocation"
+            component={ConfirmLocation}
         />
-        <Stack.Screen
-            name="SignIn"
-            component={SignIn}
+        <Screen
+            options={{
+                headerShown: false
+            }}
+            name="Home"
+            component={Home}
         />
-        <Stack.Screen
-            name="SignUp"
-            component={SignUp}
-        />
-    </Stack.Navigator>
+    </Navigator>
 );

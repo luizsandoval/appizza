@@ -23,13 +23,14 @@ class AuthController {
             const token = sign(
                 {
                     id: user.id,
+                    cpf: user.cpf,
+                    email: user.email,
                     name: user.first_name,
                     surname: user.last_name,
                     latitude: user.latitude,
                     longitude: user.longitude,
+                    firstAccess: !user.latitude,
                     fullName: `${user.first_name} ${user.last_name}`,
-                    cpf: user.cpf,
-                    email: user.email
                 },
                 process.env.SECRET_JWT || '',
                 {

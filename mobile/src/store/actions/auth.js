@@ -4,9 +4,10 @@ import { set as setToken } from '../../services/token.service';
 
 import AUTH_ACTIONS_TYPES from '../types/auth';
 
-const userSignedIn = () => (
+const userSignedIn = (token) => (
     {
-        type: AUTH_ACTIONS_TYPES.SIGN_IN
+        type: AUTH_ACTIONS_TYPES.SIGN_IN,
+        payload: token
     }
 );
 

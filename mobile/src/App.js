@@ -10,17 +10,21 @@ import LightTheme from './styles/themes/light';
 
 import Routes from './routes';
 
-const App = ({ isAuthenticated }) => (
+const App = ({ isAuthenticated, firstAccess }) => (
     <ThemeProvider theme={LightTheme}>
         <SafeAreaView style={{ flex: 1 }}>
-            <Routes isAuthenticated={isAuthenticated} />
+            <Routes 
+                firstAccess={firstAccess}
+                isAuthenticated={isAuthenticated}
+            />
         </SafeAreaView>
     </ThemeProvider>
 );
 
-const mapStateToProps = ({ auth: { isAuthenticated } }) => (
+const mapStateToProps = ({ auth: { isAuthenticated, user } }) => (
     {
         isAuthenticated,
+        firstAccess: !user?.latitude,
     }
 );
 
