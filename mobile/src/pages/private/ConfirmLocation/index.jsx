@@ -1,10 +1,14 @@
 import React, { 
     useState, 
-    useEffect, 
+    useEffect,
     useCallback 
 } from 'react';
 
-import { Alert, Dimensions } from 'react-native';
+import { Alert, Dimensions,  } from 'react-native';
+
+import { connect } from 'react-redux';
+
+import { updateUser } from '../../../store/actions/auth';
 
 import LottieView from 'lottie-react-native';
 
@@ -36,8 +40,9 @@ const INITIAL_REGION = {
     longitudeDelta: 0.014,
 };
 
-const ConfirmLocation = () => {
+const ConfirmLocation = ({ user, onUpdateUser, navigation }) => {
     const [showMap, setShowMap] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [region, setRegion] = useState(INITIAL_REGION);
 
     const { width, height } = Dimensions.get('window');
@@ -45,8 +50,19 @@ const ConfirmLocation = () => {
     const handleMarkerDrag = useCallback(({ latitude, longitude }) => setRegion({ ...INITIAL_REGION, latitude, longitude }), [setRegion]);
 
     const handleConfirmLocation = useCallback(() => {
-        console.warn('[POSITION] ==>', region);
-    }, []);
+        const { latitude, longitude } = region;
+
+        setIsLoading(true);
+
+        onUpdateUser(
+            {
+                latitude,
+                longitude,
+            }
+        )
+        .then(() => navigation.navigate('Home'))
+        .finally(() => setIsLoading(false));
+    }, [onUpdateUser, region]);
 
     useEffect(() => {
         async function loadPosition() {
@@ -71,11 +87,11 @@ const ConfirmLocation = () => {
             ? (
                 <Container defaultPadding={false}>
                     <Map
-                        provider={PROVIDER_GOOGLE}
                         loadingEnabled
+                        showsUserLocation
+                        provider={PROVIDER_GOOGLE}
                         initialRegion={INITIAL_REGION}
                         region={region}
-                        showsUserLocation
                         width={width}
                         height={height}
                     >
@@ -85,7 +101,9 @@ const ConfirmLocation = () => {
                         <Marker
                             draggable
                             onDragEnd={(e) => handleMarkerDrag(e.nativeEvent.coordinate)}
-                            icon={mapMarker}
+                            image={mapMarker}
+                            title="teste"
+                            description="testesdasda"
                             coordinate={
                                 {
                                     latitude: region.latitude,
@@ -97,6 +115,7 @@ const ConfirmLocation = () => {
                     <FloatingActionButton
                         size="large"
                         position="center"
+                        isLoading={isLoading}
                         title="Confirmar localização"
                         onPress={() => handleConfirmLocation()}
                     />
@@ -131,4 +150,16 @@ const ConfirmLocation = () => {
     );
 }
 
-export default ConfirmLocation;
+const mapStateToProps = ({ auth: { user }}) => (
+    {
+        user,
+    }
+);
+
+const mapDispatchToProps = dispatch => (
+    {
+        onUpdateUser: user => dispatch(updateUser(user)),
+    }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmLocation);

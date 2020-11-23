@@ -13,7 +13,7 @@ const PrimaryButton = ({
 }) => (
     <ButtonContainer 
         onPress={onPress}
-        disabled={disabled}
+        disabled={isLoading || disabled}
         {...rest}
     >
         {

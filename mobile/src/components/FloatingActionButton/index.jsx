@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Dimensions } from 'react-native';
+import { ActivityIndicator, Dimensions } from 'react-native';
 
 import {
     ButtonText,
@@ -22,6 +22,7 @@ const FloatingActionButton = (
         color = 'primary',
         variation = 'main',
         disabled = false,
+        isLoading = false,
         ...rest 
     }
 ) => (
@@ -30,21 +31,30 @@ const FloatingActionButton = (
     >
         <ButtonContainer
             color={color}
-            disabled={disabled}
+            disabled={isLoading || disabled}
             variation={variation}
             size={BUTTON_SIZES[size]}
             position={BUTTON_POSITIONS[position]}
             {...rest}
-        >
-            {(
-                title
+        >        
+            {
+                isLoading
                     ? (
-                        <ButtonText disabled={disabled}>
-                            {title}
-                        </ButtonText>
+                        <ActivityIndicator 
+                            size="small"
+                            color="#FFF"
+                        />
                     )
-                    : children
-            )}
+                    : (
+                        title
+                            ? (
+                                <ButtonText disabled={disabled}>
+                                    {title}
+                                </ButtonText>
+                            )
+                            : children
+                    )
+            }
         </ButtonContainer>
     </ButtonWrapper>
 );

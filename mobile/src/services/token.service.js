@@ -20,13 +20,22 @@ export const get = async () => {
     }
 };
 
+export const remove = async () => {
+    try {
+        return await AsyncStorage.removeItem(TOKEN_KEY);
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const decode = (token) => decodeToken(token);
 
 export const isValid = async () => {
     try {
-        const token = decode(await this.getToken());
+        const storedToken = await get();
+        const token = decode(storedToken);
 
-        return token && (token.exp < Date.now() / 1000);
+        return token && token.exp < Date.now() / 1000;
     } catch (error) {
         throw error;
     }
