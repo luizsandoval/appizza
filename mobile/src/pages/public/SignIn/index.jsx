@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { signIn } from '../../../store/actions/auth';
+import { signIn } from '../../../store/thunks/auth';
 
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';

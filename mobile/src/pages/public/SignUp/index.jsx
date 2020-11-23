@@ -10,7 +10,7 @@ import { ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { signUp } from '../../../store/actions/auth';
+import { signUp } from '../../../store/thunks/auth';
 
 import { FontAwesomeIcon  as Icon } from '@fortawesome/react-native-fontawesome';
 import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';

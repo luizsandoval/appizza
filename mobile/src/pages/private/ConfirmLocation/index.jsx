@@ -8,7 +8,7 @@ import { Alert, Dimensions,  } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { updateUser } from '../../../store/actions/auth';
+import { updateUser } from '../../../store/thunks/auth';
 
 import LottieView from 'lottie-react-native';
 
