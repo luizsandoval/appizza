@@ -50,7 +50,7 @@ const mapDispatchToProps = dispatch => (
 const mapStateToProps = ({ auth: { isAuthenticated, user } }) => (
     {
         isAuthenticated,
-        firstAccess: !user?.latitude,
+        firstAccess: user?.firstAccess,
     }
 );
 

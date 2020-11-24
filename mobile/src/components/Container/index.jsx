@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 
 const StyledContainer = styled.View`
     flex: 1;
+    background: ${({ theme }) => theme.colors.background};
     position: relative;
     padding: ${({ defaultPadding }) => (
         defaultPadding 

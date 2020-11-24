@@ -29,7 +29,25 @@ class UsersController {
 
     async update(req: Request, res: Response) {
         try {
-            const user: User = req.body;
+            const {
+                id,
+                cpf,
+                email,
+                latitude,
+                longitude,
+                first_name,
+                last_name,
+            } = req.body;
+
+            const user = {
+                id,
+                cpf,
+                email,
+                latitude,
+                longitude,
+                first_name,
+                last_name, 
+            };
 
             const trx = await knex.transaction();
     

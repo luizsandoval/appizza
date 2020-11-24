@@ -40,7 +40,7 @@ const INITIAL_REGION = {
     longitudeDelta: 0.014,
 };
 
-const ConfirmLocation = ({ user, onUpdateUser, navigation }) => {
+const ConfirmLocation = ({ userId, onUpdateUser, navigation }) => {
     const [showMap, setShowMap] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [region, setRegion] = useState(INITIAL_REGION);
@@ -56,6 +56,7 @@ const ConfirmLocation = ({ user, onUpdateUser, navigation }) => {
 
         onUpdateUser(
             {
+                id: userId,
                 latitude,
                 longitude,
             }
@@ -150,9 +151,9 @@ const ConfirmLocation = ({ user, onUpdateUser, navigation }) => {
     );
 }
 
-const mapStateToProps = ({ auth: { user }}) => (
+const mapStateToProps = ({ auth: { user: { id } }}) => (
     {
-        user,
+        userId: id,
     }
 );
 
