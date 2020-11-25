@@ -10,13 +10,18 @@ import {
 
 const routes = Router();
 
-const { create, update, show, index } = new EstablishmentsController();
+const { 
+    show,
+    index,
+    create, 
+    update, 
+} = new EstablishmentsController();
 
 routes
     .post(
         '/establishments',
         createEstablishmentValidator,
-        create
+        create,
     )
     .put(
         '/establishments',
@@ -25,12 +30,12 @@ routes
     )
     .get(
         '/establishments',
-        index
+        index,
     )
     .get(
         '/establishments/:id',
         getEstablishmentValidator,
-        show
+        show,
     );
 
 export default routes;

@@ -19,7 +19,7 @@ export const SearchContainer = styled.View`
 export const SearchInput = styled.TextInput`
     border: none;
     padding: 16px;
-    padding-left: 32px;
+    padding-left: 64px;
     font-size: 16px;
     flex: 1;
     border-radius: 25px;
@@ -29,8 +29,8 @@ export const SearchInput = styled.TextInput`
 
 export const Icon = styled(FontAwesomeIcon)`
     position: absolute;
-    right: 0;
+    left: 0;
     z-index: 2;
-    margin-right: 32px;
+    margin-left: 32px;
     color: ${({ theme }) => theme.colors.black.lightest};
 `;

@@ -21,7 +21,7 @@ const Home = () => {
     const theme = useTheme();
 
     return ((
-        <TabNavigator 
+        <TabNavigator
             tabBarOptions={
                 { 
                     style: { 
@@ -51,14 +51,14 @@ const Home = () => {
                 options={{
                     tabBarIcon: ({ color }) => <Icon color={color} icon={faHome} size={24} />,
                 }}
-                />
+            />
             <TabScreen
                 name="Pedidos"
                 component={OrdersScreen}
                 options={{
                     tabBarIcon: ({ color }) => <Icon color={color} icon={faReceipt} size={24} />,
                 }}
-                />
+            />
             <TabScreen
                 name="Meu Perfil"
                 component={ProfileScreen}

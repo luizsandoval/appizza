@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 
-import authReducer from './auth';
+import auth from './auth';
+import establishments from './establishments';
 
 const reducers = combineReducers(
     {
-        auth: authReducer,
+        auth,
+        establishments,
     }
 );
 

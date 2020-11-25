@@ -1,7 +1,5 @@
 import { celebrate, Joi } from 'celebrate';
 
-import { Establishment } from '../../../models';
-
 export default celebrate(
     {
         params: {

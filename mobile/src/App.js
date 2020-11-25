@@ -16,7 +16,6 @@ import Routes from './routes';
 
 const App = (
     { 
-        firstAccess,
         isAuthenticated, 
         validatingAuthentication, 
         validateUserAuthentication, 
@@ -36,7 +35,6 @@ const App = (
                         )
                         : (
                             <Routes 
-                                firstAccess={firstAccess}
                                 isAuthenticated={isAuthenticated}
                             />
                         )
@@ -55,7 +53,6 @@ const mapDispatchToProps = dispatch => (
 const mapStateToProps = (
     { 
         auth: { 
-            user,
             isAuthenticated,
             validatingAuthentication,
         } 
@@ -64,7 +61,6 @@ const mapStateToProps = (
     {
         isAuthenticated,
         validatingAuthentication,
-        firstAccess: user?.firstAccess,
     }
 );
 

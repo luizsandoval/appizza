@@ -1,5 +1,6 @@
 import Title from './Title';
 import Input from './Input';
+import Loader from './Loader';
 import SubTitle from './SubTitle';
 import Container from './Container';
 import BackButton from './BackButton';
@@ -12,6 +13,7 @@ import FloatingActionButton from './FloatingActionButton';
 export {
     Title,
     Input,
+    Loader,
     SubTitle,
     Container,
     BackButton,
