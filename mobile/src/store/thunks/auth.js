@@ -83,7 +83,7 @@ export const validateAuthentication = () => {
                     dispatch(userSignedIn(token))
                 )
                 : (
-                    dispatch(userSignedOut())
+                    signOut()
                 );
 
             dispatch(authenticationFinished());

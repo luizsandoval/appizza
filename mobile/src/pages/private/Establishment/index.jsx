@@ -1,12 +1,30 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+
+import { 
+    Search,
+    SubTitle,
+    Container,
+    ScrollList,
+    FloatingActionButton,
+} from '../../../components';
+
+import { Header } from './styles';
 
 const Establishment = () => (
-    <View>
-        <Text>
-            Establishment details comes here...
-        </Text>
-    </View>
+    <Container>
+        <Header>
+            <SubTitle>
+                Pizzaria do Zé
+            </SubTitle>
+        </Header>
+        <Search />
+        <ScrollList />
+        <FloatingActionButton 
+            size="large"
+            position="center"
+            title="Novo pedido"
+        />
+    </Container>
 );
 
 export default Establishment;

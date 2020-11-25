@@ -4,9 +4,8 @@ import { View, ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
 import {
+    Search,
     Loader,
     SubTitle,
     Container,
@@ -19,11 +18,9 @@ import ConfirmLocation from '../ConfirmLocation';
 
 import Logo from '../../../assets/logo.svg';
 
-import { 
-    Icon,
-    Header, 
-    SearchInput, 
-    SearchContainer, 
+import {
+    Header,
+    Content,
 } from './styles';
 
 const DEFAULT_ESTABLISHMENT_IMAGE = 'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80';
@@ -56,13 +53,10 @@ const Home = (
                     </SubTitle>
                     <Logo width={50} height={100} />
                 </Header>
-                <SearchContainer>
-                    <Icon icon={faSearch} />
-                    <SearchInput 
-                        placeholder="Pesquisar"                    
-                    />
-                </SearchContainer>
-                <View style={{ flex: 1 }}>
+
+                <Search />
+
+                <Content>
                     {
                         loading
                             ? (
@@ -91,7 +85,7 @@ const Home = (
                                 />
                             )
                     }
-                </View>
+                </Content>
             </Container>
         </ScrollView>
     );

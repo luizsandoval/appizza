@@ -1,6 +1,7 @@
 import Title from './Title';
 import Input from './Input';
 import Loader from './Loader';
+import Search from './Search';
 import SubTitle from './SubTitle';
 import Container from './Container';
 import BackButton from './BackButton';
@@ -14,6 +15,7 @@ export {
     Title,
     Input,
     Loader,
+    Search,
     SubTitle,
     Container,
     BackButton,
