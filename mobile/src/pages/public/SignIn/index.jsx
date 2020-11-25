@@ -41,7 +41,7 @@ const SIGN_IN_SCHEMA = yup
         }
     );
 
-const SignIn = ({ onSignIn, navigation }) => {
+const SignIn = ({ onSignIn }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const { 

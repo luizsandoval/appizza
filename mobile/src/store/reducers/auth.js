@@ -14,36 +14,36 @@ const reducer = (state = INITIAL_STATE, { type, payload }) => {
                 ...state,
                 isAuthenticated: true,
                 user: decode(payload),
-            }
+            };
         };
         case AUTH_ACTIONS_TYPES.USER_SIGNED_OUT: {
             return {
                 ...state,
                 isAuthenticated: false,
                 user: null,
-            }
+            };
         };
         case AUTH_ACTIONS_TYPES.USER_UPDATED: {
             return {
                 ...state,
                 user: payload,
-            }
+            };
         };
         case AUTH_ACTIONS_TYPES.AUTHENTICATION_STARTED: {
             return {
                 ...state,
                 validatingAuthentication: true,
-            }
+            };
         };
         case AUTH_ACTIONS_TYPES.AUTHENTICATION_FINISHED: {
             return {
                 ...state,
                 validatingAuthentication: false,
-            }
+            };
         };
         default:
             return state;
-    }
+    };
 };
 
 export default reducer;

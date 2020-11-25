@@ -12,3 +12,10 @@ export const loadedEstablishments = establishments => (
         payload: establishments,
     }
 );
+
+export const loadedEstablishment = establishment => (
+    {
+        type: ESTABLISHMENTS_ACTIONS_TYPES.ESTABLISHMENTS_LOADED,
+        payload: establishment,
+    }
+);
