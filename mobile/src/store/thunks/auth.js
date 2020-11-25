@@ -1,14 +1,18 @@
 import api from '../../services/api';
 
 import { 
-    set as setToken, 
-    remove as removeToken 
+    get as getToken,
+    set as setToken,
+    remove as removeToken,
+    isValid as isTokenValid,
 } from '../../services/token.service';
 
 import { 
     userUpdated,
     userSignedIn,
     userSignedOut,
+    authenticationStarted,
+    authenticationFinished,
 } from '../actions/auth';
 
 export const signIn = ({ email, password }) => {
@@ -66,3 +70,27 @@ export const updateUser = user => {
         }
     };
 };
+
+export const validateAuthentication = () => {
+    return async dispatch => {
+        try {
+            dispatch(authenticationStarted());
+
+            const token = await getToken();
+
+            token && (await isTokenValid(token))
+                ? (
+                    dispatch(userSignedIn(token))
+                )
+                : (
+                    dispatch(userSignedOut())
+                );
+
+            dispatch(authenticationFinished());
+
+            return;            
+        } catch(error) {
+            throw error;
+        }
+    }
+}

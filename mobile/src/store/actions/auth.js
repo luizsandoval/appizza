@@ -1,5 +1,17 @@
 import AUTH_ACTIONS_TYPES from '../types/auth';
 
+export const authenticationStarted = () => (
+    {
+        type: AUTH_ACTIONS_TYPES.AUTHENTICATION_STARTED,
+    }
+);
+
+export const authenticationFinished = () => (
+    {
+        type: AUTH_ACTIONS_TYPES.AUTHENTICATION_FINISHED,
+    }
+);
+
 export const userSignedIn = token => (
     {
         type: AUTH_ACTIONS_TYPES.USER_SIGNED_IN,

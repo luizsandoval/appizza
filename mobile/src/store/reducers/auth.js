@@ -4,6 +4,7 @@ import { decode } from '../../services/token.service';
 const INITIAL_STATE = {
     user: null,
     isAuthenticated: false,
+    validatingAuthentication: true,
 };
 
 const reducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -26,6 +27,18 @@ const reducer = (state = INITIAL_STATE, { type, payload }) => {
             return {
                 ...state,
                 user: payload,
+            }
+        };
+        case AUTH_ACTIONS_TYPES.AUTHENTICATION_STARTED: {
+            return {
+                ...state,
+                validatingAuthentication: true,
+            }
+        };
+        case AUTH_ACTIONS_TYPES.AUTHENTICATION_FINISHED: {
+            return {
+                ...state,
+                validatingAuthentication: false,
             }
         };
         default:

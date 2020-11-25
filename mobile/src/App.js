@@ -6,50 +6,64 @@ import { connect } from 'react-redux';
 
 import { ThemeProvider } from 'styled-components/native';
 
-import { isValid as isTokenValid } from './services/token.service';
-
-import { signOut } from './store/actions/auth';
+import { validateAuthentication } from './store/thunks/auth';
 
 import LightTheme from './styles/themes/light';
 
+import SplashScreen from './pages/public/Splash';
+
 import Routes from './routes';
 
-const App = ({ onSignOut, isAuthenticated, firstAccess }) => {
-
+const App = (
+    { 
+        firstAccess,
+        isAuthenticated, 
+        validatingAuthentication, 
+        validateUserAuthentication, 
+    }
+) => {
     useEffect(() => {
-        async function validateAuthentication() {
-            if (
-                !(await isTokenValid())
-                && isAuthenticated
-            ) {
-                onSignOut();
-            }
-        };
-
-        validateAuthentication();
-    }, []);
+        validateUserAuthentication();
+    }, [validateUserAuthentication]);
 
     return (
         <ThemeProvider theme={LightTheme}>
             <SafeAreaView style={{ flex: 1 }}>
-                <Routes 
-                    firstAccess={firstAccess}
-                    isAuthenticated={isAuthenticated}
-                />
+                {
+                    validatingAuthentication
+                        ? (
+                            <SplashScreen />
+                        )
+                        : (
+                            <Routes 
+                                firstAccess={firstAccess}
+                                isAuthenticated={isAuthenticated}
+                            />
+                        )
+                }
             </SafeAreaView>
         </ThemeProvider>
     );
-};
+}
 
 const mapDispatchToProps = dispatch => (
     {
-        onSignOut: () => dispatch(signOut()),
+        validateUserAuthentication: () => dispatch(validateAuthentication()),
     }
 );
 
-const mapStateToProps = ({ auth: { isAuthenticated, user } }) => (
+const mapStateToProps = (
+    { 
+        auth: { 
+            user,
+            isAuthenticated,
+            validatingAuthentication,
+        } 
+    }
+) => (
     {
         isAuthenticated,
+        validatingAuthentication,
         firstAccess: user?.firstAccess,
     }
 );

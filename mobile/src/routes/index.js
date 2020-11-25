@@ -5,11 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import PublicRoutes from './public.routes';
 import PrivateRoutes from './private.routes';
 
-export default Routes = ({ isAuthenticated = false, firstAccess = false }) => (
+export default Routes = ({ isAuthenticated = false }) => (
     <NavigationContainer>
         {
             isAuthenticated
-                ? <PrivateRoutes firstAccess={firstAccess} />
+                ? <PrivateRoutes />
                 : <PublicRoutes />
         }
     </NavigationContainer>

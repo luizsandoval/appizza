@@ -2,6 +2,8 @@ import React from 'react';
 
 import { View, ScrollView } from 'react-native';
 
+import { connect } from 'react-redux';
+
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -9,6 +11,8 @@ import {
     Container,
     ScrollList,
 } from '../../../components';
+
+import ConfirmLocation from '../ConfirmLocation';
 
 import Logo from '../../../assets/logo.svg';
 
@@ -19,8 +23,10 @@ import {
     SearchContainer, 
 } from './styles';
 
-const Home = () => {
+const Home = ({ firstAccess }) => {
     
+    if (firstAccess) return <ConfirmLocation />;
+
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
@@ -104,4 +110,10 @@ const Home = () => {
     );
 };
 
-export default Home;
+const mapStateToProps = ({ auth: { user }}) => (
+    {
+        firstAccess: user?.firstAccess,
+    }
+);
+
+export default connect(mapStateToProps)(Home);

@@ -30,12 +30,11 @@ export const remove = async () => {
 
 export const decode = (token) => decodeToken(token);
 
-export const isValid = async () => {
+export const isValid = async (token) => {
     try {
-        const storedToken = await get();
-        const token = decode(storedToken);
+        const decodedToken = decode(token);
 
-        return token && token.exp < Date.now() / 1000;
+        return decodedToken && decodedToken.exp < Date.now() / 1000;
     } catch (error) {
         throw error;
     }
