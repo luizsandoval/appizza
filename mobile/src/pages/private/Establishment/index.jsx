@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { connect } from 'react-redux';
+
+import { getEstablishment } from '../../../store/thunks/establishments';
 
 import { 
     Search,
@@ -10,21 +14,35 @@ import {
 
 import { Header } from './styles';
 
-const Establishment = () => (
-    <Container>
-        <Header>
-            <SubTitle>
-                Pizzaria do Zé
-            </SubTitle>
-        </Header>
-        <Search />
-        <ScrollList />
-        <FloatingActionButton 
-            size="large"
-            position="center"
-            title="Novo pedido"
-        />
-    </Container>
+const Establishment = ({ onGetEstablishment, route }) => {
+    const { id } = route.params;
+
+    useEffect(() => {
+        onGetEstablishment(id);
+    }, []);
+
+    return (
+        <Container>
+            <Header>
+                <SubTitle>
+                    Pizzaria do Zé
+                </SubTitle>
+            </Header>
+            <Search />
+            <ScrollList />
+            <FloatingActionButton 
+                size="large"
+                position="center"
+                title="Novo pedido"
+            />
+        </Container>
+    );
+}
+
+const mapDispatchToProps = dispatch => (
+    {
+        onGetEstablishment: id => dispatch(getEstablishment(id)),
+    }
 );
 
-export default Establishment;
+export default connect(null, mapDispatchToProps)(Establishment);

@@ -20,7 +20,10 @@ export default celebrate(
                     description: Joi
                         .string()
                         .allow('')
-                        .max(30)
+                        .max(30),
+                    establishment_id: Joi
+                        .number()
+                        .required()
                 },
                 
             )

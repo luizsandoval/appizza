@@ -8,20 +8,21 @@ import { useTheme } from 'styled-components';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faReceipt, faUser } from '@fortawesome/free-solid-svg-icons';
 
-import HomeScreen from '../pages/private/Home';
-import OrdersScreen from '../pages/private/Home';
-import ProfileScreen from '../pages/private/Home';
-import ConfirmLocationScreen from '../pages/private/ConfirmLocation';
+import Home from '../pages/private/Home';
+import Orders from '../pages/private/Orders';
+import Profile from '../pages/private/Profile';
+import Establishment from '../pages/private/Establishment';
 
 const { Navigator, Screen } = createStackNavigator();
 
 const { Navigator: TabNavigator, Screen: TabScreen } = createBottomTabNavigator();
 
-const Home = () => {
+const Main = () => {
     const theme = useTheme();
 
     return ((
         <TabNavigator
+            initialRouteName="Home"
             tabBarOptions={
                 { 
                     style: { 
@@ -46,23 +47,26 @@ const Home = () => {
             }
         >
             <TabScreen
-                name="Início"
-                component={HomeScreen}
+                name="Home"
+                component={Home}
                 options={{
+                    tabBarLabel: 'Início',
                     tabBarIcon: ({ color }) => <Icon color={color} icon={faHome} size={24} />,
                 }}
             />
             <TabScreen
-                name="Pedidos"
-                component={OrdersScreen}
+                name="Orders"
+                component={Orders}
                 options={{
+                    tabBarLabel: 'Pedidos',
                     tabBarIcon: ({ color }) => <Icon color={color} icon={faReceipt} size={24} />,
                 }}
             />
             <TabScreen
-                name="Meu Perfil"
-                component={ProfileScreen}
+                name="Profile"
+                component={Profile}
                 options={{
+                    tabBarLabel: 'Meu perfil',
                     tabBarIcon: ({ color }) => <Icon color={color} icon={faUser} size={24} />,
                 }}
             />
@@ -70,27 +74,23 @@ const Home = () => {
     ));
 };
 
-export default PrivateRoutes = ({ firstAccess = false }) => (
+export default PrivateRoutes = () => (
     <Navigator 
-        initialRouteName={(
-            firstAccess
-                ? 'ConfirmLocation'
-                : 'Home'
-        )}
+        initialRouteName="Main"
     >
         <Screen
             options={{
                 headerShown: false
             }}
-            name="ConfirmLocation"
-            component={ConfirmLocationScreen}
+            name="Main"
+            component={Main}
         />
         <Screen
             options={{
-                headerShown: false
+                title: "",
             }}
-            name="Home"
-            component={Home}
+            name="Establishment"
+            component={Establishment}
         />
     </Navigator>
 );

@@ -4,8 +4,6 @@ import knex from '../database/connection';
 
 import { 
     Establishment,
-    User,
-    Order,
 } from '../models';
 
 import { encryptPassword } from '../helpers/passwordEncryptor';

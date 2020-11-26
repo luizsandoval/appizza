@@ -34,7 +34,7 @@ export const isValid = async (token) => {
     try {
         const decodedToken = decode(token);
 
-        return decodedToken && decodedToken.exp < Date.now() / 1000;
+        return decodedToken && !(decodedToken.exp < Date.now() / 1000);
     } catch (error) {
         throw error;
     }

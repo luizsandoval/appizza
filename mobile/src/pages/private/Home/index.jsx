@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
-import { View, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -28,13 +28,18 @@ const DEFAULT_ESTABLISHMENT_IMAGE = 'https://images.unsplash.com/photo-157199747
 const Home = (
     { 
         loading,
-        firstAccess,
+        navigation,
+        isFirstAccess,
         establishments, 
         onGetEstablishments, 
     }
 ) => {
+    if (isFirstAccess) return <ConfirmLocation />;
 
-    if (firstAccess) return <ConfirmLocation />;
+    const handleOnItemPressed = useCallback(({ id }) => (
+        navigation
+            .navigate('Establishment', { id })
+    ), [navigation]);
 
     useEffect(() => {
         onGetEstablishments();
@@ -65,6 +70,7 @@ const Home = (
                             : (
                                 <ScrollList 
                                     label="Em destaque"
+                                    onItemPressed={handleOnItemPressed}
                                     items={(
                                         establishments
                                             .map((
@@ -103,7 +109,7 @@ const mapStateToProps = (
     {
         loading,
         establishments,
-        firstAccess: user?.firstAccess,
+        isFirstAccess: user?.firstAccess,
     }
 );
 
