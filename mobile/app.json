@@ -1,0 +1,21 @@
+{
+    "expo": {
+        "name": "Happizza",
+        "version": "1.0.0",
+        "slug": "happizza",
+        "ios": {
+          "bundleIdentifier": "com.mobile",
+          "buildNumber": "1.0.0"
+        },
+        "android": {
+          "package": "com.mobile",
+          "versionCode": 1,
+          "config": {
+              "googleMaps": {
+                  "apiKey": "AIzaSyAvfHl_IaKwjkEzrsj5g80qoYJRIV1VA5g"
+              }
+          }
+        }
+    },
+    "name": "mobile"
+}

@@ -44,15 +44,23 @@ const Menu = () => {
             </SectionHeader>
             <PizzasContainer>
                 {
-                    pizzas.map(
-                        pizza => (
-                            <PizzaCard
-                                key={pizza.id}
-                                pizza={pizza}
-                            />
-
+                    pizzas.length
+                        ? (
+                            pizzas.map(
+                                pizza => (
+                                    <PizzaCard
+                                        key={pizza.id}
+                                        pizza={pizza}
+                                    />
+        
+                                )
+                            )
                         )
-                    )
+                        : (
+                            <p>
+                                Seu cardápio está vazio
+                            </p>
+                        )
                 }
             </PizzasContainer>
         </>

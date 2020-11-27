@@ -19,7 +19,7 @@ const Header = () => {
 
     const getUserInitials = () => {
         const firstInitial = user.name[0].toUpperCase();
-        const lastInitial = user.surname[0].toUpperCase();
+        const lastInitial = user.name[1].toUpperCase();
 
         return `${firstInitial}${lastInitial}`;
     };
@@ -33,7 +33,7 @@ const Header = () => {
     return (
         <StyledHeader>
             <Link to="/">
-                <Logo src={LogoSVG} alt="Appizza - Aplicativo para pizzarias" title="Appizza - A melhor pizza da região" />
+                <Logo src={LogoSVG} alt="Appizza - Aplicativo para pizzarias" title="Appizza - A melhor pizza da região é a sua" />
             </Link>
             <UserInformation>
                 <Avatar>
@@ -42,7 +42,7 @@ const Header = () => {
                     </span>
                 </Avatar>
                 <label>
-                    {user.fullName}
+                    {user.name}
                 </label>
                 <span>
                     |

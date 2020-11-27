@@ -9,6 +9,7 @@ export const create = async (pizza) => {
     formData.append('ingredients', pizza.ingredients);
     formData.append('price', pizza.price);
     formData.append('image', pizza.image);
+    formData.append('establishment_id', pizza.establishment_id);
 
     if (pizza.description) formData.append('description', pizza.description);
 

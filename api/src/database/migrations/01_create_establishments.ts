@@ -39,6 +39,10 @@ export async function up(knex: Knex) {
                 .string('password')
                 .notNullable();
             table
+                .string('main_color');
+            table
+                .string('logo_image');
+            table
                 .dateTime('created_at')
                 .notNullable()
                 .defaultTo(knex.fn.now());

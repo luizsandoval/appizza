@@ -17,7 +17,14 @@ import {
 } from './styles';
 
 const Pizza = () => {
-    const { expandedPizza: pizza, openedComponent, setOpenedComponent, setExpandedPizza, setSelectedPizzas } = useContext(AppContext);
+    const { 
+        user,
+        expandedPizza: pizza, 
+        openedComponent, 
+        setOpenedComponent, 
+        setExpandedPizza, 
+        setSelectedPizzas,
+    } = useContext(AppContext);
     const history = useHistory();
 
     const [activeComponent, setActiveComponent] = useState(openedComponent || 'details');
@@ -91,6 +98,7 @@ const Pizza = () => {
                             : (
                                 <Keep
                                     pizza={pizza}
+                                    userId={user.id}
                                     setActiveComponent={setActiveComponent}
                                     handleKeep={handleKeep}
                                     handleClose={handleClose}

@@ -1,13 +1,11 @@
 import { Response, Request } from 'express';
 import { sign } from 'jsonwebtoken';
 
-import { compare, getRounds } from 'bcrypt';
-
 import knex from '../database/connection';
 
 import { User, Establishment } from '../models';
 
-import isPasswordValid from '../helpers/validatePassword';
+import { validatePassword as isPasswordValid } from '../helpers/passwordEncryptor';
 
 class AuthController {
     async authenticateUsers(req: Request, res: Response) {
@@ -18,24 +16,28 @@ class AuthController {
                 .where('email', email)
                 .first();
     
-            if (!user || await isPasswordValid(password, user.password)) return res.status(403).json({ message: 'E-mail ou senha inválido(s)' });
+            if (!user || !(await isPasswordValid(password, user.password))) {
+                return res.status(403).json({ message: 'E-mail ou senha inválido(s)' });
+            }
     
             const token = sign(
                 {
                     id: user.id,
-                    name: user.name,
-                    surname: user.surname,
-                    address: user.address,
-                    fullName: `${user.name} ${user.surname}`,
                     cpf: user.cpf,
-                    email: user.email
+                    email: user.email,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    latitude: user.latitude,
+                    longitude: user.longitude,
+                    firstAccess: !user.latitude,
+                    fullName: `${user.first_name} ${user.last_name}`,
                 },
                 process.env.SECRET_JWT || '',
                 {
                     expiresIn: '12h'
                 }
             );
-    
+
             return res.status(200).json(token);
 
         } catch(err) {
@@ -51,7 +53,9 @@ class AuthController {
                 .where('email', email)
                 .first();
     
-            if (!establishment || await isPasswordValid(password, establishment.password)) return res.status(403).json({ message: 'E-mail ou senha inválido(s)' });
+            if (!establishment || !(await isPasswordValid(password, establishment.password))) {
+                return res.status(403).json({ message: 'E-mail ou senha inválido(s)' });
+            }
     
             const token = sign(
                 {

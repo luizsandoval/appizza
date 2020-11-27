@@ -1,21 +1,19 @@
 import { Request, Response } from 'express';
 
-import { hash } from 'bcrypt';
-
 import knex from '../database/connection';
 
 import { 
     Establishment,
-    User,
-    Order,
 } from '../models';
+
+import { encryptPassword } from '../helpers/passwordEncryptor';
 
 class EstablishmentsController {
     async create(req: Request, res: Response) {
         try {
-            const establishment: Establishment = req.body;    
-            
-            establishment.password = await hash(establishment.password, process.env.ROUNDS || '');
+            const establishment: Establishment = req.body;
+
+            establishment.password = await encryptPassword(establishment.password);
         
             const trx = await knex.transaction();
 
@@ -32,6 +30,7 @@ class EstablishmentsController {
             );
 
         } catch (err) {
+            console.log(err);
             return res.status(500).json(err);
         }
     }
@@ -39,7 +38,7 @@ class EstablishmentsController {
     async update(req: Request, res: Response) {
         try {
             const establishment: Establishment = req.body;                
-        
+
             const trx = await knex.transaction();
 
             const updatedEstablishment = await trx<Establishment>('establishments')

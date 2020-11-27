@@ -7,10 +7,10 @@ export default celebrate(
         body: Joi.object()
             .keys(
                 {
-                    name: Joi
+                    first_name: Joi
                         .string()
                         .required(),
-                    surname: Joi
+                    last_name: Joi
                         .string()
                         .required(),
                     email: Joi
@@ -24,9 +24,6 @@ export default celebrate(
                         .string()
                         .required()
                         .custom(CPFValidator),
-                    address: Joi
-                        .string()
-                        .required(),
                 }
             )
     },

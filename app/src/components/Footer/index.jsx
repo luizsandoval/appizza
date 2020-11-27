@@ -5,7 +5,7 @@ import { StyledFooter, Copyright } from './styles';
 const Footer = () => (
     <StyledFooter>
         <Copyright>
-            Appizza - Aplicativo para pizzarias
+            Appizza - A melhor pizza da região é a sua
             &nbsp;
             <span
                 role="img"

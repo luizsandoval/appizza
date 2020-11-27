@@ -127,7 +127,6 @@ export const OrderTotal = styled.div`
 export const NoOrdersContainer = styled.div`
     display: flex;
     flex: 1;
-    padding: 32px;
     flex-direction: column;
     justify-content: center;
     align-items: center;

@@ -20,7 +20,7 @@ const PizzaSchema = yup.object().shape({
     description: yup.string().max(100, 'A descrição não pode ultrapassar 100 caracteres'),
 })
 
-const Keep = ({ handleKeep, handleClose, setActiveComponent, pizza }) => {
+const Keep = ({ handleKeep, handleClose, setActiveComponent, pizza, userId }) => {
     const [pizzaImage, setPizzaImage] = useState(pizza.image || {});
 
     const { register, errors, formState, getValues } = useForm({
@@ -37,6 +37,7 @@ const Keep = ({ handleKeep, handleClose, setActiveComponent, pizza }) => {
         const pizza = getValues();
 
         pizza.image = pizzaImage;
+        pizza.establishment_id = userId;
 
         handleKeep(pizza);
     };
@@ -98,7 +99,7 @@ const Keep = ({ handleKeep, handleClose, setActiveComponent, pizza }) => {
                     />
                     {errors.ingredients && (
                         <ErrorMessage>
-                            {errors.ingredients.message}
+                            {errors?.ingredients?.message}
                         </ErrorMessage>
                     )}
                 </fieldset>
@@ -112,7 +113,7 @@ const Keep = ({ handleKeep, handleClose, setActiveComponent, pizza }) => {
                         required
                     />
                     {errors.price && (
-                        <ErrorMessage>{errors.price.message}</ErrorMessage>
+                        <ErrorMessage>{errors?.price?.message}</ErrorMessage>
                     )}
                 </fieldset>
                 <fieldset>
