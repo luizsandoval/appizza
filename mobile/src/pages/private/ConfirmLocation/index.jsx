@@ -40,7 +40,7 @@ const INITIAL_REGION = {
     longitudeDelta: 0.014,
 };
 
-const ConfirmLocation = ({ userId, onUpdateUser, navigation }) => {
+const ConfirmLocation = ({ userId, onUpdateUser }) => {
     const [showMap, setShowMap] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [region, setRegion] = useState(INITIAL_REGION);
@@ -61,7 +61,6 @@ const ConfirmLocation = ({ userId, onUpdateUser, navigation }) => {
                 longitude,
             }
         )
-        .then(() => navigation.navigate('Home'))
         .finally(() => setIsLoading(false));
     }, [onUpdateUser, region]);
 

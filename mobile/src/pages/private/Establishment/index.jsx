@@ -1,21 +1,50 @@
-import React, { useEffect } from 'react';
+import React, 
+{ 
+    useMemo, 
+    useState, 
+    useEffect,
+    useCallback,
+} from 'react';
 
 import { connect } from 'react-redux';
 
 import { getEstablishment } from '../../../store/thunks/establishments';
 
 import { 
-    Search,
+    Loader,
     SubTitle,
     Container,
-    ScrollList,
-    FloatingActionButton,
 } from '../../../components';
 
-import { Header } from './styles';
+import Menu from './Menu';
+import Details from './Details';
 
-const Establishment = ({ onGetEstablishment, establishment, route }) => {
+import { 
+    Header, 
+    TabText,
+    TabWrapper,
+    TabsContainer, 
+} from './styles';
+
+const Establishment = (
+    { 
+        route,
+        loading, 
+        establishment, 
+        onGetEstablishment, 
+    }
+) => {
     const { id } = route.params;
+    const [activeTab, setActiveTab] = useState('menu');
+
+    const tabs = useMemo(() => (
+        {
+            menu: <Menu establishment={establishment} />,
+            details: <Details establishment={establishment} />
+        }
+    ), [establishment]);
+
+    const getActiveTabComponent = useCallback(() => tabs[activeTab], [activeTab, tabs]);
 
     useEffect(() => {
         onGetEstablishment(id);
@@ -23,25 +52,52 @@ const Establishment = ({ onGetEstablishment, establishment, route }) => {
 
     return (
         <Container>
-            <Header>
-                <SubTitle>
-                    {establishment.fantasy_name}
-                </SubTitle>
-            </Header>
-            <Search />
-            <ScrollList />
-            <FloatingActionButton 
-                size="large"
-                position="center"
-                title="Novo pedido"
-            />
+            {
+                !establishment && loading
+                    ? <Loader />
+                    : (
+                        <>
+                            <Header>
+                                <SubTitle>
+                                    {establishment?.name}
+                                </SubTitle>
+                            </Header>
+                            <TabsContainer>
+                                <TabWrapper
+                                    active={activeTab === 'menu'}
+                                    onPress={() => setActiveTab('menu')}
+                                >
+                                    <TabText
+                                        active={activeTab === 'menu'}
+                                    >
+                                        Cardápio
+                                    </TabText>
+                                </TabWrapper>
+                                <TabWrapper
+                                    active={activeTab === 'details'}
+                                    onPress={() => setActiveTab('details')}
+                                >
+                                    <TabText
+                                        active={activeTab === 'details'}
+                                    >
+                                        Detalhes
+                                    </TabText>
+                                </TabWrapper>
+                            </TabsContainer>
+                            {
+                                getActiveTabComponent()
+                            }
+                        </>
+                    )
+            }
         </Container>
     );
 }
 
-const mapStateToProps = ({ establishment: { establishment }}) => (
+const mapStateToProps = ({ establishments: { establishment, loading }}) => (
     {
-        establishment
+        loading,
+        establishment,
     }
 );
 

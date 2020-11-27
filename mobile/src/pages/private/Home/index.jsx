@@ -4,6 +4,8 @@ import { ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
 
+import { getDistance, convertDistance } from 'geolib';
+
 import {
     Search,
     Loader,
@@ -30,7 +32,8 @@ const Home = (
         loading,
         navigation,
         isFirstAccess,
-        establishments, 
+        establishments,
+        userCoordinates,
         onGetEstablishments, 
     }
 ) => {
@@ -40,6 +43,12 @@ const Home = (
         navigation
             .navigate('Establishment', { id })
     ), [navigation]);
+
+    const getEstablishmentDistance = useCallback((establishmentCoordinates) => {
+        const distance = getDistance(userCoordinates, establishmentCoordinates);
+
+        return Math.round(convertDistance(distance, 'km'));
+    }, [userCoordinates]);
 
     useEffect(() => {
         onGetEstablishments();
@@ -63,7 +72,7 @@ const Home = (
 
                 <Content>
                     {
-                        loading
+                        !establishments?.length && loading
                             ? (
                                 <Loader />
                             ) 
@@ -72,19 +81,20 @@ const Home = (
                                     label="Em destaque"
                                     onItemPressed={handleOnItemPressed}
                                     items={(
-                                        establishments
-                                            .map((
+                                        establishments.map((
                                                 { 
                                                     id, 
+                                                    name,
+                                                    latitude, 
+                                                    longitude,
                                                     logo_image, 
-                                                    fantasy_name,
                                                 }
                                             ) => (
                                                 {
                                                     id,
                                                     image: logo_image || DEFAULT_ESTABLISHMENT_IMAGE,
-                                                    title: fantasy_name,
-                                                    subtitle: `A aproximadamente 3km de você`,
+                                                    title: name,
+                                                    subtitle: `A aproximadamente ${getEstablishmentDistance({ latitude, longitude })} km de você`,
                                                 }
                                             ))
                                     )}
@@ -110,6 +120,10 @@ const mapStateToProps = (
         loading,
         establishments,
         isFirstAccess: user?.firstAccess,
+        userCoordinates: { 
+            latitude: user?.latitude, 
+            longitude: user?.longitude 
+        },
     }
 );
 

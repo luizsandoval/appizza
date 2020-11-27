@@ -12,7 +12,7 @@ import {
     CardSubTitle,
 } from './styles';
 
-const ScrollList = ({ items, label = '', onItemPressed = null }) => (
+const ScrollList = ({ items = [], label = '', onItemPressed = null }) => (
     <>
         <Label>
             {label}
@@ -24,20 +24,20 @@ const ScrollList = ({ items, label = '', onItemPressed = null }) => (
                 contentContainerStyle={{ paddingVertical: 8, paddingBottom: 24, paddingHorizontal: 8 }}
             >
                 {
-                    items.map((item) => (
+                    items?.map((item) => (
                         <Card
-                            key={item.id}
+                            key={item?.id}
                             onPress={() => onItemPressed && onItemPressed(item)}
                         >
                             <CardImage 
-                                source={{ uri: item.image }}
+                                source={{ uri: item?.image }}
                             />
                             <CardDetails>
                                 <CardTitle>
-                                    {item.title}
+                                    {item?.title}
                                 </CardTitle>
                                 <CardSubTitle>
-                                    {item.subtitle}
+                                    {item?.subtitle}
                                 </CardSubTitle>
                             </CardDetails>
                         </Card>

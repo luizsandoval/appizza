@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const ButtonWrapper = styled.View`
-    width: ${({ windowWidth }) => windowWidth}; 
+    width: ${({ windowWidth }) => windowWidth}px; 
     position: absolute;
     align-items: center; 
     justify-content: center; 

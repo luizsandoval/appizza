@@ -15,7 +15,7 @@ export const loadedEstablishments = establishments => (
 
 export const loadedEstablishment = establishment => (
     {
-        type: ESTABLISHMENTS_ACTIONS_TYPES.ESTABLISHMENTS_LOADED,
+        type: ESTABLISHMENTS_ACTIONS_TYPES.ESTABLISHMENT_LOADED,
         payload: establishment,
     }
 );
