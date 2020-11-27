@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import AppContext from '../../../AppContext';
 
-import { Container, FloatingActionButton, StyledIcon } from './styles';
+import { Container } from './styles';
 
 import Menu from './Menu';
 import Pizza from '../Pizza';
