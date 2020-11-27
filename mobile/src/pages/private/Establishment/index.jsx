@@ -14,7 +14,7 @@ import {
 
 import { Header } from './styles';
 
-const Establishment = ({ onGetEstablishment, route }) => {
+const Establishment = ({ onGetEstablishment, establishment, route }) => {
     const { id } = route.params;
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Establishment = ({ onGetEstablishment, route }) => {
         <Container>
             <Header>
                 <SubTitle>
-                    Pizzaria do Zé
+                    {establishment.fantasy_name}
                 </SubTitle>
             </Header>
             <Search />
@@ -39,10 +39,16 @@ const Establishment = ({ onGetEstablishment, route }) => {
     );
 }
 
+const mapStateToProps = ({ establishment: { establishment }}) => (
+    {
+        establishment
+    }
+);
+
 const mapDispatchToProps = dispatch => (
     {
         onGetEstablishment: id => dispatch(getEstablishment(id)),
     }
 );
 
-export default connect(null, mapDispatchToProps)(Establishment);
+export default connect(mapStateToProps, mapDispatchToProps)(Establishment);
