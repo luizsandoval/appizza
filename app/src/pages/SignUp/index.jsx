@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 
 import { icon } from 'leaflet';
 
-import { Map, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 
 import * as yup from 'yup';
 
@@ -120,7 +120,7 @@ const SignUp = () => {
 
                     <fieldset className="location">
                         <label htmlFor="map">Localização</label>
-                        <Map
+                        <MapContainer
                             center={initialPosition}
                             style={
                                 {
@@ -138,7 +138,7 @@ const SignUp = () => {
                                 position={selectedPosition}
                                 icon={customMarker}
                             />
-                        </Map>
+                        </MapContainer>
                     </fieldset>
 
                     <fieldset>
