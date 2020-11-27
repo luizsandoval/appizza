@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 
 import { icon } from 'leaflet';
 
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 
 import * as yup from 'yup';
 
@@ -65,6 +65,25 @@ const customMarker = icon(
     }
 );
 
+const MapMarker = ({ handleMapClick, selectedPosition }) => {
+    const map = useMapEvents({
+        click() {
+            map.locate();
+        },
+        locationfound(e) {
+            handleMapClick(e);
+            map.flyTo(e.latlng, map.getZoom());
+        },
+    });
+
+    return (
+        <Marker 
+            position={selectedPosition}
+            icon={customMarker}
+        />
+    );
+};
+
 const SignUp = () => {
     const [initialPosition, setInitialPosition] = useState([DEFAULT_LATITUDE, DEFAULT_LONGITUDE]);
     const [selectedPosition, setSelectedPosition] = useState([0, 0]);
@@ -88,8 +107,8 @@ const SignUp = () => {
             .then(() => goToSignIn());
     }, [getValues, goToSignIn, selectedPosition]);
 
-    const handleMapClick = useCallback(({ latlng: { lat, lng } }) => {
-        setSelectedPosition([lat, lng]);
+    const handleMapClick = useCallback(({ latitude, longitude }) => {
+        setSelectedPosition([latitude, longitude]);
     }, []); 
 
     const isFormValid = () => formState.isValid && selectedPosition.length && (!selectedPosition.includes(0));
@@ -128,15 +147,14 @@ const SignUp = () => {
                                     height: '100%',
                                 }
                             }
-                            onClick={handleMapClick}
                             zoom={15}
                         >
                             <TileLayer
                                 url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
                             />
-                            <Marker 
-                                position={selectedPosition}
-                                icon={customMarker}
+                            <MapMarker 
+                                selectedPosition={selectedPosition || initialPosition}
+                                handleMapClick={handleMapClick}
                             />
                         </MapContainer>
                     </fieldset>
