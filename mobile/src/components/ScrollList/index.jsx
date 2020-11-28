@@ -20,13 +20,14 @@ const ScrollList = ({ items = [], label = '', onItemPressed = null }) => (
         <Container>
             <ScrollView
                 horizontal
-                showsHorizontalScrollIndicator={false} 
+                showsHorizontalScrollIndicator={false}
                 contentContainerStyle={{ paddingVertical: 8, paddingBottom: 24, paddingHorizontal: 8 }}
             >
                 {
                     items?.map((item) => (
                         <Card
                             key={item?.id}
+                            activeOpacity={0.1}
                             onPress={() => onItemPressed && onItemPressed(item)}
                         >
                             <CardImage 

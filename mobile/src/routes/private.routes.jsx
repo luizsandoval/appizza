@@ -87,7 +87,7 @@ export default PrivateRoutes = () => (
         />
         <Screen
             options={{
-                title: "",
+                title: "Estabelecimento",
             }}
             name="Establishment"
             component={Establishment}

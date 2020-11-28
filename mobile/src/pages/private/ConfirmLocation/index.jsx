@@ -25,8 +25,6 @@ import {
     FloatingActionButton,
 } from '../../../components';
 
-import mapMarker from '../../../assets/map-marker.png';
-
 import {
     Map,
     StyledContainer,
@@ -101,7 +99,6 @@ const ConfirmLocation = ({ userId, onUpdateUser }) => {
                         <Marker
                             draggable
                             onDragEnd={(e) => handleMarkerDrag(e.nativeEvent.coordinate)}
-                            image={mapMarker}
                             title="teste"
                             description="testesdasda"
                             coordinate={

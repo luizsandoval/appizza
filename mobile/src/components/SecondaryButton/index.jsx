@@ -2,15 +2,30 @@ import React from 'react';
 
 import { ButtonContainer, ButtonText } from './styles';
 
-const SecondaryButton = ({ title, onPress, ...rest }) => (
+const SecondaryButton = (
+    { 
+        title, 
+        onPress, 
+        customColor,
+        children,
+        icon: Icon,
+        ...rest 
+    }
+) => (
     <ButtonContainer
+        onPress={onPress}
         activeOpacity={0.1}
-        onPress={onPress} 
+        customColor={customColor}
         {...rest}
     >
-        <ButtonText>
+        <ButtonText customColor={customColor}>
             {title}
         </ButtonText>
+        {
+            Icon 
+                ? <Icon />
+                : null
+        }
     </ButtonContainer>
 );
 

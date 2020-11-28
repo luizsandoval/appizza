@@ -4,8 +4,6 @@ import { ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { getDistance, convertDistance } from 'geolib';
-
 import {
     Search,
     Loader,
@@ -13,6 +11,8 @@ import {
     Container,
     ScrollList,
 } from '../../../components';
+
+import calculateDistance from '../../../utils/calculateDistance';
 
 import { getEstablishments } from '../../../store/thunks/establishments';
 
@@ -43,12 +43,6 @@ const Home = (
         navigation
             .navigate('Establishment', { id })
     ), [navigation]);
-
-    const getEstablishmentDistance = useCallback((establishmentCoordinates) => {
-        const distance = getDistance(userCoordinates, establishmentCoordinates);
-
-        return Math.round(convertDistance(distance, 'km'));
-    }, [userCoordinates]);
 
     useEffect(() => {
         onGetEstablishments();
@@ -94,7 +88,7 @@ const Home = (
                                                     id,
                                                     image: logo_image || DEFAULT_ESTABLISHMENT_IMAGE,
                                                     title: name,
-                                                    subtitle: `A aproximadamente ${getEstablishmentDistance({ latitude, longitude })} km de você`,
+                                                    subtitle: `A aproximadamente ${calculateDistance(userCoordinates, { latitude, longitude })} km de você`,
                                                 }
                                             ))
                                     )}

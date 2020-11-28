@@ -4,17 +4,17 @@ export const Header = styled.View`
     margin: 16px 0;
     align-items: center;
     justify-content: center;
+    margin-top: 32px;
 `;
 
 export const TabsContainer = styled.View`
-    margin: 32px 0;
+    margin: 16px 0;
     align-items: center;
     justify-content: center;
     flex-direction: row;
 `;
 
 export const TabWrapper = styled.TouchableOpacity`
-    /* padding: 8px; */
     margin: 0 32px;
     align-items: center;
     justify-content: center;
