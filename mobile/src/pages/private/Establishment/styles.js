@@ -1,10 +1,16 @@
 import styled, { css } from 'styled-components/native';
 
+import Title from '../../../components/Title';
+
 export const Header = styled.View`
     margin: 16px 0;
     align-items: center;
     justify-content: center;
     margin-top: 32px;
+`;
+
+export const StyledTitle = styled(Title)`
+    font-size: 24px;
 `;
 
 export const TabsContainer = styled.View`

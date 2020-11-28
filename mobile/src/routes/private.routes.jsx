@@ -11,6 +11,7 @@ import { faHome, faReceipt, faUser } from '@fortawesome/free-solid-svg-icons';
 import Home from '../pages/private/Home';
 import Orders from '../pages/private/Orders';
 import Profile from '../pages/private/Profile';
+import ReviewOrder from '../pages/private/ReviewOrder';
 import Establishment from '../pages/private/Establishment';
 
 const { Navigator, Screen } = createStackNavigator();
@@ -91,6 +92,13 @@ export default PrivateRoutes = () => (
             }}
             name="Establishment"
             component={Establishment}
+        />
+        <Screen
+            options={{
+                title: "Revisar pedido",
+            }}
+            name="ReviewOrder"
+            component={ReviewOrder}
         />
     </Navigator>
 );

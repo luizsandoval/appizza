@@ -8,6 +8,7 @@ import BackButton from './BackButton';
 import ScrollList from './ScrollList';
 import PasswordInput from './PasswordInput';
 import PrimaryButton from './PrimaryButton';
+import FormatCurrency from './FormatCurrency';
 import SecondaryButton from './SecondaryButton';
 import FloatingActionButton from './FloatingActionButton';
 
@@ -22,6 +23,7 @@ export {
     ScrollList,
     PasswordInput,
     PrimaryButton,
+    FormatCurrency,
     SecondaryButton,
     FloatingActionButton,
 };

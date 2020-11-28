@@ -1,19 +1,57 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
+
+import { useNavigation } from '@react-navigation/native';
+
+import { connect } from 'react-redux';
+
+import styled from 'styled-components/native';
+
+import { itemAdded, itemRemoved } from '../../../../store/actions/cart';
 
 import { 
-    Search,
     Container,
+    Search,
     ScrollList,
     FloatingActionButton,
 } from '../../../../components';
 
-const Menu = ({ establishment }) => {
-    const [selectedPizzas, setSelectedPizzas] = useState([]);
+const ContentContainer = styled(Container)`
+    padding: 0 32px 32px;
+`;
+
+const Menu = (
+    { 
+        items,
+        onItemAdded,
+        onItemRemoved, 
+        establishment, 
+    }
+) => {
+    const navigation = useNavigation();
+    const handleItemSelection = useCallback((item) => { 
+        const isItemSelected = items.some(selectedItem => selectedItem.id === item.id);
+        const originalItem = establishment
+            .pizzas
+            .find(pizza => pizza.id === item.id);
+
+        isItemSelected
+            ? onItemRemoved(originalItem)
+            : onItemAdded(originalItem);
+    }, [items, onItemRemoved, onItemAdded]);
+
+    const handleNewOrder = useCallback(() => (
+        navigation
+            .navigate('ReviewOrder', { establishment_id: establishment?.id })
+    ), [navigation, establishment]);
 
     return (
-        <Container>
+        <ContentContainer 
+            defaultPadding={false}
+        >
             <Search />
-            <ScrollList 
+            <ScrollList
+                selectable
+                onItemSelected={handleItemSelection}
                 items={(establishment?.pizzas?.map(({ id, name, price, image }) => (
                     {
                         id,
@@ -22,20 +60,35 @@ const Menu = ({ establishment }) => {
                         subtitle: price,
                     }
                 )))}
+                selectedItems={items}
             />
             {
-                selectedPizzas.length 
+                items.length 
                     ? (
                         <FloatingActionButton 
                             size="large"
                             position="center"
                             title="Novo pedido"
+                            onPress={() => handleNewOrder()}
                         />
                     )
                     : null
             }
-        </Container>
+        </ContentContainer>
     );
 };
 
-export default Menu;
+const mapStateToProps = ({ cart: { items }}) => (
+    {
+        items,
+    }
+);
+
+const mapDispatchToProps = dispatch => (
+    {
+        onItemAdded: item => dispatch(itemAdded(item)),
+        onItemRemoved: item => dispatch(itemRemoved(item)),
+    }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

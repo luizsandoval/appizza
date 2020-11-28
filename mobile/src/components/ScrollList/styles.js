@@ -1,7 +1,10 @@
 import styled from 'styled-components/native';
 
+import ReactCheckBox from '@react-native-community/checkbox';
+
 export const Label = styled.Text`
     font-size: 16px;
+    margin-top: 32px;
     color: ${({ theme }) => theme.colors.black.lighten};
 `;
 
@@ -31,6 +34,11 @@ export const CardImage = styled.ImageBackground`
     height: 100%;
 `;
 
+export const CardImageOverlay = styled.View`
+    flex: 1;
+    background-color: rgba(0,0,0, 0.3);
+`;
+
 export const CardDetails = styled.View`
     position: absolute;
     z-index: 2;
@@ -54,4 +62,24 @@ export const CardTitle = styled.Text`
 export const CardSubTitle = styled.Text`
     font-size: 12px;
     color: ${({ theme }) => theme.colors.black.lighten};
+`;
+
+export const CheckboxBackground = styled.View`
+    top: 0;
+    right: 0;
+    z-index: 2;
+    margin: 24px 16px;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    background: ${({ theme }) => theme.colors.white};
+`;
+
+export const Checkbox = styled(ReactCheckBox)`
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: 0;
+    margin: 16px 8px;
+    position: absolute;
 `;

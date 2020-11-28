@@ -6,7 +6,7 @@ export const Container = styled.View`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 32px 0;
+    margin: 32px 0 0;
     position: relative;
 `;
 

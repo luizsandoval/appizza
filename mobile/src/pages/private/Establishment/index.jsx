@@ -6,15 +6,12 @@ import React,
     useCallback,
 } from 'react';
 
-import { ScrollView } from 'react-native';
-
 import { connect } from 'react-redux';
 
 import { getEstablishment } from '../../../store/thunks/establishments';
 
 import { 
     Loader,
-    SubTitle,
     Container,
 } from '../../../components';
 
@@ -23,6 +20,7 @@ import Details from './Details';
 
 import { 
     Header, 
+    StyledTitle,
     TabText,
     TabWrapper,
     TabsContainer, 
@@ -53,51 +51,46 @@ const Establishment = (
     }, []);
 
     return (
-        <ScrollView
-            contentContainerStyle={{ flex: 1 }}
-            showsVerticalScrollIndicator={false}
-        >
-            <Container defaultPadding={false}>
-                {
-                    !establishment && loading
-                        ? <Loader />
-                        : (
-                            <>
-                                <Header>
-                                    <SubTitle>
-                                        {establishment?.name}
-                                    </SubTitle>
-                                </Header>
-                                <TabsContainer>
-                                    <TabWrapper
+        <Container defaultPadding={false}>
+            {
+                !establishment && loading
+                    ? <Loader />
+                    : (
+                        <>
+                            <Header>
+                                <StyledTitle>
+                                    {establishment?.name}
+                                </StyledTitle>
+                            </Header>
+                            <TabsContainer>
+                                <TabWrapper
+                                    active={activeTab === 'menu'}
+                                    onPress={() => setActiveTab('menu')}
+                                >
+                                    <TabText
                                         active={activeTab === 'menu'}
-                                        onPress={() => setActiveTab('menu')}
                                     >
-                                        <TabText
-                                            active={activeTab === 'menu'}
-                                        >
-                                            Cardápio
-                                        </TabText>
-                                    </TabWrapper>
-                                    <TabWrapper
+                                        Cardápio
+                                    </TabText>
+                                </TabWrapper>
+                                <TabWrapper
+                                    active={activeTab === 'details'}
+                                    onPress={() => setActiveTab('details')}
+                                >
+                                    <TabText
                                         active={activeTab === 'details'}
-                                        onPress={() => setActiveTab('details')}
                                     >
-                                        <TabText
-                                            active={activeTab === 'details'}
-                                        >
-                                            Detalhes
-                                        </TabText>
-                                    </TabWrapper>
-                                </TabsContainer>
-                                {
-                                    getActiveTabComponent()
-                                }
-                            </>
-                        )
-                }
-            </Container>
-        </ScrollView>
+                                        Detalhes
+                                    </TabText>
+                                </TabWrapper>
+                            </TabsContainer>
+                            {
+                                getActiveTabComponent()
+                            }
+                        </>
+                    )
+            }
+        </Container>
     );
 }
 
