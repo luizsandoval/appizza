@@ -11,6 +11,7 @@ import { faHome, faReceipt, faUser } from '@fortawesome/free-solid-svg-icons';
 import Home from '../pages/private/Home';
 import Orders from '../pages/private/Orders';
 import Profile from '../pages/private/Profile';
+import Feedback from '../pages/private/Feedback';
 import ReviewOrder from '../pages/private/ReviewOrder';
 import Establishment from '../pages/private/Establishment';
 
@@ -99,6 +100,13 @@ export default PrivateRoutes = () => (
             }}
             name="ReviewOrder"
             component={ReviewOrder}
+        />
+        <Screen
+            options={{
+                headerShown: false,
+            }}
+            name="Feedback"
+            component={Feedback}
         />
     </Navigator>
 );

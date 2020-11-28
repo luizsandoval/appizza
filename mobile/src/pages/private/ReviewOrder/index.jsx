@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { connect } from 'react-redux';
+
+import { itemQuantityDecreased, itemQuantityIncreased } from '../../../store/actions/cart';
 
 import { 
     Container,
@@ -10,17 +12,28 @@ import {
 } from '../../../components';
 
 import { 
+    Divider,
     ItemName,
     ItemCard,
-    ItemPrice,
-    ItemTitle,
     ItemDetails,
     StyledTitle,
+    ItemQuantity,
+    QuantityLabel,
     ItemsContainer,
+    QuantityButton,
     ItemIngredients
 } from './styles';
 
-const ReviewOrder = ({ items }) => {
+const ReviewOrder = (
+    { 
+        items, 
+        onIncreaseItemQuantity, 
+        onDecreaseItemQuantity,
+    }
+) => {
+    const handleIncreaseItemQuantity = useCallback((item) => onIncreaseItemQuantity(item), [onIncreaseItemQuantity]);
+
+    const handleDecreaseItemQuantity = useCallback((item) => onDecreaseItemQuantity(item), [onIncreaseItemQuantity]);
 
     return (
         <Container>
@@ -39,28 +52,47 @@ const ReviewOrder = ({ items }) => {
                                     key={item.id}
                                 >
                                     <ItemDetails>
-                                        <ItemTitle>
-                                            <ItemName>
-                                                {item.name}
-                                            </ItemName>
-                                            <ItemIngredients>
-                                                {item?.ingredients}
-                                            </ItemIngredients>
-                                        </ItemTitle>
+                                        <ItemName>
+                                            {item.name}
+                                        </ItemName>
+                                        <ItemIngredients>
+                                            {item?.ingredients}
+                                        </ItemIngredients>
                                         <FormatCurrency
-                                            value={item.price}
+                                            value={item.price * item.quantity}
                                             renderText={() => <ItemName />}
                                         />
                                     </ItemDetails>
+                                    <ItemQuantity>
+                                        <QuantityButton
+                                            disabled={item.quantity === 1}
+                                            onPress={() => handleDecreaseItemQuantity(item)}
+                                        >
+                                            <Text>
+                                                -
+                                            </Text>
+                                        </QuantityButton>
+                                        <QuantityLabel>
+                                            {item.quantity}
+                                        </QuantityLabel>
+                                        <QuantityButton
+                                            onPress={() => handleIncreaseItemQuantity(item)}
+                                        >
+                                            <Text>
+                                                +
+                                            </Text>
+                                        </QuantityButton>
+                                    </ItemQuantity>
                                 </ItemCard>
                             ))
                     }
                 </ItemsContainer>
+                <Divider />
             </ScrollView>
             <FloatingActionButton 
                 size="large"
                 position="center"
-                title="Confirmar pedido"
+                title="Tudo certo, pode confirmar!"
             />
         </Container>
     );
@@ -72,4 +104,11 @@ const mapStateToProps = ({ cart: { items }}) => (
     }
 );
 
-export default connect(mapStateToProps)(ReviewOrder);
+const mapDispatchToProps = dispatch => (
+    {
+        onIncreaseItemQuantity: item => dispatch(itemQuantityIncreased(item)),
+        onDecreaseItemQuantity: item => dispatch(itemQuantityDecreased(item)),
+    }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);

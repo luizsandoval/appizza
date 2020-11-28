@@ -34,6 +34,8 @@ const Menu = (
             .pizzas
             .find(pizza => pizza.id === item.id);
 
+        originalItem.quantity = 1;
+
         isItemSelected
             ? onItemRemoved(originalItem)
             : onItemAdded(originalItem);
