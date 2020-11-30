@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 
 import LottieView from 'lottie-react-native';
+
+import styled from 'styled-components/native';
 
 import {
     Title,
@@ -11,16 +13,26 @@ import {
     FloatingActionButton
 } from '../../../components'
 
+const AnimationWrapper = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+`;
+
+const StyledContainer = styled(Container)`
+    padding: 64px 32px 32px;
+`;
+
 const Feedback = () => {
     const navigation = useNavigation();
 
     const handleTrackMyOrder = useCallback(() => (
         navigation
             .navigate('Orders')
-    ), []);
+    ), [navigation]);
 
     return (
-        <Container>
+        <StyledContainer>
             <Title>
                 Bom apetite
             </Title>
@@ -37,10 +49,12 @@ const Feedback = () => {
                 />
             </AnimationWrapper>
             <FloatingActionButton 
+                size="large"
+                position="center"
                 title="Acompanhar meu pedido"
                 onPress={() => handleTrackMyOrder()}
             />
-        </Container>
+        </StyledContainer>
     );
 };
 

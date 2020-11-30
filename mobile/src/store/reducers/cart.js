@@ -7,6 +7,7 @@ const INITIAL_STATE = {
 const reducer = (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {
         case CART_ACTIONS_TYPES.ITEM_ADDED: {
+            payload.quantity = 1;
             return {
                 ...state,
                 items: [...state.items, payload]

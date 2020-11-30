@@ -28,7 +28,7 @@ export const ButtonContainer = styled.TouchableOpacity`
     background: ${({ theme, disabled }) => (
         !disabled 
             ? (theme.colors.primary.main)
-            : (theme.colors.primary.lightest)
+            : (theme.colors.gray.main)
     )};
 
 `;

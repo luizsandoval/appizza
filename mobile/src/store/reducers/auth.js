@@ -28,6 +28,7 @@ const reducer = (state = INITIAL_STATE, { type, payload }) => {
             return {
                 ...state,
                 user: { 
+                    ...state.user,
                     ...payload,
                     firstAccess: false,
                 },

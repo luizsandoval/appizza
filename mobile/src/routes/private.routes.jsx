@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Dimensions } from 'react-native';
+
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -14,6 +16,7 @@ import Profile from '../pages/private/Profile';
 import Feedback from '../pages/private/Feedback';
 import ReviewOrder from '../pages/private/ReviewOrder';
 import Establishment from '../pages/private/Establishment';
+import ConfirmLocation from '../pages/private/ConfirmLocation';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -21,8 +24,9 @@ const { Navigator: TabNavigator, Screen: TabScreen } = createBottomTabNavigator(
 
 const Main = () => {
     const theme = useTheme();
+    const { height } = Dimensions.get('window');
 
-    return ((
+    return (
         <TabNavigator
             initialRouteName="Home"
             tabBarOptions={
@@ -30,12 +34,12 @@ const Main = () => {
                     style: { 
                         borderTopEndRadius: 25, 
                         borderTopStartRadius: 25, 
-                        elevation: 24,
-                        paddingVertical: 72,
+                        elevation: 12,
+                        height: height / 10,
                     }, 
                     activeTintColor: theme.colors.secondary.main, 
                     tabStyle: { 
-                        paddingBottom: 32 
+                        paddingTop: 32,
                     },
                     labelStyle: {
                         fontSize: 12,
@@ -73,7 +77,7 @@ const Main = () => {
                 }}
             />
         </TabNavigator>
-    ));
+    );
 };
 
 export default PrivateRoutes = () => (
@@ -86,6 +90,13 @@ export default PrivateRoutes = () => (
             }}
             name="Main"
             component={Main}
+        />
+        <Screen
+            options={{
+                headerShown: false,
+            }}
+            name="ConfirmLocation"
+            component={ConfirmLocation}
         />
         <Screen
             options={{

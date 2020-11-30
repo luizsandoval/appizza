@@ -38,7 +38,7 @@ const INITIAL_REGION = {
     longitudeDelta: 0.014,
 };
 
-const ConfirmLocation = ({ userId, onUpdateUser }) => {
+const ConfirmLocation = ({ userId, onUpdateUser, navigation }) => {
     const [showMap, setShowMap] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [region, setRegion] = useState(INITIAL_REGION);
@@ -59,6 +59,7 @@ const ConfirmLocation = ({ userId, onUpdateUser }) => {
                 longitude,
             }
         )
+        .then(() => navigation.navigate('Main'))
         .finally(() => setIsLoading(false));
     }, [onUpdateUser, region]);
 
@@ -99,8 +100,6 @@ const ConfirmLocation = ({ userId, onUpdateUser }) => {
                         <Marker
                             draggable
                             onDragEnd={(e) => handleMarkerDrag(e.nativeEvent.coordinate)}
-                            title="teste"
-                            description="testesdasda"
                             coordinate={
                                 {
                                     latitude: region.latitude,

@@ -1,8 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
 
-const Profile = () => {
-    return <View />;
-};
+import {
+    Container
+} from '../../../components';
+
+const Profile = () => (
+    <Container>
+
+    </Container>
+);
 
 export default Profile;

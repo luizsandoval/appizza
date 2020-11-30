@@ -4,8 +4,8 @@ import Loader from './Loader';
 import Search from './Search';
 import SubTitle from './SubTitle';
 import Container from './Container';
+import ItemsList from './ItemsList';
 import BackButton from './BackButton';
-import ScrollList from './ScrollList';
 import PasswordInput from './PasswordInput';
 import PrimaryButton from './PrimaryButton';
 import FormatCurrency from './FormatCurrency';
@@ -19,8 +19,8 @@ export {
     Search,
     SubTitle,
     Container,
+    ItemsList,
     BackButton,
-    ScrollList,
     PasswordInput,
     PrimaryButton,
     FormatCurrency,

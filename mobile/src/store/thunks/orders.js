@@ -3,10 +3,10 @@ import api from '../../services/api';
 import { cartCleaned } from '../actions/cart';
 import { orderCreated } from '../actions/orders';
 
-const createOrder = order => {
+export const createOrder = order => {
     return async dispatch => {
         try {
-            await api.post('/orders', order);
+            const { data } = await api.post('/orders', order);
     
             dispatch(orderCreated());
             dispatch(cartCleaned());

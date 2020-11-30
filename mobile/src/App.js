@@ -16,7 +16,7 @@ import Routes from './routes';
 
 const App = (
     { 
-        isAuthenticated, 
+        isAuthenticated,
         validatingAuthentication, 
         validateUserAuthentication, 
     }

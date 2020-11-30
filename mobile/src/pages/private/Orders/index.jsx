@@ -1,8 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
 
-const Orders = () => {
-    return <View />;
-};
+import {
+    Container
+} from '../../../components';
+
+const Orders = () => (
+    <Container>
+
+    </Container>
+);
 
 export default Orders;

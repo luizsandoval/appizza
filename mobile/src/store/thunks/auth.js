@@ -1,7 +1,5 @@
 import api from '../../services/api';
 
-import { API_URL } from '@env';
-
 import { 
     get as getToken,
     set as setToken,
@@ -50,7 +48,6 @@ export const signOut = () => {
 export const signUp = user => {
     return async _ => {
         try {
-            console.log(API_URL);
             const { data } = await api.post('/users', user);
 
             return data;

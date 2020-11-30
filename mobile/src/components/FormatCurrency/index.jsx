@@ -1,12 +1,8 @@
 import React from 'react';
 
-import styled from 'styled-components/native';
+import { Text } from 'react-native';
 
 import FormatNumber from 'react-number-format';
-
-const Text = styled.Text`
-    margin-top: 16px;
-`;
 
 const FormatCurrency = ({ value }) => (
     <FormatNumber 
@@ -14,7 +10,11 @@ const FormatCurrency = ({ value }) => (
         value={value}
         displayType="text"
         thousandSeparator
-        renderText={formattedValue => <Text>{formattedValue}</Text>}
+        renderText={formattedValue => (
+            <Text>
+                {formattedValue}
+            </Text>
+        )}
     />
 );
 

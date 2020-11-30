@@ -10,16 +10,19 @@ export default celebrate(
                     .number()
                     .positive()
                     .required(),
-                address: Joi
-                    .string()
-                    .required(),
                 user_id: Joi
                     .number()
                     .positive()
                     .required(),
-                pizza_ids: Joi
+                establishment_id: Joi
+                    .number()
+                    .positive()
+                    .required(),
+                pizzas: Joi
                     .array()
-                    .items(Joi.number().positive())
+                    .required(),
+                payment_term: Joi
+                    .string()
                     .required()
             }
         )

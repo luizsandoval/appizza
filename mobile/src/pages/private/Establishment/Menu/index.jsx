@@ -9,11 +9,12 @@ import styled from 'styled-components/native';
 import { itemAdded, itemRemoved } from '../../../../store/actions/cart';
 
 import { 
-    Container,
     Search,
-    ScrollList,
+    Container,
     FloatingActionButton,
 } from '../../../../components';
+
+import PizzasList from './PizzasList';
 
 const ContentContainer = styled(Container)`
     padding: 0 32px 32px;
@@ -21,51 +22,46 @@ const ContentContainer = styled(Container)`
 
 const Menu = (
     { 
-        items,
         onItemAdded,
-        onItemRemoved, 
+        onItemRemoved,
+        selectedItems,
         establishment, 
     }
 ) => {
     const navigation = useNavigation();
-    const handleItemSelection = useCallback((item) => { 
-        const isItemSelected = items.some(selectedItem => selectedItem.id === item.id);
-        const originalItem = establishment
-            .pizzas
-            .find(pizza => pizza.id === item.id);
 
-        originalItem.quantity = 1;
+    const handlePizzaSelected = useCallback((pizza) => {
+        const isItemSelected = selectedItems.some(selectedItem => selectedItem.id === pizza.id);
 
         isItemSelected
-            ? onItemRemoved(originalItem)
-            : onItemAdded(originalItem);
-    }, [items, onItemRemoved, onItemAdded]);
+            ? onItemRemoved(pizza)
+            : onItemAdded(pizza);
+    }, [selectedItems, onItemAdded, onItemRemoved]);
 
     const handleNewOrder = useCallback(() => (
         navigation
-            .navigate('ReviewOrder', { establishment_id: establishment?.id })
+            .navigate(
+                'ReviewOrder', 
+                { 
+                    establishment_id: establishment.id, 
+                }
+            )
     ), [navigation, establishment]);
-
+    
     return (
         <ContentContainer 
             defaultPadding={false}
         >
             <Search />
-            <ScrollList
-                selectable
-                onItemSelected={handleItemSelection}
-                items={(establishment?.pizzas?.map(({ id, name, price, image }) => (
-                    {
-                        id,
-                        image,
-                        title: name,
-                        subtitle: price,
-                    }
-                )))}
-                selectedItems={items}
+
+            <PizzasList 
+                pizzas={establishment?.pizzas}
+                selectedPizzas={selectedItems}
+                onPizzaSelected={handlePizzaSelected}
             />
+
             {
-                items.length 
+                selectedItems.length 
                     ? (
                         <FloatingActionButton 
                             size="large"
@@ -82,7 +78,7 @@ const Menu = (
 
 const mapStateToProps = ({ cart: { items }}) => (
     {
-        items,
+        selectedItems: items,
     }
 );
 

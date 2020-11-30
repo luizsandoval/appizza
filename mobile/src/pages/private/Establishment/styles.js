@@ -14,7 +14,7 @@ export const StyledTitle = styled(Title)`
 `;
 
 export const TabsContainer = styled.View`
-    margin: 16px 0;
+    margin-top: 16px;
     align-items: center;
     justify-content: center;
     flex-direction: row;

@@ -9,23 +9,19 @@ import {
     Loader,
     SubTitle,
     Container,
-    ScrollList,
 } from '../../../components';
 
-import calculateDistance from '../../../utils/calculateDistance';
 
 import { getEstablishments } from '../../../store/thunks/establishments';
 
-import ConfirmLocation from '../ConfirmLocation';
-
 import Logo from '../../../assets/logo.svg';
+
+import EstablishmentsList from './EstablishmentsList';
 
 import {
     Header,
     Content,
 } from './styles';
-
-const DEFAULT_ESTABLISHMENT_IMAGE = 'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80';
 
 const Home = (
     { 
@@ -37,16 +33,18 @@ const Home = (
         onGetEstablishments, 
     }
 ) => {
-    if (isFirstAccess) return <ConfirmLocation />;
-
     const handleOnItemPressed = useCallback(({ id }) => (
         navigation
             .navigate('Establishment', { id })
     ), [navigation]);
 
     useEffect(() => {
-        onGetEstablishments();
-    }, []);
+        isFirstAccess
+            ? navigation.navigate('ConfirmLocation')
+            : onGetEstablishments(); 
+    }, [isFirstAccess]);
+
+    if (isFirstAccess) return null;
     
     return (
         <ScrollView
@@ -71,27 +69,11 @@ const Home = (
                                 <Loader />
                             ) 
                             : (
-                                <ScrollList 
+                                <EstablishmentsList 
                                     label="Em destaque"
+                                    establishments={establishments}
+                                    userCoordinates={userCoordinates}
                                     onItemPressed={handleOnItemPressed}
-                                    items={(
-                                        establishments.map((
-                                                { 
-                                                    id, 
-                                                    name,
-                                                    latitude, 
-                                                    longitude,
-                                                    logo_image, 
-                                                }
-                                            ) => (
-                                                {
-                                                    id,
-                                                    image: logo_image || DEFAULT_ESTABLISHMENT_IMAGE,
-                                                    title: name,
-                                                    subtitle: `A aproximadamente ${calculateDistance(userCoordinates, { latitude, longitude })} km de você`,
-                                                }
-                                            ))
-                                    )}
                                 />
                             )
                     }
