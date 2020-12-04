@@ -102,7 +102,7 @@ const ReviewOrder = (
         };
 
         onCreateOrder(order)
-            .then(() => navigation.navigate('Feedback'))
+            .then(({ id }) => navigation.navigate('Feedback', { id }))
             .finally(() => setIsLoading(false));
     }, [items, onCreateOrder, paymentTerm, setIsLoading, navigation]);
 

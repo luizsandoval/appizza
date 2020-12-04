@@ -40,7 +40,7 @@ export const CardDetails = styled.View`
 
 export const CardTitle = styled.Text`
     font-weight: bold;
-    font-size: 24px;
+    font-size: 16px;
     margin-bottom: 8px;
     color: ${({ theme }) => theme.colors.black.light};
 `;

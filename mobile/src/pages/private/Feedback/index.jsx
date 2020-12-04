@@ -23,12 +23,13 @@ const StyledContainer = styled(Container)`
     padding: 64px 32px 32px;
 `;
 
-const Feedback = () => {
+const Feedback = ({ route }) => {
+    const { id } = route.params;
     const navigation = useNavigation();
 
     const handleTrackMyOrder = useCallback(() => (
         navigation
-            .navigate('Orders')
+            .navigate('OrderDetails', { id })
     ), [navigation]);
 
     return (

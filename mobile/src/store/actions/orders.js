@@ -6,3 +6,23 @@ export const orderCreated = order => (
         payload: order,
     }
 );
+
+export const loadingOrders = () => (
+    {
+        type: ORDERS_ACTIONS_TYPES.ORDERS_LOADING,
+    }
+);
+
+export const loadedOrders = orders => (
+    {
+        type: ORDERS_ACTIONS_TYPES.ORDERS_LOADED,
+        payload: orders,
+    }
+);
+
+export const loadedOrder = order => (
+    {
+        type: ORDERS_ACTIONS_TYPES.ORDER_LOADED,
+        payload: order,
+    }
+);

@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Dimensions } from 'react-native';
 
+import { useSelector } from 'react-redux';
+
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -17,6 +19,7 @@ import Feedback from '../pages/private/Feedback';
 import ReviewOrder from '../pages/private/ReviewOrder';
 import Establishment from '../pages/private/Establishment';
 import ConfirmLocation from '../pages/private/ConfirmLocation';
+import OrderDetails from '../pages/private/Orders/OrderDetails';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -25,6 +28,7 @@ const { Navigator: TabNavigator, Screen: TabScreen } = createBottomTabNavigator(
 const Main = () => {
     const theme = useTheme();
     const { height } = Dimensions.get('window');
+    const ordersInProgress = useSelector(state => state?.orders?.ordersInProgress || 0);
 
     return (
         <TabNavigator
@@ -65,6 +69,7 @@ const Main = () => {
                 component={Orders}
                 options={{
                     tabBarLabel: 'Pedidos',
+                    tabBarBadge: ordersInProgress || null,
                     tabBarIcon: ({ color }) => <Icon color={color} icon={faReceipt} size={24} />,
                 }}
             />
@@ -111,6 +116,13 @@ export default PrivateRoutes = () => (
             }}
             name="ReviewOrder"
             component={ReviewOrder}
+        />
+        <Screen
+            options={{
+                title: "Detalhes do pedido",
+            }}
+            name="OrderDetails"
+            component={OrderDetails}
         />
         <Screen
             options={{
