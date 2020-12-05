@@ -4,7 +4,6 @@ import { Dimensions } from 'react-native';
 
 import { connect } from 'react-redux';
 
-
 import { getOrder } from '../../../../store/thunks/orders';
 
 import { 
@@ -90,6 +89,7 @@ const OrderDetails = (
                     </Content>
 
                     <Map 
+                        liteMode
                         width={width}
                         height={height / 3}
                         region={{
