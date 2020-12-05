@@ -7,9 +7,12 @@ import FormatNumber from 'react-number-format';
 const FormatCurrency = ({ value }) => (
     <FormatNumber 
         prefix={'R$ '}
-        value={value}
+        value={Number(value)}
+        decimalSeparator=','
         displayType="text"
-        thousandSeparator
+        thousandSeparator='.'
+        fixedDecimalScale
+        decimalScale={2}
         renderText={formattedValue => (
             <Text>
                 {formattedValue}

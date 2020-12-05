@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { Dimensions, Linking, ScrollView } from 'react-native';
 
@@ -23,13 +23,20 @@ const Content = styled.View`
     margin: 16px 32px;
 `;
 
-const DEFAULT_WHATSAPP_MESSAGE = 'Olá, acessei sua Pizzaria pelo Happizza e gostaria de pedir uma deliciosa Pizza :)'
+const DEFAULT_WHATSAPP_MESSAGE = 'Olá, encontrei sua Pizzaria pelo Happizza e gostaria de pedir uma deliciosa Pizza :)'
 
 const Details = ({ establishment, userCoordinates }) => {
     const { width, height } = Dimensions.get('window');
 
-    const handleWhatsApp = () => Linking
-        .openURL(`whatsapp://send?phone=${establishment.whatsApp}&text=${DEFAULT_WHATSAPP_MESSAGE}`);
+    const handleWhatsApp = useCallback(() => (
+        Linking
+            .openURL(`whatsapp://send?phone=${establishment.whatsApp}&text=${DEFAULT_WHATSAPP_MESSAGE}`)
+    ), [Linking, establishment]);
+
+    const handlePhoneCall = useCallback(() => (
+        Linking
+            .openURL(`tel:${establishment.phone}`)
+    ), [Linking, establishment]);
 
     return (
         <ScrollView>
@@ -82,7 +89,7 @@ const Details = ({ establishment, userCoordinates }) => {
                             longitude: establishment.longitude 
                         }
                     )}
-                    {' '}km de você
+                    {' '}de você
                 </Text>
             </Content>
 
@@ -111,6 +118,7 @@ const Details = ({ establishment, userCoordinates }) => {
                 <SecondaryButton
                     title="Telefonar"
                     customColor="#808080"
+                    onPress={handlePhoneCall}
                     icon={() => <Icon icon={faPhone} color="#808080" />}
                 />
             </Content>

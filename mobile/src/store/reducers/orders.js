@@ -15,6 +15,12 @@ const reducer = (state = INITIAL_STATE, { type, payload }) => {
                 ordersInProgress: state.ordersInProgress + 1,
             };
         };
+        case ORDERS_ACTIONS_TYPES.ORDER_FINISHED: {
+            return {
+                ...state,
+                ordersInProgress: state.ordersInProgress - 1,
+            };
+        };
         case ORDERS_ACTIONS_TYPES.ORDERS_LOADING: {
             return {
                 ...state,

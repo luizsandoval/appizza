@@ -8,8 +8,8 @@ const StyledText = styled.Text`
     color: ${({ theme }) => theme.colors.black.lighten};
 `;
 
-const Text = ({ children }) => (
-    <StyledText>
+const Text = ({ children, ...rest }) => (
+    <StyledText {...rest}>
         {children}
     </StyledText>
 );

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 export const Label = styled.Text`
     font-size: 16px;
-    margin: 16px 0;
+    margin-bottom: 16px;
     color: ${({ theme }) => theme.colors.black.lighten};
 `;
 
@@ -31,7 +31,7 @@ export const CardImage = styled.ImageBackground`
 
 export const CardDetails = styled.View`
     flex: 1;
-    padding: 16px;
+    padding: 16px 16px 8px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     height: auto;
@@ -51,7 +51,6 @@ export const CardFooter = styled.View`
 
 export const Text = styled.Text`
     font-size: 12px;
-    font-weight: bold;
     margin-left: 8px;
     color: ${({ theme }) => theme.colors.black.lighten};
 `;

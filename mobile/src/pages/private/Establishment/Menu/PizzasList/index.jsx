@@ -55,6 +55,7 @@ const PizzasList = (
             renderItem={renderPizza}
             extraData={selectedPizzas}
             keyExtractor={pizza => String(pizza.id)}
+            contentContainerStyle={{ paddingBottom: 64 }}
         />
     );
 };

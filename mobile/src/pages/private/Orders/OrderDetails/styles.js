@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Content = styled.View`
-    margin: 16px 32px;
+    margin: 8px 32px;
     position: relative;
 `;
 

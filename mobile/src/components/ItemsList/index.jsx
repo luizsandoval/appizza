@@ -76,7 +76,7 @@ const ItemsList = (
         <FlatList 
             data={items}
             renderItem={renderItem}
-            contentContainerStyle={{ paddingBottom: 32 }}
+            contentContainerStyle={{ paddingBottom: 8 }}
             keyExtractor={item => String(item.id)}
         />
     )

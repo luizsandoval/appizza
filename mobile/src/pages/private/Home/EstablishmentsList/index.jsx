@@ -48,7 +48,9 @@ const EstablishmentsList = (
                             source={{ uri: establishment?.image || DEFAULT_ESTABLISHMENT_IMAGE }}
                         />
                         <CardDetails>
-                            <CardTitle>
+                            <CardTitle 
+                                numberOfLines={1}
+                            >
                                 {establishment?.name}
                             </CardTitle>
                             <CardFooter>
@@ -62,7 +64,7 @@ const EstablishmentsList = (
                                                 longitude: establishment.longitude 
                                             }
                                         )
-                                    } km distante
+                                    } distante
                                 </Text>
                             </CardFooter>
                         </CardDetails>

@@ -13,13 +13,17 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faReceipt, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import Home from '../pages/private/Home';
+
 import Orders from '../pages/private/Orders';
+import OrderDetails from '../pages/private/Orders/OrderDetails';
+
 import Profile from '../pages/private/Profile';
+import EditProfile from '../pages/private/Profile/EditProfile';
+
 import Feedback from '../pages/private/Feedback';
 import ReviewOrder from '../pages/private/ReviewOrder';
 import Establishment from '../pages/private/Establishment';
 import ConfirmLocation from '../pages/private/ConfirmLocation';
-import OrderDetails from '../pages/private/Orders/OrderDetails';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -130,6 +134,13 @@ export default PrivateRoutes = () => (
             }}
             name="Feedback"
             component={Feedback}
+        />
+        <Screen
+            options={{
+                title: 'Editar perfil',
+            }}
+            name="EditProfile"
+            component={EditProfile}
         />
     </Navigator>
 );

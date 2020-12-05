@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
-import { Dimensions } from 'react-native';
+import { Dimensions, ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { getOrder } from '../../../../store/thunks/orders';
+import { getOrder, updateOrder } from '../../../../store/thunks/orders';
 
 import { 
     Map,
@@ -12,8 +12,10 @@ import {
     Label,
     Loader,
     Divider,
+    Container,
     ItemsList,
     PrimaryButton,
+    FormatCurrency,
 } from '../../../../components';
 
 import calculateDistance from '../../../../utils/calculateDistance';
@@ -26,92 +28,120 @@ const OrderDetails = (
         route, 
         loading, 
         onGetOrder,
+        onOrderUpdated,
     }
 ) => {
-    const { width, height } = Dimensions.get('window'); 
     const { id } = route.params;
+    const { width, height } = Dimensions.get('window'); 
+
+    const handleOrderFinished = useCallback(() => {
+        const orderToBeSaved = {
+            ...order,
+            finished: true
+        };
+
+        onOrderUpdated(orderToBeSaved);
+    }, [order, onOrderUpdated]);
 
     useEffect(() => {
         onGetOrder(id);
-    }, []);
+    }, [onGetOrder]);
 
     return (
-        loading 
-            ? <Loader />
-            : (
-                <>
-                    <Content>
-                        <Label>
-                            Pizzas
-                        </Label>
-                        <ItemsList 
-                            viewOnly
-                            items={order?.pizzas}
-                        />
-
-                        <Divider />
-
-                        <TotalContainer>
-                            <Label>
-                                Total
-                            </Label>
-                            <Text>
-                                {order?.total}
-                            </Text>
-                        </TotalContainer>
-                    </Content>
-
-                    <Content>
-                        <Label>
-                            Forma de pagamento
-                        </Label>
-                        <Text>
-                            {order.paymentTerm}
-                        </Text>
-                    </Content>
-
-                    <Content>
-                        <Label>
-                            Endereço de entrega
-                        </Label>
-                        <Text>
-                            A aproximadamente {calculateDistance(
-                                { 
-                                    latitude: order.user_latitude, 
-                                    longitude: order.user_longitude 
-                                }, 
-                                { 
-                                    latitude: order.establishment_latitude, 
-                                    longitude: order.establishment_longitude 
-                                }
-                            )} km de você
-                        </Text>
-                    </Content>
-
-                    <Map 
-                        liteMode
-                        width={width}
-                        height={height / 3}
-                        region={{
-                            latitudeDelta: 0.020,
-                            longitudeDelta: 0.020,
-                            latitude: order.user_latitude,
-                            longitude: order.user_longitude,
-                        }}
-                    />
-                    {
-                        !order?.finished
-                            ? (
+        <Container defaultPadding={false}>
+            {
+                loading 
+                    ? <Loader />
+                    : (
+                        <>
+                            <ScrollView>
+                            
                                 <Content>
-                                    <PrimaryButton 
-                                        title="Confirmar recebimento"
+                                    <Label>
+                                        Pizzas
+                                    </Label>
+            
+                                    <ItemsList 
+                                        viewOnly
+                                        items={order?.pizzas}
                                     />
+            
+                                    <Divider />
+            
+                                    <TotalContainer>
+                                        <Text>
+                                            Total
+                                        </Text>
+                                        <FormatCurrency 
+                                            value={order?.total}
+                                        />
+                                    </TotalContainer>
                                 </Content>
-                            )
-                            : null
-                    }
-                </>
-            )
+            
+                                <Content>
+                                    <Label>
+                                        Forma de pagamento
+                                    </Label>
+                                    <Text>
+                                        {order?.payment_term}
+                                    </Text>
+                                </Content>
+
+                                <Content>
+                                    <Label>
+                                        Estabelecimento
+                                    </Label>
+                                    <Text>
+                                        {order?.company_name}
+                                    </Text>
+                                </Content>
+            
+                                <Content>
+                                    <Label>
+                                        Endereço de entrega
+                                    </Label>
+                                    <Text>
+                                        A aproximadamente {calculateDistance(
+                                            { 
+                                                latitude: Number(order?.user_latitude), 
+                                                longitude: Number(order?.user_longitude) 
+                                            }, 
+                                            { 
+                                                latitude: Number(order?.establishment_latitude), 
+                                                longitude: Number(order?.establishment_longitude) 
+                                            }
+                                        )} km de você
+                                    </Text>
+                                </Content>
+            
+                                <Map 
+                                    liteMode
+                                    width={width}
+                                    height={height / 3}
+                                    region={{
+                                        latitudeDelta: 0.020,
+                                        longitudeDelta: 0.020,
+                                        latitude: Number(order?.user_latitude),
+                                        longitude: Number(order?.user_longitude),
+                                    }}
+                                />
+                            </ScrollView>
+                            <Content>
+                                {
+                                    !order?.finished
+                                        ? (
+                                            <PrimaryButton
+                                                title="Confirmar recebimento"
+                                                onPress={() => handleOrderFinished()}
+                                            />
+                                        )
+                                        : null
+                                }
+                            </Content>
+                        </>
+                    )    
+            }
+        </Container>
     );
 };
 
@@ -125,6 +155,7 @@ const mapStateToProps = ({ orders: { order, loading }}) =>  (
 const mapDispatchToProps = dispatch => (
     {
         onGetOrder: id => dispatch(getOrder(id)),
+        onOrderUpdated: order => dispatch(updateOrder(order)),
     }
 );
 

@@ -11,6 +11,8 @@ import { groupBy } from 'underscore';
 
 import dayJs from 'dayjs';
 
+import styled from 'styled-components/native';
+
 import { getOrders } from '../../../store/thunks/orders';
 
 import {
@@ -19,6 +21,12 @@ import {
     Divider,
     Container,
 } from '../../../components';
+
+import OrdersList from './OrdersList';
+
+const StyledText = styled(Text)`
+    margin-top: ${({ isFirst }) => isFirst ? '0' : '32px'};
+`;
 
 const Orders = (
     {
@@ -29,10 +37,13 @@ const Orders = (
     }
 ) => {
     const [groupedOrders, setGroupedOrders] = useState({});
+    const [groupedOrdersGroups, setGroupedOrdersGroups] = useState([]);
 
-    const handleOrderDetails = useCallback((id) =>{
+    const handleOrderDetails = useCallback(({ id }) => {
         navigation.navigate('OrderDetails', { id });
     }, [navigation]);
+
+    const isFirstItem = useCallback((index) => index === 0, [groupedOrdersGroups]);
 
     useEffect(() => {
         onGetOrders();
@@ -55,6 +66,7 @@ const Orders = (
         });
         
         setGroupedOrders(ordersGroupedByDate);
+        setGroupedOrdersGroups(Object.keys(ordersGroupedByDate));
     }, [orders]);
 
     return (
@@ -63,25 +75,23 @@ const Orders = (
                 loading
                     ? <Loader />
                     : (
-                        Object.keys(groupedOrders)
-                            .map(key => (
+                        groupedOrdersGroups
+                            .map((group, index) => (
                                 <>
-                                    <Text>
-                                        {key}
-                                    </Text>
+                                    <StyledText
+                                        key={group}
+                                        isFirst={isFirstItem(index)}
+                                    >
+                                        {group}
+                                    </StyledText>
 
                                     <Divider />
 
-                                    <Text>
-                                        {
-                                            groupedOrders[key]
-                                                .map(order => (
-                                                    <Text>
-                                                        {order.id}
-                                                    </Text>
-                                                ))
-                                        }
-                                    </Text>
+                                    <OrdersList 
+                                        orders={groupedOrders[group]}
+                                        onOrderPressed={handleOrderDetails}
+                                    />
+
                                 </>
                             ))
                     )

@@ -4,7 +4,8 @@ import { cartCleaned } from '../actions/cart';
 import { 
     loadedOrder,
     loadedOrders,
-    orderCreated, 
+    orderCreated,
+    orderFinished,
     loadingOrders,
 } from '../actions/orders';
 
@@ -16,6 +17,24 @@ export const createOrder = order => {
             dispatch(cartCleaned());
 
             dispatch(orderCreated());
+
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    };
+};
+
+export const updateOrder = order => {
+    return async dispatch => {
+        try {
+            dispatch(loadingOrders());
+
+            const { data } = await api.put('/orders', order);
+
+            dispatch(loadedOrder(data));
+
+            dispatch(orderFinished());
 
             return data;
         } catch (error) {
