@@ -23,6 +23,7 @@ import {
 
 import { 
     Title,
+    Divider,
     SubTitle,
     Container,
     ItemsList,
@@ -32,7 +33,6 @@ import {
 
 import { 
     Label,
-    Divider,
     StyledTitle,
     TotalContainer,
     AnimationWrapper,

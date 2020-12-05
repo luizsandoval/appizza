@@ -12,13 +12,10 @@ import { updateUser } from '../../../store/thunks/auth';
 
 import LottieView from 'lottie-react-native';
 
-import { Marker, UrlTile, PROVIDER_GOOGLE } from 'react-native-maps';
-
-import { MAPBOX_TOKEN } from '@env';
-
 import * as Location from 'expo-location';
 
 import { 
+    Map,
     Title,
     SubTitle,
     Container,
@@ -26,26 +23,25 @@ import {
 } from '../../../components';
 
 import {
-    Map,
     StyledContainer,
     AnimationWrapper,
 } from './styles';
 
-const INITIAL_REGION = {
-    latitude: -23.533773,
-    longitude: -46.625290,
-    latitudeDelta: 0.014,
-    longitudeDelta: 0.014,
-};
-
 const ConfirmLocation = ({ userId, onUpdateUser, navigation }) => {
     const [showMap, setShowMap] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [region, setRegion] = useState(INITIAL_REGION);
+    const [region, setRegion] = useState();
 
     const { width, height } = Dimensions.get('window');
 
-    const handleMarkerDrag = useCallback(({ latitude, longitude }) => setRegion({ ...INITIAL_REGION, latitude, longitude }), [setRegion]);
+    const handleMarkerDrag = useCallback(({ latitude, longitude }) => setRegion(
+        {
+            latitude, 
+            longitude,
+            latitudeDelta: 0.014,
+            longitudeDelta: 0.014, 
+        }
+    ), [setRegion]);
 
     const handleConfirmLocation = useCallback(() => {
         const { latitude, longitude } = region;
@@ -75,7 +71,14 @@ const ConfirmLocation = ({ userId, onUpdateUser, navigation }) => {
                 coords: { latitude, longitude },
             } = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
 
-            setRegion({ ...INITIAL_REGION, latitude, longitude });
+            setRegion(
+                { 
+                    latitude,
+                    longitude,
+                    latitudeDelta: 0.014,
+                    longitudeDelta: 0.014, 
+                }
+            );
         }
 
         loadPosition();
@@ -86,28 +89,12 @@ const ConfirmLocation = ({ userId, onUpdateUser, navigation }) => {
             ? (
                 <Container defaultPadding={false}>
                     <Map
-                        loadingEnabled
-                        showsUserLocation
-                        provider={PROVIDER_GOOGLE}
-                        initialRegion={INITIAL_REGION}
-                        region={region}
+                        noMargin
                         width={width}
                         height={height}
-                    >
-                        <UrlTile
-                            urlTemplate={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${MAPBOX_TOKEN}`}
-                        />
-                        <Marker
-                            draggable
-                            onDragEnd={(e) => handleMarkerDrag(e.nativeEvent.coordinate)}
-                            coordinate={
-                                {
-                                    latitude: region.latitude,
-                                    longitude: region.longitude,
-                                }
-                            }
-                        />
-                    </Map>
+                        region={region}
+                        onMarkerDrag={handleMarkerDrag}
+                    />
                     <FloatingActionButton
                         size="large"
                         position="center"
@@ -146,7 +133,13 @@ const ConfirmLocation = ({ userId, onUpdateUser, navigation }) => {
     );
 }
 
-const mapStateToProps = ({ auth: { user: { id } }}) => (
+const mapStateToProps = (
+    { 
+        auth: { 
+            user: { id } 
+        }
+    }
+) => (
     {
         userId: id,
     }

@@ -4,10 +4,7 @@ import { Dimensions, Linking, ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { 
-    Marker, 
-    PROVIDER_GOOGLE 
-} from 'react-native-maps';
+import styled from 'styled-components/native';
 
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
@@ -18,9 +15,13 @@ import calculateDistance from '../../../../utils/calculateDistance';
 import { 
     Map, 
     Text, 
-    Label, 
-    StyledSecondaryButton 
-} from './styles';
+    Label,
+    SecondaryButton,
+} from '../../../../components';
+
+const Content = styled.View`
+    margin: 16px 32px;
+`;
 
 const DEFAULT_WHATSAPP_MESSAGE = 'Olá, acessei sua Pizzaria pelo Happizza e gostaria de pedir uma deliciosa Pizza :)'
 
@@ -32,85 +33,87 @@ const Details = ({ establishment, userCoordinates }) => {
 
     return (
         <ScrollView>
-            {
-                establishment.description
-                    ? (
-                        <>
-                            <Label>
-                                Sobre
-                            </Label>
-                            <Text>
-                                {establishment?.description}
-                            </Text>
-                        </>
-                    )
-                    : null
-            }
-            <Label>
-                Razão Social
-            </Label>
-            <Text>
-                {establishment?.company_name}
-            </Text>
-            <Label>
-                CNPJ
-            </Label>
-            <Text>
-                {establishment?.cnpj}
-            </Text>
-            <Label>
-                Localização
-            </Label>
-            <Text>
-                A aproximadamente
-                {' '}
-                {calculateDistance(
-                    userCoordinates, 
-                    { 
-                        latitude: establishment.latitude, 
-                        longitude: establishment.longitude 
-                    }
-                )}
-                {' '}km de você
-            </Text>
+            <Content>
+                {
+                    establishment.description
+                        ? (
+                            <>
+                                <Label>
+                                    Sobre
+                                </Label>
+                                <Text>
+                                    {establishment?.description}
+                                </Text>
+                            </>
+                        )
+                        : null
+                }
+            </Content>
+
+            <Content>
+                <Label>
+                    Razão Social
+                </Label>
+                <Text>
+                    {establishment?.company_name}
+                </Text>
+            </Content>
+
+            <Content>
+                <Label>
+                    CNPJ
+                </Label>
+                <Text>
+                    {establishment?.cnpj}
+                </Text>
+            </Content>
+
+            <Content>
+                <Label>
+                    Localização
+                </Label>
+                <Text>
+                    A aproximadamente
+                    {' '}
+                    {calculateDistance(
+                        userCoordinates, 
+                        { 
+                            latitude: establishment.latitude, 
+                            longitude: establishment.longitude 
+                        }
+                    )}
+                    {' '}km de você
+                </Text>
+            </Content>
+
             <Map 
                 liteMode
-                loadingEnabled
-                showsUserLocation
-                scrollEnabled={false}
-                zoomEnabled={false}
-                rotateEnabled={false}
-                zoomControlEnabled={false}
-                provider={PROVIDER_GOOGLE}
-                initialRegion={{ 
-                    latitude: Number(establishment?.latitude),
-                    longitude: Number(establishment?.longitude),
+                width={width}
+                height={height / 3}
+                region={{ 
                     latitudeDelta: 0.020,
                     longitudeDelta: 0.020,
+                    latitude: Number(establishment?.latitude),
+                    longitude: Number(establishment?.longitude),
                 }}
-                screenWidth={width}
-                screenHeight={height}
-            >
-                <Marker
-                    coordinate={
-                        {
-                            latitude: Number(establishment?.latitude),
-                            longitude: Number(establishment?.longitude),
-                        }
-                    }
+            />
+
+            <Content>
+                <SecondaryButton
+                    title="Enviar WhatsApp"
+                    customColor="#25D366"
+                    onPress={handleWhatsApp}
+                    icon={() => <Icon icon={faWhatsapp} color="#25D366" size={24} />}
                 />
-            </Map>
-            <StyledSecondaryButton
-                title="Enviar WhatsApp"
-                customColor="#25D366"
-                onPress={handleWhatsApp}
-                icon={() => <Icon icon={faWhatsapp} color="#25D366" size={24} />}
-            />
-            <StyledSecondaryButton
-                title="Telefonar"
-                customColor="#808080"
-                icon={() => <Icon icon={faPhone} color="#808080" />}
-            />
+            </Content>
+
+            <Content>
+                <SecondaryButton
+                    title="Telefonar"
+                    customColor="#808080"
+                    icon={() => <Icon icon={faPhone} color="#808080" />}
+                />
+            </Content>
         </ScrollView>
     );
 };
