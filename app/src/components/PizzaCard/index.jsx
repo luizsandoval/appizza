@@ -25,8 +25,7 @@ const PizzaCard = ({
     showActions = true,
     selectable = false,
 }) => {
-    const { setSelectedPizzas, setExpandedPizza } = useContext(AppContext);
-    const history = useHistory();
+    const { setExpandedPizza } = useContext(AppContext);
 
     const handlePizzaDetails = (pizza) => setExpandedPizza(pizza);
 
