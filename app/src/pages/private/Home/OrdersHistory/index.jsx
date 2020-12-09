@@ -56,7 +56,6 @@ const OrdersHistory = () => {
             order.created_at = dayJs(order.created_at)
                 .format('YYYY-MM-DD');
 
-
             const date = dayJs(order.created_at)
                 .calendar(null, {
                     sameDay: '[Hoje]', 
@@ -112,10 +111,7 @@ const OrdersHistory = () => {
                                                                 <div>
                                                                     <StyledIcon icon={faUserAlt} />
                                                                     <StackedText>
-                                                                        <h4>{`${order.firstname} ${order.lastname}`}</h4>
-                                                                        <small>
-                                                                            {order.address}
-                                                                        </small>
+                                                                        <h4>{`${order.first_name} ${order.last_name}`}</h4>
                                                                     </StackedText>
                                                                 </div>
                                                                 <label>
