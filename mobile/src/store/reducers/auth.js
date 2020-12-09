@@ -3,6 +3,7 @@ import { decode } from '../../services/token.service';
 
 const INITIAL_STATE = {
     user: null,
+    firstAccess: false,
     isAuthenticated: false,
     validatingAuthentication: true,
 };
@@ -26,7 +27,11 @@ const reducer = (state = INITIAL_STATE, { type, payload }) => {
         case AUTH_ACTIONS_TYPES.USER_UPDATED: {
             return {
                 ...state,
-                user: payload,
+                user: { 
+                    ...state.user,
+                    ...payload,
+                    firstAccess: false,
+                },
             };
         };
         case AUTH_ACTIONS_TYPES.AUTHENTICATION_STARTED: {

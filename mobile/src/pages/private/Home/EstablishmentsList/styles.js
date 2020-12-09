@@ -1,57 +1,60 @@
 import styled from 'styled-components/native';
 
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 export const Label = styled.Text`
     font-size: 16px;
+    margin-bottom: 16px;
     color: ${({ theme }) => theme.colors.black.lighten};
 `;
 
 export const Container = styled.View`
-    flex-direction: row;
-    margin: 32px 0;
+    flex-direction: column;
+    margin: 16px 0;
 `;
 
 export const Card = styled.TouchableOpacity`
     position: relative;
     flex: 1;
-    height: 200px;
+    max-width: auto;
+    max-height: auto;
     width: 200px;
-    border-radius: 5px;
+    height: 200px;
+    border-radius: 25px;
     margin-right: 32px;
-    elevation: 16;
+    elevation: 8;
 `;
 
 export const CardImage = styled.ImageBackground`
-    flex: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right:0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
+    flex: 2;
 `;
 
 export const CardDetails = styled.View`
-    position: absolute;
-    z-index: 2;
-    padding: 16px;
-    left: 0;
+    flex: 1;
+    padding: 16px 16px 8px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    bottom: 0;
-    width: 100%;
     height: auto;
     background: ${({ theme }) => theme.colors.white};
 `;
 
 export const CardTitle = styled.Text`
     font-weight: bold;
-    font-size: 24px;
+    font-size: 16px;
     margin-bottom: 8px;
     color: ${({ theme }) => theme.colors.black.light};
 `;
 
-export const CardSubTitle = styled.Text`
+export const CardFooter = styled.View`
+    flex-direction: row;
+`;
+
+export const Text = styled.Text`
     font-size: 12px;
+    margin-left: 8px;
+    color: ${({ theme }) => theme.colors.black.lighten};
+`;
+
+export const Icon = styled(FontAwesomeIcon)`
     color: ${({ theme }) => theme.colors.black.lighten};
 `;

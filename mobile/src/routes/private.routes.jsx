@@ -1,5 +1,9 @@
 import React from 'react';
 
+import { Dimensions } from 'react-native';
+
+import { useSelector } from 'react-redux';
+
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -9,9 +13,17 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faReceipt, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import Home from '../pages/private/Home';
+
 import Orders from '../pages/private/Orders';
+import OrderDetails from '../pages/private/Orders/OrderDetails';
+
 import Profile from '../pages/private/Profile';
+import EditProfile from '../pages/private/Profile/EditProfile';
+
+import Feedback from '../pages/private/Feedback';
+import ReviewOrder from '../pages/private/ReviewOrder';
 import Establishment from '../pages/private/Establishment';
+import ConfirmLocation from '../pages/private/ConfirmLocation';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -19,8 +31,10 @@ const { Navigator: TabNavigator, Screen: TabScreen } = createBottomTabNavigator(
 
 const Main = () => {
     const theme = useTheme();
+    const { height } = Dimensions.get('window');
+    const ordersInProgress = useSelector(state => state?.orders?.ordersInProgress || 0);
 
-    return ((
+    return (
         <TabNavigator
             initialRouteName="Home"
             tabBarOptions={
@@ -28,12 +42,12 @@ const Main = () => {
                     style: { 
                         borderTopEndRadius: 25, 
                         borderTopStartRadius: 25, 
-                        elevation: 24,
-                        paddingVertical: 72,
+                        elevation: 12,
+                        height: height / 10,
                     }, 
                     activeTintColor: theme.colors.secondary.main, 
                     tabStyle: { 
-                        paddingBottom: 32 
+                        paddingTop: 32,
                     },
                     labelStyle: {
                         fontSize: 12,
@@ -59,6 +73,7 @@ const Main = () => {
                 component={Orders}
                 options={{
                     tabBarLabel: 'Pedidos',
+                    tabBarBadge: ordersInProgress || null,
                     tabBarIcon: ({ color }) => <Icon color={color} icon={faReceipt} size={24} />,
                 }}
             />
@@ -71,7 +86,7 @@ const Main = () => {
                 }}
             />
         </TabNavigator>
-    ));
+    );
 };
 
 export default PrivateRoutes = () => (
@@ -87,10 +102,45 @@ export default PrivateRoutes = () => (
         />
         <Screen
             options={{
-                title: "",
+                headerShown: false,
+            }}
+            name="ConfirmLocation"
+            component={ConfirmLocation}
+        />
+        <Screen
+            options={{
+                title: "Estabelecimento",
             }}
             name="Establishment"
             component={Establishment}
+        />
+        <Screen
+            options={{
+                title: "Revisar pedido",
+            }}
+            name="ReviewOrder"
+            component={ReviewOrder}
+        />
+        <Screen
+            options={{
+                title: "Detalhes do pedido",
+            }}
+            name="OrderDetails"
+            component={OrderDetails}
+        />
+        <Screen
+            options={{
+                headerShown: false,
+            }}
+            name="Feedback"
+            component={Feedback}
+        />
+        <Screen
+            options={{
+                title: 'Editar perfil',
+            }}
+            name="EditProfile"
+            component={EditProfile}
         />
     </Navigator>
 );

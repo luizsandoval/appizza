@@ -9,41 +9,42 @@ import {
     Loader,
     SubTitle,
     Container,
-    ScrollList,
 } from '../../../components';
+
 
 import { getEstablishments } from '../../../store/thunks/establishments';
 
-import ConfirmLocation from '../ConfirmLocation';
-
 import Logo from '../../../assets/logo.svg';
+
+import EstablishmentsList from './EstablishmentsList';
 
 import {
     Header,
     Content,
 } from './styles';
 
-const DEFAULT_ESTABLISHMENT_IMAGE = 'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80';
-
 const Home = (
     { 
         loading,
         navigation,
         isFirstAccess,
-        establishments, 
+        establishments,
+        userCoordinates,
         onGetEstablishments, 
     }
 ) => {
-    if (isFirstAccess) return <ConfirmLocation />;
-
     const handleOnItemPressed = useCallback(({ id }) => (
         navigation
             .navigate('Establishment', { id })
     ), [navigation]);
 
     useEffect(() => {
-        onGetEstablishments();
-    }, []);
+        isFirstAccess
+            ? navigation.navigate('ConfirmLocation')
+            : onGetEstablishments(); 
+    }, [isFirstAccess]);
+
+    if (isFirstAccess) return null;
     
     return (
         <ScrollView
@@ -63,31 +64,16 @@ const Home = (
 
                 <Content>
                     {
-                        loading
+                        !establishments?.length && loading
                             ? (
                                 <Loader />
                             ) 
                             : (
-                                <ScrollList 
+                                <EstablishmentsList 
                                     label="Em destaque"
+                                    establishments={establishments}
+                                    userCoordinates={userCoordinates}
                                     onItemPressed={handleOnItemPressed}
-                                    items={(
-                                        establishments
-                                            .map((
-                                                { 
-                                                    id, 
-                                                    logo_image, 
-                                                    fantasy_name,
-                                                }
-                                            ) => (
-                                                {
-                                                    id,
-                                                    image: logo_image || DEFAULT_ESTABLISHMENT_IMAGE,
-                                                    title: fantasy_name,
-                                                    subtitle: `A aproximadamente 3km de você`,
-                                                }
-                                            ))
-                                    )}
                                 />
                             )
                     }
@@ -110,6 +96,10 @@ const mapStateToProps = (
         loading,
         establishments,
         isFirstAccess: user?.firstAccess,
+        userCoordinates: { 
+            latitude: user?.latitude, 
+            longitude: user?.longitude 
+        },
     }
 );
 

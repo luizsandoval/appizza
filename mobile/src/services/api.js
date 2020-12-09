@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-import { API_URL } from '@env';
-
 import { get as getToken } from './token.service';
 
 const api = axios.create({
-    baseURL: API_URL
+    baseURL: 'https://appizza-backend.herokuapp.com'
 });
 
 api.interceptors.request.use(async (request) => {

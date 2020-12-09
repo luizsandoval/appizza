@@ -6,17 +6,12 @@ export const BUTTON_SIZES = {
 
 export const BUTTON_POSITIONS = {
     start: `
-        left: 0;
-        bottom: 0;
-        margin: 16px;
+        align-self: flex-start;
     `,
     end: `
-        right: 0;
-        bottom: 0;
-        margin: 16px;
+        align-self: flex-end;
     `,
     center: `
-        bottom: 0;
         align-items: center;
         justify-content: center;
     `

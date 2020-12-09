@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const ButtonWrapper = styled.View`
-    width: ${({ windowWidth }) => windowWidth}; 
+    width: ${({ windowWidth }) => windowWidth}px; 
     position: absolute;
     align-items: center; 
     justify-content: center; 
@@ -16,6 +16,7 @@ export const ButtonContainer = styled.TouchableOpacity`
     ${({ position }) => position}
 
     width: ${({ size }) => size};
+    height: ${({ size }) => size === '50px' ? size : 'auto'};
     padding: 24px;
 
     background: ${({ theme, color, variation }) => theme.colors[color][variation]};
@@ -24,13 +25,6 @@ export const ButtonContainer = styled.TouchableOpacity`
 
     align-items: center;
     justify-content: center;
-
-    background: ${({ theme, disabled }) => (
-        !disabled 
-            ? (theme.colors.primary.main)
-            : (theme.colors.primary.lightest)
-    )};
-
 `;
 
 export const ButtonText = styled.Text`

@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import knex from '../database/connection';
 
 import { 
-    Establishment,
+    Establishment, Pizza,
 } from '../models';
 
 import { encryptPassword } from '../helpers/passwordEncryptor';
@@ -30,7 +30,6 @@ class EstablishmentsController {
             );
 
         } catch (err) {
-            console.log(err);
             return res.status(500).json(err);
         }
     }
@@ -72,6 +71,7 @@ class EstablishmentsController {
             return res.status(200).json(establishments);
 
         } catch (err) {
+            console.log(err);
             return res.status(500).json(err);
         }
     }
@@ -85,6 +85,7 @@ class EstablishmentsController {
                 .select(
                     'id',
                     'cnpj',
+                    'company_name',
                     'fantasy_name as name',
                     'email',
                     'phone',
@@ -94,6 +95,17 @@ class EstablishmentsController {
                     'longitude',
                 )
                 .first();
+
+            const pizzas = await knex<Pizza>('pizzas')
+                .where('establishment_id', id)
+                .where('active', true);
+
+            establishment.pizzas = pizzas.map(pizza => (
+                {
+                    ...pizza,
+                    image: `${process.env.IMAGES_URL}/${pizza?.image}`
+                }
+            ));
 
             return res.status(200).json(establishment);
 
