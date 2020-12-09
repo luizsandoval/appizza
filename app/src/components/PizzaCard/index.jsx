@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 
-import { useHistory } from 'react-router-dom';
-
 import AppContext from '../../AppContext';
 
 import formatCurrency from '../../utils/formatCurrency';
