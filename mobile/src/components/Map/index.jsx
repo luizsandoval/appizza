@@ -16,7 +16,7 @@ const StyledMap = styled(ReactNativeMap)`
     width: ${({ width }) => width}px;
     max-width: ${({ width }) => width}px;
     height: ${({ height }) => height}px;
-    margin: ${({ noMargin }) => noMargin ? '' : '16px 0'};
+    margin: ${({ noMargin }) => noMargin ? '0' : '16px 0'};
 `;
 
 const INITIAL_REGION = {

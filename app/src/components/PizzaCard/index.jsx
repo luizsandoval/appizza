@@ -28,11 +28,6 @@ const PizzaCard = ({
     const { setSelectedPizzas, setExpandedPizza } = useContext(AppContext);
     const history = useHistory();
 
-    const handleOrderPizza = (pizza) => {
-        setSelectedPizzas([pizza]);
-        history.push('/order');
-    };
-
     const handlePizzaDetails = (pizza) => setExpandedPizza(pizza);
 
     return (
@@ -65,11 +60,6 @@ const PizzaCard = ({
             </CardContent>
             {showActions ? (
                 <CardActions>
-                    <CardButton
-                        onClick={() => handleOrderPizza(pizza)}
-                    >
-                        Pedir
-                    </CardButton>
                     <CardButton
                         onClick={() => handlePizzaDetails(pizza)}
                     >
